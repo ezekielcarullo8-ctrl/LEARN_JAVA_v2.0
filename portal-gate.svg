@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256">
+  <defs>
+    <radialGradient id="vortex" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#e0f2fe"/>
+      <stop offset="18%" stop-color="#22d3ee"/>
+      <stop offset="42%" stop-color="#0284c7"/>
+      <stop offset="68%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#020617"/>
+    </radialGradient>
+    <linearGradient id="stone" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#64748b"/>
+      <stop offset="40%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#0f172a"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#22d3ee" stop-opacity="0.55"/>
+      <stop offset="60%" stop-color="#22d3ee" stop-opacity="0.12"/>
+      <stop offset="100%" stop-color="#22d3ee" stop-opacity="0"/>
+    </radialGradient>
+    <filter id="blur"><feGaussianBlur stdDeviation="2"/></filter>
+  </defs>
+  <!-- outer glow -->
+  <circle cx="128" cy="128" r="120" fill="url(#glow)"/>
+  <!-- stone ring -->
+  <circle cx="128" cy="128" r="108" fill="url(#stone)" stroke="#94a3b8" stroke-width="6"/>
+  <circle cx="128" cy="128" r="96" fill="none" stroke="#67e8f9" stroke-width="2.5" stroke-dasharray="8 6" opacity="0.85"/>
+  <circle cx="128" cy="128" r="88" fill="url(#vortex)"/>
+  <!-- swirl arcs -->
+  <path d="M128 48 C170 70 190 110 175 150 C160 185 120 200 90 180" fill="none" stroke="#a5f3fc" stroke-width="3" opacity="0.55" filter="url(#blur)"/>
+  <path d="M128 208 C90 185 70 140 85 100 C100 65 140 55 165 75" fill="none" stroke="#38bdf8" stroke-width="2.5" opacity="0.45" filter="url(#blur)"/>
+  <!-- runes on ring -->
+  <g fill="#67e8f9" font-family="serif" font-size="14" text-anchor="middle" opacity="0.9">
+    <text x="128" y="32">ᚠ</text>
+    <text x="200" y="58">ᚢ</text>
+    <text x="230" y="128">ᚦ</text>
+    <text x="200" y="200">ᚨ</text>
+    <text x="128" y="236">ᚱ</text>
+    <text x="56" y="200">ᚲ</text>
+    <text x="26" y="128">ᚷ</text>
+    <text x="56" y="58">ᚹ</text>
+  </g>
+  <!-- center spark -->
+  <circle cx="128" cy="128" r="10" fill="#e0f2fe" opacity="0.95"/>
+  <circle cx="128" cy="128" r="22" fill="none" stroke="#67e8f9" stroke-width="2" opacity="0.7"/>
+</svg>
