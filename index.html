@@ -34,7 +34,7 @@
       .row{display:flex;gap:10px;align-items:center}.sp{justify-content:space-between}
       .btn{padding:13px 18px;border-radius:14px;font-weight:800;background:var(--grad);color:#fff;text-align:center;box-shadow:0 8px 24px #4f8cff55}
       .btn.alt{background:#ffffff12;box-shadow:none;border:1px solid var(--line)}.btn:disabled{opacity:.4}
-      .seg{display:flex;background:#ffffff0d;border-radius:14px;padding 3px;padding:3px;border:1px solid var(--line)}
+      .seg{display:flex;background:#ffffff0d;border-radius:14px;padding:3px;border:1px solid var(--line)}
       .seg button{flex:1;padding:9px;border-radius:11px;font-weight:700;font-size:13px;color:var(--mut)}.seg button.on{background:var(--grad);color:#fff}
       .topics{display:grid;grid-template-columns:1fr 1fr;gap:10px}
       .tp{text-align:left;padding:13px;border-radius:16px;border:1px solid var(--line);background:#ffffff08}
@@ -311,9 +311,70 @@
         .ed{height:min(44dvh,320px)!important}
       }
 
-      /* ===== @EVC watermark (fixed at the top of the screen, non-interactive) ===== */
-      #evc-mark{position:fixed;top:calc(4px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:60;pointer-events:none;user-select:none;-webkit-user-select:none;font:800 12px/1 ui-monospace,Menlo,Consolas,monospace;letter-spacing:.14em;color:#ffffffc9;background:#05060e80;border:1px solid #ffffff2e;border-radius:99px;padding:5px 12px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);text-shadow:0 1px 3px #000;box-shadow:0 4px 14px #0007;white-space:nowrap}
-      @media(max-width:600px){#evc-mark{font-size:10px;padding:4px 10px}}
+      /* ===== @EVC watermark (header, beside XP) — larger & emphasized ===== */
+      #evc-mark{
+        flex:none;
+        margin-left:10px;
+        position:relative;
+        z-index:2;
+        pointer-events:auto;
+        user-select:none;
+        -webkit-user-select:none;
+        font:900 15px/1.05 ui-monospace,Menlo,Consolas,monospace;
+        letter-spacing:.16em;
+        color:#fff;
+        background:linear-gradient(135deg,#1a2744f2,#0c1228f0 55%,#1e1038f2);
+        border:1.5px solid #a5f3fc99;
+        border-radius:99px;
+        padding:9px 16px;
+        backdrop-filter:blur(8px);
+        -webkit-backdrop-filter:blur(8px);
+        text-shadow:0 1px 2px #000c,0 0 12px #22d3ee88;
+        box-shadow:
+          0 0 0 1px #22d3ee33,
+          0 6px 18px #000a,
+          0 0 22px #22d3ee55,
+          inset 0 1px 0 #ffffff44;
+        white-space:nowrap;
+        cursor:pointer;
+        writing-mode:horizontal-tb;
+        text-orientation:mixed;
+        transform:none;
+        top:auto;right:auto;left:auto;
+        transition:transform .15s,box-shadow .15s,filter .15s,border-color .15s;
+      }
+      #evc-mark:hover,#evc-mark:focus-visible{
+        color:#fff;
+        border-color:#e0f7ff;
+        filter:brightness(1.12);
+        box-shadow:
+          0 0 0 2px #22d3ee66,
+          0 8px 22px #000b,
+          0 0 32px #22d3ee88,
+          inset 0 1px 0 #ffffff66;
+        outline:none;
+      }
+      #evc-mark:active{transform:scale(.96)}
+      @media(max-width:600px){
+        #evc-mark{
+          font-size:13px;
+          padding:8px 13px;
+          margin-left:8px;
+          letter-spacing:.14em;
+        }
+      }
+      .about-overlay{display:none;position:fixed;inset:0;z-index:70;background:#02050bcc;backdrop-filter:blur(10px);align-items:center;justify-content:center;padding:16px}
+      .about-overlay.open{display:flex}
+      .about-panel{width:min(420px,100%);border:1px solid #8be9ff77;border-radius:20px;background:linear-gradient(160deg,#12182df7,#070b16f8);box-shadow:0 20px 60px #000d,0 0 32px #22d3ee2a;overflow:hidden}
+      .about-panel header{padding:14px 16px;background:linear-gradient(115deg,#0e7490,#3346a8 58%,#6d28d9);display:flex;align-items:center;gap:10px}
+      .about-panel header b{font-size:16px;color:#fff}
+      .about-panel header button{margin-left:auto;font-size:24px;padding:2px 10px;border-radius:10px;background:#ffffff22;color:#fff}
+      .about-body{padding:16px;color:#e2e8ff;font-size:13px;line-height:1.55}
+      .about-body dt{font-weight:800;color:#a5f3fc;margin-top:10px}
+      .about-body dd{margin:2px 0 0;color:#dbe7ff}
+      .about-body dd:first-of-type{margin-top:0}
+      .about-tools{margin:6px 0 0;padding:0 0 0 18px;list-style:disc}
+      .about-tools li{margin:2px 0;color:#dbe7ff}
 
 
       /* ===== Challenge detail background spans the entire task, not only the editor =====
@@ -515,15 +576,21 @@
         box-shadow:0 8px 28px #000a,0 0 20px #64748b44;text-align:center;pointer-events:none}
       .map-lock-badge small{display:block;font-weight:600;font-size:10px;color:#cbd5e1;margin-top:3px;letter-spacing:0}
 
-      /* Portal gate — image-based, compact */
-      .map-portal{position:relative;z-index:3;margin:6px auto 4px;width:min(72px,22vw);aspect-ratio:1;border-radius:50%;
-        border:2px solid #67e8f966;padding:0;overflow:hidden;
+      /* Portal gate — literal dimensional gateway */
+      .map-portal{position:relative;z-index:3;margin:6px auto 4px;width:min(88px,26vw);aspect-ratio:1;border-radius:50%;
+        border:3px solid #a5f3fc99;padding:0;overflow:hidden;
         background:#0a1220 center/cover no-repeat;
         background-size:cover;background-position:center;background-repeat:no-repeat;
-        background-image:url("portal-gate.png"),radial-gradient(circle at 50% 34%,#8b5cf6cc,#22d3eeaa 46%,#0a1220 80%);
-        box-shadow:0 0 0 2px #33415555,0 0 14px #22d3ee55,inset 0 0 10px #022c4288;
+        background-image:
+          radial-gradient(circle at 50% 50%,#e0f2ff88 0%,#a5f3fc44 12%,#8b5cf666 28%,#22d3ee55 48%,#0a1220 72%),
+          url("portal-gate.png"),
+          radial-gradient(circle at 50% 34%,#8b5cf6cc,#22d3eeaa 46%,#0a1220 80%);
+        box-shadow:0 0 0 3px #33415566,0 0 22px #22d3ee77,0 0 40px #7c5cff44,inset 0 0 18px #022c42aa,inset 0 0 4px #e0f2ff66;
         text-align:center;cursor:default;display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;
         }
+      .map-portal:before{content:"";position:absolute;inset:8%;border-radius:50%;border:2px dashed #67e8f955;animation:portal-spin 12s linear infinite;pointer-events:none}
+      .map-portal:after{content:"";position:absolute;inset:18%;border-radius:50%;border:1.5px solid #c4b5fd66;animation:portal-spin 8s linear infinite reverse;pointer-events:none}
+      @keyframes portal-spin{to{transform:rotate(360deg)}}
       .map-portal.open{cursor:pointer;border-color:#67e8f9;box-shadow:0 0 0 3px #22d3ee44,0 0 28px #22d3ee88,0 6px 16px #0007;
         animation:portal-pulse 2.8s ease-in-out infinite}
       .map-portal.locked-portal{opacity:.5;filter:grayscale(.65) brightness(.6)}
@@ -532,7 +599,7 @@
         text-shadow:0 1px 3px #000d;background:linear-gradient(transparent,#020617cc);line-height:1.1}
       .map-portal small{position:relative;z-index:2;display:block;width:100%;padding:0 2px 4px;font-size:6px;color:#c8d0e8;
         text-shadow:0 1px 2px #000c;background:#020617cc;line-height:1.1}
-      @keyframes portal-pulse{50%{box-shadow:0 0 0 4px #22d3ee55,0 0 36px #22d3eeaa,0 6px 16px #0007}}
+      @keyframes portal-pulse{50%{box-shadow:0 0 0 6px #22d3ee66,0 0 48px #22d3eecc,0 0 28px #7c5cff88,0 6px 16px #0007}}
 
 
       /* Spellworm — duel arena */
@@ -601,7 +668,46 @@
       @media(max-width:360px){.learn-grid{gap:8px}.learn-tile{padding:12px 10px;min-height:70px}.learn-tile b{font-size:12px}}
 
 
-      /* Compact beehive map worlds + quest grid polish */
+      /* Code Lab: hexagon worlds (no portals); challenges stay inside each world */
+      .realm-stream-solo{display:flex;flex-direction:column;gap:28px;padding:4px 4px 20px;width:100%}
+      .realm-stream-solo .realm-card{/* keep original hex appearance */}
+      /* Center portals between world groups (bigger placeholder circles) */
+      .realm-portal-slot{
+        display:flex;justify-content:center;align-items:center;
+        width:100%;padding:2px 0;position:relative;z-index:3;
+      }
+      .realm-portal{
+        flex:none;width:72px;height:72px;border-radius:50%;
+        border:2.5px solid #8be9ffaa;
+        background:#061018 center/cover no-repeat;
+        background-image:url("portal.png");
+        box-shadow:
+          0 0 0 3px #33415566,
+          0 0 22px #22d3ee77,
+          0 0 40px #7c5cff44,
+          inset 0 0 14px #022c42aa;
+        pointer-events:none;
+      }
+      .realm-portal.locked-portal{
+        opacity:.48;filter:grayscale(.55) brightness(.65);
+        border-color:#94a3b888;
+        box-shadow:0 0 0 2px #33415566,0 0 12px #0008,inset 0 0 10px #0008;
+      }
+      .realm-portal.open-portal{
+        border-color:#67e8f9;
+        box-shadow:0 0 0 3px #22d3ee55,0 0 28px #22d3ee99,0 0 48px #7c5cff66,inset 0 0 14px #022c42aa;
+        animation:portal-pulse 2.8s ease-in-out infinite;
+      }
+      @media(max-width:600px){
+        .realm-portal{width:60px;height:60px}
+      }
+
+      .world-challenges.lab-chal-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+      @media(max-width:360px){.world-challenges.lab-chal-grid{grid-template-columns:1fr}}
+      /* Portals removed */
+      .portal-rail,.map-portal,.rail-portal{display:none!important}
+
+/* Compact beehive map worlds + quest grid polish */
       .map-journey .map-world{
         width:min(100%,320px)!important;
         margin-left:auto!important;margin-right:auto!important;margin-bottom:10px!important;
@@ -663,14 +769,15 @@
         color:#f1f5ff;position:relative;overflow:hidden;
         background:linear-gradient(160deg,#0c1a28cc,#0a1020e0 70%),var(--world-bg,none) center/cover no-repeat,linear-gradient(160deg,#1a3a55,#0f1a30)
       }
-      .realm-card.water .realm-hex-face{background:linear-gradient(160deg,#0e749099,#0f172add),var(--world-bg) center/cover no-repeat}
-      .realm-card.sky .realm-hex-face{background:linear-gradient(160deg,#3b82f699,#0f172add),var(--world-bg) center/cover no-repeat}
-      .realm-card.forest .realm-hex-face{background:linear-gradient(160deg,#05966999,#0f172add),var(--world-bg) center/cover no-repeat}
-      .realm-card.earth .realm-hex-face{background:linear-gradient(160deg,#65a30d99,#0f172add),var(--world-bg) center/cover no-repeat}
-      .realm-card.fire .realm-hex-face{background:linear-gradient(160deg,#f9731699,#0f172add),var(--world-bg) center/cover no-repeat}
-      .realm-card.cleared .realm-hex-face{box-shadow:inset 0 0 0 2px #34d399aa}
-      .realm-card.active .realm-hex-face{box-shadow:inset 0 0 0 2px #fbbf24aa,0 0 24px #fbbf2444}
-      .realm-card.locked .realm-hex-face{filter:saturate(.25) brightness(.55)}
+      .realm-card.water .realm-hex-face{background:linear-gradient(160deg,#0e749099,#0f172add),var(--world-bg) center/cover no-repeat;box-shadow:0 0 0 2px #22d3ee,0 0 18px #22d3ee88,0 0 36px #22d3ee44,inset 0 0 0 1px #67e8f966}
+      .realm-card.sky .realm-hex-face{background:linear-gradient(160deg,#3b82f699,#0f172add),var(--world-bg) center/cover no-repeat;box-shadow:0 0 0 2px #60a5fa,0 0 18px #60a5fa88,0 0 36px #3b82f644,inset 0 0 0 1px #93c5fd66}
+      .realm-card.forest .realm-hex-face{background:linear-gradient(160deg,#05966999,#0f172add),var(--world-bg) center/cover no-repeat;box-shadow:0 0 0 2px #34d399,0 0 18px #34d39988,0 0 36px #10b98144,inset 0 0 0 1px #6ee7b766}
+      .realm-card.earth .realm-hex-face{background:linear-gradient(160deg,#65a30d99,#0f172add),var(--world-bg) center/cover no-repeat;box-shadow:0 0 0 2px #a3e635,0 0 18px #a3e63588,0 0 36px #84cc1644,inset 0 0 0 1px #d9f99d66}
+      .realm-card.fire .realm-hex-face{background:linear-gradient(160deg,#f9731699,#0f172add),var(--world-bg) center/cover no-repeat;box-shadow:0 0 0 2px #fb923c,0 0 18px #f9731688,0 0 36px #ef444444,inset 0 0 0 1px #fdba7466}
+      .realm-card.lightning .realm-hex-face{background:linear-gradient(160deg,#a78bfa99,#1e1b4bdd),var(--world-bg) center/cover no-repeat;box-shadow:0 0 0 2px #c4b5fd,0 0 18px #a78bfa99,0 0 36px #8b5cf666,inset 0 0 0 1px #e9d5ff66}
+      .realm-card.cleared .realm-hex-face{box-shadow:0 0 0 2px #34d399,0 0 22px #34d39988,inset 0 0 0 2px #34d399aa}
+      .realm-card.active .realm-hex-face{box-shadow:0 0 0 2px #fbbf24,0 0 24px #fbbf24aa,inset 0 0 0 2px #fbbf24aa}
+      .realm-card.locked .realm-hex-face{filter:saturate(.25) brightness(.55);box-shadow:0 0 0 2px #64748b66,0 0 10px #0008}
       .realm-icon{font-size:24px;filter:drop-shadow(0 2px 4px #000a)}
       .realm-score{position:absolute;top:16%;right:16%;font-size:9px;font-weight:800;background:#0008;padding:2px 6px;border-radius:99px}
       .realm-title{font-size:14px;font-weight:800;text-shadow:0 2px 8px #000c}
@@ -771,14 +878,110 @@
         .talisman{width:40px;height:40px}
         .talisman-core{font-size:13px}
       }
+
+      /* ===================================================================
+         DESKTOP LAYOUT — center the mobile app in a clean "device frame"
+         so it stays usable and tidy on large screens, instead of stretching
+         every element edge-to-edge across a wide monitor.
+         =================================================================== */
+      @media (min-width: 900px) {
+        :root {
+          --app-w: 520px;
+          --app-half: 260px;
+        }
+        html {
+          background:
+            radial-gradient(ellipse 60% 40% at 18% 8%,  #5b3df033, transparent 60%),
+            radial-gradient(ellipse 55% 45% at 85% 92%, #22d3ee22, transparent 55%),
+            radial-gradient(ellipse 40% 30% at 50% 50%, #7c5cff18, transparent 70%),
+            linear-gradient(135deg, #04050d 0%, #08091a 40%, #0a0820 100%);
+          background-attachment: fixed;
+          min-height: 100vh;
+        }
+        body {
+          position: relative;
+          max-width: var(--app-w);
+          margin: 0 auto;
+          height: 100vh;
+          overflow: hidden;
+          border-left: 1px solid #ffffff18;
+          border-right: 1px solid #ffffff18;
+          box-shadow: 0 0 0 1px #0003, 0 0 60px #000a, 0 0 120px #7c5cff22;
+        }
+        /* Keep the animated background scoped to the app frame, not the page. */
+        body:before {
+          position: absolute;
+          inset: 0;
+        }
+        /* Constrain the fixed bottom nav to the centered app frame. */
+        nav {
+          left: calc(50% - var(--app-half) + 14px);
+          right: calc(50% - var(--app-half) + 14px);
+        }
+        /* Constrain the floating library launcher to the app frame's right edge. */
+        .library-launch {
+          right: calc(50% - var(--app-half) + 14px) !important;
+        }
+        /* Centered overlays (toast, evc-mark) already use left:50% + translateX. */
+        /* Make modal panels match the app width for visual consistency. */
+        .library-panel,
+        .lib-detail-panel {
+          width: min(100%, var(--app-w));
+          max-width: var(--app-w);
+        }
+      }
+    
+      /* Requested realm polish: stable portals (no blinking emphasis) and soft neon card glow. */
+      .realm-portal.open-portal{animation:none!important;transition:filter .2s,box-shadow .2s;border-color:#67e8f9;box-shadow:0 0 0 2px #22d3ee55,0 0 18px #22d3ee88,0 0 34px #7c5cff55,inset 0 0 14px #022c42aa}
+      .realm-card .realm-hex-face{transition:box-shadow .2s,filter .2s;box-shadow:0 0 0 2px #8be9ff66,0 0 15px #22d3ee44,0 0 28px #7c5cff33,inset 0 0 0 1px #ffffff33!important}
+      .realm-card.water .realm-hex-face{box-shadow:0 0 0 2px #22d3ee,0 0 18px #22d3ee77,0 0 34px #22d3ee44,inset 0 0 0 1px #67e8f966!important}
+      .realm-card.sky .realm-hex-face{box-shadow:0 0 0 2px #60a5fa,0 0 18px #60a5fa77,0 0 34px #3b82f644,inset 0 0 0 1px #93c5fd66!important}
+      .realm-card.forest .realm-hex-face{box-shadow:0 0 0 2px #34d399,0 0 18px #34d39977,0 0 34px #10b98144,inset 0 0 0 1px #6ee7b766!important}
+      .realm-card.earth .realm-hex-face{box-shadow:0 0 0 2px #a3e635,0 0 18px #a3e63577,0 0 34px #84cc1644,inset 0 0 0 1px #d9f99d66!important}
+      .realm-card.fire .realm-hex-face{box-shadow:0 0 0 2px #fb923c,0 0 18px #f9731677,0 0 34px #ef444444,inset 0 0 0 1px #fdba7466!important}
+      .realm-card.lightning .realm-hex-face{box-shadow:0 0 0 2px #c4b5fd,0 0 18px #a78bfa77,0 0 34px #8b5cf644,inset 0 0 0 1px #e9d5ff66!important}
+      .realm-card.locked .realm-hex-face{filter:saturate(.3) brightness(.58);box-shadow:0 0 0 2px #64748b55,0 0 10px #0008!important}
+      @media(prefers-reduced-motion:reduce){.realm-portal.open-portal{animation:none!important}}
+
     </style>
   </head>
   <body>
-    <div id="evc-mark" aria-hidden="true">@EVC</div>
+    
+    <section class="about-overlay" id="aboutOverlay" aria-hidden="true">
+      <div class="about-panel" role="dialog" aria-modal="true" aria-label="About JavaLab">
+        <header>
+          <b>About JavaLab</b>
+          <button type="button" id="aboutClose" aria-label="Close about">×</button>
+        </header>
+        <div class="about-body">
+          <dl>
+            <dt>Creator</dt><dd>Ezek Caru</dd>
+            <dt>Date Made</dt><dd>11/24/2026</dd>
+            <dt>Version</dt><dd>v3.0</dd>
+            <dt>Tools Used</dt>
+            <dd>
+              <ul class="about-tools">
+                <li>VS Code</li>
+                <li>GitHub</li>
+                <li>Claude</li>
+                <li>Grok</li>
+                <li>Manus</li>
+                <li>Kimi</li>
+                <li>ChatGPT</li>
+                <li>Google AI</li>
+                <li>Zhipu</li>
+                <li>DeepSeek</li>
+              </ul>
+            </dd>
+          </dl>
+        </div>
+      </div>
+    </section>
     <header>
       <img class="logo" src="javalab-icon.png" alt="JavaLab app icon" />
       <div><b>JavaLab</b><small>Fill the code, learn Java</small></div>
       <div class="xp" id="xp">0 XP</div>
+      <button type="button" id="evc-mark" aria-label="About JavaLab and creator">@EVC</button>
     </header>
     <main>
       <section class="tab on" id="course"></section>
@@ -842,158 +1045,141 @@
         <div class="library-content">
           <article class="library-topic">
             <h3>1. Variables & Data Types</h3>
-            <p>
-              Variables store values that your program can use and update.
-              Choose a type that matches the data.
-            </p>
-            <div class="lib-syntax">
-              int age = 18; double price = 99.50; String name = "Ana"; boolean
-              enrolled = true;
-            </div>
-            <small
-              >Common types: int (whole numbers), double (decimals), char
-              (single character), String (text), boolean (true/false).</small
-            >
+            <p>A variable is a named box that stores a value your program can read or change. You must declare the type first so Java knows how much memory to reserve and which operations are allowed.</p>
+            <div class="lib-syntax">int age = 18;
+double price = 99.50;
+String name = "Ana";
+boolean enrolled = true;
+char grade = 'A';
+final int MAX_SEATS = 40;</div>
+            <small>Syntax: type name = value; Common types: int (whole numbers), double (decimals), String (text in double quotes), boolean (true/false), char (single character in single quotes). Watch out: forgetting the semicolon; writing string instead of String; putting words in single quotes.</small>
           </article>
           <article class="library-topic">
             <h3>2. Output & Input</h3>
-            <p>
-              Print information to the console. println adds a line break; print
-              does not. Scanner can read user input.
-            </p>
-            <div class="lib-syntax">
-              System.out.println("Hello!"); System.out.print("Name: "); Scanner
-              sc = new Scanner(System.in); String input = sc.nextLine();
-            </div>
-            <small
-              >When using Scanner, add import java.util.Scanner; above your
-              class.</small
-            >
+            <p>System.out.println shows a message and moves to the next line. System.out.print stays on the same line. Scanner reads what the user types on the keyboard.</p>
+            <div class="lib-syntax">System.out.println("Hello!");
+System.out.print("Name: ");
+Scanner sc = new Scanner(System.in);
+String input = sc.nextLine();
+System.out.println("Hi, " + input);</div>
+            <small>Add import java.util.Scanner; above the class. Prompt before you read. Watch out: missing the import; mixing nextInt() and nextLine() without consuming the leftover newline.</small>
           </article>
           <article class="library-topic">
             <h3>3. Operators</h3>
-            <p>
-              Arithmetic operators perform calculations; comparison and logical
-              operators form conditions.
-            </p>
-            <div class="lib-syntax">
-              + - * / % == != &gt; &lt; &gt;= &lt;= && || ! value += 2; value++;
-            </div>
-            <small
-              >Use == for equality checks, not = (assignment). Integer division
-              discards the fractional part.</small
-            >
+            <p>Operators calculate, compare, and combine values. Arithmetic changes numbers; comparison produces true/false; logical operators combine conditions.</p>
+            <div class="lib-syntax">// Arithmetic
+int sum = 7 + 3;
+int rem = 7 % 3;   // 1
+// Comparison
+boolean ok = sum >= 10;
+// Logical
+boolean both = ok && rem == 1;
+// Compound assignment
+sum += 2;
+sum++;</div>
+            <small>Use == for equality, not =. Integer division discards the fraction (7/2 is 3). Prefer && and || over & and | for conditions.</small>
           </article>
           <article class="library-topic">
             <h3>4. if / else & switch</h3>
-            <p>
-              Branch code based on conditions. Conditions evaluate to true or
-              false.
-            </p>
-            <div class="lib-syntax">
-              if (score >= 75) { // one branch } else { // other branch } switch
-              (choice) { case 1: break; default: break; }
-            </div>
-            <small
-              >Use braces to group statements. A switch case often needs break
-              to avoid falling through.</small
-            >
+            <p>Branching lets the program choose different paths. if runs a block when a condition is true. else covers the other path. switch is useful for several fixed cases of one value.</p>
+            <div class="lib-syntax">if (score >= 75) {
+    System.out.println("Passed");
+} else {
+    System.out.println("Needs support");
+}
+
+switch (choice) {
+    case 1:
+        System.out.println("Option A");
+        break;
+    default:
+        System.out.println("Other");
+        break;
+}</div>
+            <small>Always use braces. A switch case usually needs break to avoid falling through. Compare Strings with equals, not ==.</small>
           </article>
           <article class="library-topic">
             <h3>5. Loops</h3>
-            <p>
-              Loops repeat code. Use for when iteration is count-based, while
-              when a condition controls repetition.
-            </p>
-            <div class="lib-syntax">
-              for (int i = 0; i < 5; i++) { System.out.println(i); } while
-              (condition) { // repeated work }
-            </div>
-            <small
-              >Ensure the loop condition eventually changes or becomes false to
-              avoid an infinite loop.</small
-            >
+            <p>Loops repeat instructions. for is ideal when you know the count. while repeats while a condition stays true. do-while runs the body at least once.</p>
+            <div class="lib-syntax">for (int i = 0; i < 5; i++) {
+    System.out.println(i);
+}
+
+int n = 3;
+while (n > 0) {
+    n--;
+}</div>
+            <small>Make sure the condition eventually becomes false. Watch off-by-one errors: i < 5 runs 0..4; i <= 5 runs 0..5. break exits early; continue skips to the next pass.</small>
           </article>
           <article class="library-topic">
             <h3>6. Arrays</h3>
-            <p>
-              Arrays hold multiple values of the same type. Indexes start at
-              zero.
-            </p>
-            <div class="lib-syntax">
-              int[] scores = {80, 92, 75}; System.out.println(scores[0]); for
-              (int score : scores) { System.out.println(score); }
-            </div>
-            <small
-              >Use array.length to get the number of elements. The last valid
-              index is length - 1.</small
-            >
+            <p>An array holds many values of the same type under one name. Indexes start at zero. length tells you how many slots exist.</p>
+            <div class="lib-syntax">int[] scores = {80, 92, 75};
+System.out.println(scores[0]); // 80
+
+for (int score : scores) {
+    System.out.println(score);
+}</div>
+            <small>Last valid index is length - 1. Arrays cannot grow after creation. Watch out: using scores[scores.length] (out of bounds).</small>
           </article>
           <article class="library-topic">
             <h3>7. Methods</h3>
-            <p>
-              Methods package reusable instructions. Parameters pass information
-              in; return sends a result back.
-            </p>
-            <div class="lib-syntax">
-              static int add(int a, int b) { return a + b; } // call it: add(2,
-              3)
-            </div>
-            <small
-              >Use void for methods that do not return a value. A return type
-              must match the value returned.</small
-            >
+            <p>Methods package reusable steps. Parameters pass data in; return sends a result back. void means the method does not return a value.</p>
+            <div class="lib-syntax">static int add(int a, int b) {
+    return a + b;
+}
+
+int result = add(2, 3);
+System.out.println(result); // 5</div>
+            <small>The return type must match the returned value. Argument count and order must match the parameter list. static methods are called without creating an object.</small>
           </article>
           <article class="library-topic">
             <h3>8. Classes & Objects</h3>
-            <p>
-              A class defines a blueprint. Objects are instances created from
-              that blueprint; fields hold state and constructors initialize it.
-            </p>
-            <div class="lib-syntax">
-              class Student { String name; Student(String name) { this.name =
-              name; } } Student s = new Student("Ana");
-            </div>
-            <small
-              >this refers to the current object. Constructor names match the
-              class name and have no return type.</small
-            >
+            <p>A class is a blueprint. An object is one living instance built from that blueprint with new. Fields hold state; methods define behavior.</p>
+            <div class="lib-syntax">class Pet {
+    String name;
+    void greet() {
+        System.out.println("Hi, I am " + name);
+    }
+}
+
+Pet p = new Pet();
+p.name = "Mochi";
+p.greet();</div>
+            <small>Forgetting new is a common mistake. Each object has its own copy of the fields. You can keep a non-public helper class in the same file.</small>
           </article>
           <article class="library-topic">
             <h3>9. Encapsulation</h3>
-            <p>
-              Keep fields private and expose controlled access with methods when
-              appropriate.
-            </p>
-            <div class="lib-syntax">
-              private int level; public int getLevel() { return level; } public
-              void setLevel(int v) { level = v; }
-            </div>
-            <small
-              >Encapsulation protects object state and lets validation happen in
-              one place.</small
-            >
+            <p>Encapsulation protects data by keeping fields private and exposing carefully designed getters and setters. Validation inside setters stops invalid values.</p>
+            <div class="lib-syntax">private double price;
+
+public double getPrice() {
+    return price;
+}
+
+public void setPrice(double p) {
+    if (p < 0) return;
+    this.price = p;
+}</div>
+            <small>Use this.field when a parameter has the same name as a field. Prefer private fields so outside code cannot corrupt object state.</small>
           </article>
           <article class="library-topic">
             <h3>10. Constructors</h3>
-            <p>
-              A constructor is a special method that builds a new object. It
-              runs automatically when you use the new keyword and initializes
-              the object&#39;s fields.
-            </p>
-            <div class="lib-syntax">
-              class Student { String name; int age; // constructor — same name
-              as the class Student(String name, int age) { this.name = name; //
-              this.name = the field this.age = age; } } // new calls the
-              constructor Student s = new Student("Ana", 18);
-            </div>
-            <small
-              >Rules: the constructor name must match the class name, it has no
-              return type (not even void), and this.field assigns a parameter to
-              a field when names are the same.</small
-            >
+            <p>A constructor runs automatically when you create an object with new. Its job is to set up the starting state of the object. The constructor name matches the class name and has no return type.</p>
+            <div class="lib-syntax">class MenuItem {
+    private String name;
+    private double price;
+
+    MenuItem(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
+}
+
+MenuItem item = new MenuItem("Tapsilog", 75.0);</div>
+            <small>If you write any constructor, Java no longer provides the empty default constructor. Argument types must match the call to new.</small>
           </article>
-        </div>
+                </div>
       </div>
     </section>
     <script>
@@ -1363,74 +1549,197 @@
         [
           "Variables and types",
           0,
-          "A variable is a named box for one value. You must declare its type first. int holds whole numbers, double holds decimals, String holds text, boolean holds true/false.",
-          `String name = "Maria";\nint quantity = 2;\ndouble price = 75.00;\nboolean paid = true;\nfinal int MAX = 5; // constant`,
+          "A variable is a named container that holds one value your program can read or update. Choose a type that matches the data: int for whole numbers, double for decimals, String for text, boolean for true/false, and char for a single character. Declare a variable before you use it and end the statement with a semicolon. Use final when the value must never change.\n\nSyntax: type name = value; — type is the data kind, name is the identifier, = assigns, value is the data, ; ends the statement.\n\nWatch out: forgetting the semicolon; using = when you meant ==; writing string instead of String; putting multi-character text in single quotes.",
+          `// Basic declarations
+String name = "Maria";
+int quantity = 2;
+double price = 75.00;
+boolean paid = true;
+final int MAX = 5; // constant
+
+// Applied
+double total = price * quantity;
+System.out.println(name + " owes PHP " + total);
+// Expected: Maria owes PHP 150.0`,
         ],
         [
           "Operators",
           0,
-          "Arithmetic: + - * / %  ·  Assignment: = += -= *= /=  ·  Comparison: == != > < >= <=  ·  Logical: && || !  ·  Output: System.out.println joins text with +.",
-          `int n = 10;\nn += 2;           // assignment\nint rem = n % 3;    // arithmetic\nboolean ok = n > 5 && n != 0;  // comparison + logical\nSystem.out.println("n = " + n);`,
+          "Operators perform work on values. Arithmetic: + - * / %. Assignment: = += -= *= /=. Comparison: == != > < >= <=. Logical: && || !. Integer division discards the fraction (7/2 is 3); use % for the remainder.\n\nCompound forms like x += 2 mean x = x + 2. Prefix ++n updates then uses the value; postfix n++ uses then updates.\n\nWatch out: writing = instead of == inside conditions; integer division when you needed a decimal; confusing & with &&.",
+          `int n = 10;
+n += 2;                 // n becomes 12
+int rem = n % 3;        // remainder 0
+boolean ok = n > 5 && n != 0;
+System.out.println("n = " + n + ", ok = " + ok);
+// Expected: n = 12, ok = true`,
         ],
         [
           "Conditionals",
           1,
-          "if runs code only when a condition is true. Chain with else if and else. Combine tests with && (and), || (or), ! (not). Compare Strings with equals, never ==.",
-          `if (subtotal >= 300) {\n  fee = 0.0;\n} else if (km <= 2) {\n  fee = 25.0;\n} else {\n  fee = 50.0;\n}`,
+          "Conditionals choose a path. if runs only when its condition is true. else if adds another test; else covers the rest. switch compares one value against fixed cases. Always use braces { } so the body is clear.\n\nSyntax: if (condition) { statements } else { statements }. Conditions must be boolean. Compare String text with .equals(...), never with ==.\n\nWatch out: missing braces; forgetting break in switch; using = instead of ==.",
+          `double fee;
+if (subtotal >= 300) {
+  fee = 0.0;
+} else if (km <= 2) {
+  fee = 25.0;
+} else {
+  fee = 50.0;
+}
+System.out.println("Delivery fee: " + fee);`,
         ],
         [
           "Loops",
           2,
-          "Use for when you know how many times, while when you do not, do-while to run at least once. break exits a loop, continue skips to the next round.",
-          `for (int i = 1; i <= 5; i++) {\n  System.out.println("Portion " + i);\n}\nint n = 1;\nwhile (n <= 3) { n++; }\ndo { n--; } while (n > 0);`,
+          "Loops repeat a block. Use for when you know the number of passes, while when a condition controls duration, and do-while when the body must run at least once. break exits immediately; continue skips to the next pass.\n\nSyntax: for (init; condition; update) { body }. Always make the condition eventually false.\n\nWatch out: off-by-one errors (i <= n vs i < n); infinite loops; unexpected changes to the loop variable.",
+          `for (int i = 1; i <= 3; i++) {
+  System.out.println("Portion " + i);
+}
+// Expected:
+// Portion 1
+// Portion 2
+// Portion 3`,
         ],
         [
           "Arrays",
           2,
-          "An array stores many values of one type. Indexes start at 0, and length gives the size. A for-each loop reads every item.",
-          `String[] menu = new String[3];\nmenu[0] = "Tapsilog";\nfor (int i = 0; i < menu.length; i++) { }\nfor (String s : menu) { }`,
+          "An array stores a fixed number of values of the same type. Indexes start at 0. array.length is the number of slots; the last valid index is length - 1. Create with new Type[size] or an initializer { ... }. A for-each loop visits every element without manual indexes.\n\nWatch out: using length as an index (out of bounds); arrays are fixed size; confusing array length with String length().",
+          `String[] menu = { "Tapsilog", "Siomai Rice", "Halo-Halo" };
+System.out.println(menu[0]); // Tapsilog
+for (String item : menu) {
+  System.out.println(item);
+}`,
         ],
         [
           "Methods",
           4,
-          "A method is a reusable block of code. It has a return type (void if none), a name, and parameters. return sends a value back to the caller.",
-          `static int add(int a, int b) {\n  return a + b;\n}\nint r = add(2, 3); // 5`,
+          "A method packages reusable instructions. Parameters receive input; a return type (or void) describes what comes back. static methods belong to the class and can be called without an object. Call a method by writing its name followed by arguments in parentheses.\n\nSyntax: static returnType name(paramType param) { body; return value; }\n\nWatch out: mismatched return type; forgetting return; calling an instance method without an object; wrong argument count.",
+          `static int add(int a, int b) {
+  return a + b;
+}
+public static void main(String[] args) {
+  int result = add(2, 3);
+  System.out.println(result); // 5
+}`,
+        ],
+        [
+          "Strings and casting",
+          6,
+          "String holds text. Helpers: length(), charAt(i), equals(other), toUpperCase(), toLowerCase(), trim(). Join text with +. Casting converts numeric types: (double) total / count keeps the decimal part integer division would drop.\n\nWatch out: comparing strings with == (use equals); charAt out of range; indexes start at 0.",
+          `String raw = "  Java Lab  ";
+String clean = raw.trim().toUpperCase();
+System.out.println(clean); // JAVA LAB
+double avg = (double) 10 / 4; // 2.5 not 2`,
+        ],
+        [
+          "Scanner input",
+          7,
+          "Scanner reads keyboard input. Import java.util.Scanner first. Create Scanner sc = new Scanner(System.in); then use nextLine() for text, nextInt() for integers, nextDouble() for decimals. Prompt the user before reading.\n\nWatch out: missing the import; mixing nextInt and nextLine without consuming the leftover newline.",
+          `import java.util.Scanner;
+// inside main:
+Scanner sc = new Scanner(System.in);
+System.out.print("Name: ");
+String name = sc.nextLine();
+System.out.println("Hello, " + name);`,
         ],
         [
           "Classes and objects",
           3,
-          "A class is a blueprint; an object is one thing built from it with new. Each object has its own copy of the fields, so two objects hold independent data.",
-          `public class MenuItem {\n  private String name;\n  private double price;\n}\nMenuItem a = new MenuItem("Siomai", 30);\nMenuItem b = new MenuItem("Rice", 15);`,
+          "A class is a blueprint. An object is one concrete instance created with new. Fields store each object's data. A constructor runs when the object is created and typically initializes those fields. Methods define behaviors.\n\nSyntax: class Name { fields; Constructor(args) { ... } methods } then Name obj = new Name(args);\n\nWatch out: forgetting new; mismatched constructor parameters; accessing private fields from outside the class.",
+          `class Pet {
+  String name;
+  Pet(String name) { this.name = name; }
+  void greet() { System.out.println("Hi, I am " + name); }
+}
+Pet p = new Pet("Mochi");
+p.greet(); // Hi, I am Mochi`,
         ],
         [
-          "Constructors",
-          3,
-          "A constructor runs when you use new. It has the class name and no return type. this.field = parameter copies the argument into the object.",
-          `public MenuItem(String name, double price) {\n  this.name = name;\n  this.price = price;\n}`,
-        ],
-        [
-          "Encapsulation: getters and setters",
+          "Encapsulation",
           4,
-          "Keep fields private and expose them through methods. A getter reads a value. A validating setter protects the object by refusing bad input.",
-          `public double getPrice() { return price; }\npublic void setPrice(double p) {\n  if (p < 0) return;\n  this.price = p;\n}\npublic void applyDiscount(double percent) {\n  this.price -= this.price * percent / 100;\n}`,
+          "Encapsulation hides internal data behind controlled methods. Mark fields private so outside code cannot change them freely. Provide public getters to read values and setters that validate before updating.\n\nWatch out: public fields that anyone can corrupt; setters that accept negative prices without checks; forgetting this. when parameter names match field names.",
+          `public double getPrice() { return price; }
+public void setPrice(double p) {
+  if (p < 0) return; // reject invalid
+  this.price = p;
+}
+public void applyDiscount(double percent) {
+  this.price -= this.price * percent / 100;
+}`,
         ],
       ];
       const $ = (s) => document.querySelector(s),
         $$ = (s) => [...document.querySelectorAll(s)];
-      let P = { res: {}, xp: 0 };
+      let P = { res: {}, xp: 0, lab: { done: {}, code: {}, byId: {} }, c: { start: null, l: {}, s: {}, fire: 0, last: 0 } };
+      const STORAGE_KEY = "jl3";
+      const LEGACY_KEYS = ["jl1", "jl2"];
       try {
-        P = JSON.parse(localStorage.getItem("jl1")) || P;
-      } catch (e) {}
+        let raw = localStorage.getItem(STORAGE_KEY);
+        let fromLegacy = false;
+        if (!raw) {
+          for (const k of LEGACY_KEYS) {
+            const leg = localStorage.getItem(k);
+            if (leg) {
+              raw = leg;
+              fromLegacy = true;
+              break;
+            }
+          }
+        }
+        if (raw) {
+          const parsed = JSON.parse(raw);
+          if (parsed && typeof parsed === "object") {
+            P = Object.assign(P, parsed);
+            if (!P.res || typeof P.res !== "object") P.res = {};
+            if (typeof P.xp !== "number" || !isFinite(P.xp)) P.xp = 0;
+            if (!P.lab || typeof P.lab !== "object") P.lab = { done: {}, code: {}, byId: {} };
+            if (!P.lab.done) P.lab.done = {};
+            if (!P.lab.code) P.lab.code = {};
+            if (!P.lab.byId) P.lab.byId = {};
+            if (!P.c || typeof P.c !== "object") P.c = { start: null, l: {}, s: {}, fire: 0, last: 0 };
+            if (fromLegacy) {
+              // Mark so the curriculum remap can recover completions by challenge id.
+              P.lab._needsRemap = true;
+            }
+          }
+        }
+      } catch (e) {
+        P = { res: {}, xp: 0, lab: { done: {}, code: {}, byId: {} }, c: { start: null, l: {}, s: {}, fire: 0, last: 0 } };
+      }
       const save = () => {
         try {
-          localStorage.setItem("jl1", JSON.stringify(P));
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(P));
         } catch (e) {}
       };
-      let mode = "type",
+      const syncLabId = (idx, fields) => {
+        if (idx == null || !LAB[idx]) return;
+        const id = LAB[idx]._id || LAB[idx].f || String(idx);
+        P.lab = P.lab || { done: {}, code: {}, byId: {} };
+        P.lab.byId = P.lab.byId || {};
+        P.lab.byId[id] = Object.assign({}, P.lab.byId[id] || {}, fields || {});
+      };
+      let mode = "pick",
         sel = new Set([0, 1, 2, 3, 4]),
         S = null;
       const esc = (t) =>
         t.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+      // Normalize invisible differences so valid student code is not rejected.
+      const normalizeQuotes = (s) =>
+        String(s || "")
+          .replace(/[\u201C\u201D\u201E\u201F\u2033\u2036]/g, '"')
+          .replace(/[\u2018\u2019\u201A\u201B\u2032\u2035]/g, "'");
+      const normalizeCode = (s) =>
+        normalizeQuotes(String(s || ""))
+          .replace(/\r\n?/g, "\n")
+          .replace(/\u00a0/g, " ")
+          .replace(/[\t ]+$/gm, "")
+          .replace(/\n{3,}/g, "\n\n");
+      const normOut = (s) =>
+        normalizeQuotes(String(s || ""))
+          .replace(/\r\n?/g, "\n")
+          .replace(/[\t ]+/g, " ")
+          .trim()
+          .toLowerCase();
+
       const KW =
         "public|private|class|static|void|int|double|String|boolean|new|return|if|else|for|while|do|break|continue|switch|case|final|this|null|true|false|throw";
       const hl = (t) =>
@@ -1458,25 +1767,6 @@
         const ids = Q.map((q, i) => i).filter((i) => t == null || Q[i][0] == t);
         return [ids.filter((i) => P.res[i] == 1).length, ids.length];
       };
-
-      function go(t) {
-        $$(".tab").forEach((x) => x.classList.toggle("on", x.id == t));
-        $$("nav button").forEach((b) =>
-          b.classList.toggle(
-            "on",
-            b.dataset.go == t || (t == "quiz" && b.dataset.go == "home"),
-          ),
-        );
-        $("main").scrollTop = 0;
-        ({ home: rHome, lab: rLab, learn: rLearn, prog: rProg, worm: rWorm })[
-          t
-        ] &&
-          { home: rHome, lab: rLab, learn: rLearn, prog: rProg, worm: rWorm }[
-            t
-          ]();
-        $("#xp").textContent = P.xp + " XP";
-      }
-      $$("nav button").forEach((b) => (b.onclick = () => go(b.dataset.go)));
 
       function rHome() {
         const [d, n] = pct();
@@ -1519,12 +1809,6 @@
         };
       }
 
-      function start(ids) {
-        if (!ids.length) return;
-        S = { ids, i: 0, ok: 0, tries: 0 };
-        go("quiz");
-        rQ();
-      }
       function rQ() {
         const id = S.ids[S.i],
           q = Q[id],
@@ -1671,22 +1955,20 @@ ${mode == "pick" ? `<div class=chips id=bank></div>` : ""}<div id=fb></div>
           }
         }
       }
-      function fin() {
-        $("#quiz").innerHTML =
-          `<div class=card style="text-align:center"><div class=big>${S.ok}/${S.ids.length}</div><p class=mut>solved on the first try</p></div><button class=btn id=again>Back to practice</button><button class="btn alt" id=les>Open lessons</button>`;
-        $("#again").onclick = () => go("home");
-        $("#les").onclick = () => go("learn");
-      }
-
       function rLearn(openIdx) {
         const el = $("#learn");
         if (openIdx != null && L[openIdx]) {
+          LESSON = openIdx;
           const l = L[openIdx],
             i = openIdx;
           el.innerHTML = `<div class="row sp"><button class="back" id="lnBack">${ic("back")}Topics</button><span class="mut">${i + 1} / ${L.length}</span></div>
   <div class="card les"><h2>${esc(l[0])}</h2><p>${l[2]}</p><pre>${hl(l[3])}</pre>
   <button class="btn" style="margin-top:12px;width:100%" data-p=${l[1]}>Practice ${T[l[1]] || "this topic"}</button></div>`;
-          $("#lnBack").onclick = () => rLearn();
+          $("#lnBack").onclick = () => {
+            LESSON = null;
+            rLearn();
+            sync();
+          };
           $$("[data-p]").forEach(
             (b) =>
               (b.onclick = () =>
@@ -1694,8 +1976,10 @@ ${mode == "pick" ? `<div class=chips id=bank></div>` : ""}<div id=fb></div>
                   Q.map((q, i) => i).filter((i) => Q[i][0] == +b.dataset.p),
                 )),
           );
+          sync();
           return;
         }
+        LESSON = null;
         el.innerHTML = `<div><h1>Learn Java</h1><p class="mut">Pick a topic. Short notes, then practice.</p></div>
 <div class="learn-grid">${L.map((l, i) => `<button type="button" class="learn-tile" data-l="${i}"><span class="learn-num">${i + 1}</span><b>${esc(l[0])}</b></button>`).join("")}</div>`;
         $$(".learn-tile").forEach(
@@ -1966,7 +2250,7 @@ ${mode == "pick" ? `<div class=chips id=bank></div>` : ""}<div id=fb></div>
         },
       ];
       const strip = (c) =>
-        c
+        normalizeCode(c)
           .replace(/\/\*[\s\S]*?\*\//g, (m) => m.replace(/[^\n]/g, " "))
           .replace(/\/\/.*$/gm, "");
       function pass(c, s, reference = "") {
@@ -2024,6 +2308,16 @@ ${mode == "pick" ? `<div class=chips id=bank></div>` : ""}<div id=fb></div>
           source = source.replace(
             "for\\s*\\(",
             "(?:for\\s*\\(|while\\s*\\(|do\\s*\\{)",
+          );
+          // Allow System.out.print and println interchangeably unless the
+          // pattern explicitly anchors a specific form with unique context.
+          source = source.replace(
+            /System\.out\.println\s*\(/g,
+            "System\\.out\\.(?:print|println)\\s*\\(",
+          );
+          source = source.replace(
+            /System\.out\.print\s*\(/g,
+            "System\\.out\\.(?:print|println)\\s*\\(",
           );
           let re;
           try {
@@ -2117,6 +2411,18 @@ ${mode == "pick" ? `<div class=chips id=bank></div>` : ""}<div id=fb></div>
             message: item.ch + " is never closed",
           }),
         );
+        // Flag multi-character text wrapped in single quotes (invalid Java String).
+        const singleStr = /'([^'\\]|\\.){2,}'/g;
+        let sm;
+        while ((sm = singleStr.exec(code))) {
+          const before = code.slice(0, sm.index);
+          const ln = before.split("\n").length;
+          errors.push({
+            type: "String syntax",
+            line: ln,
+            message: "multi-character text must use double quotes, not single quotes",
+          });
+        }
         return errors;
       }
       function rLab() {
@@ -2125,30 +2431,13 @@ ${mode == "pick" ? `<div class=chips id=bank></div>` : ""}<div id=fb></div>
         if (LB == null) {
           return labMap(el);
         }
-        if (0) {
-          el.innerHTML =
-            `<div><h1>Code Lab</h1><p class=mut>Type real Java like in JVDroid. Every task gives a situation and small steps. Start from Task 1.</p></div>` +
-            LAB.map(
-              (k, i) =>
-                `<button class="card les" data-o=${i}><div class="row sp"><h2>${P.lab.done[i] ? "✅ " : ""}${i + 1}. ${k.t}</h2><span class=mut>${k.lv}</span></div><p>${k.sit}</p></button>`,
-            ).join("");
-          $$("[data-o]").forEach(
-            (b) =>
-              (b.onclick = () => {
-                LB = +b.dataset.o;
-                rLab();
-                $("main").scrollTop = 0;
-              }),
-          );
-          return;
-        }
         const k = LAB[LB];
         el.innerHTML = `<div class="row sp"><button class=back id=lb>${ic("back")}All tasks</button><span class=mut>Task ${LB + 1} of ${LAB.length}</span></div><h1>${k.t}</h1>
 <div class=card><h2>Problem statement</h2><p style="margin-top:6px;color:#e2e8ff;white-space:pre-line">${k.sit}</p></div>
 ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top:8px;white-space:pre-wrap">${esc(k.out)}</pre></div>` : ""}
 <div class=card><h2>Your steps</h2><div id=steps style="margin-top:8px"></div></div>
 <div class=ide id=ide><div class=ftab><b>${k.f}.java</b><button class=tb zoom id=zo>${ic("minus")}</button><span id=zv class=mut style="font-size:11px;min-width:22px;text-align:center"></span><button class="tb zoom" id=zi>${ic("plus")}</button><button class=tb id=wr>${ic("wrap")}Wrap</button><button class="tb hist" id=undo title="Undo" aria-label="Undo">↶</button><button class="tb hist" id=redo title="Redo" aria-label="Redo">↷</button><button class=tb id=ex>${ic("expand")}</button></div><div class=keys id=keys></div><div class=ed><div class=gut id=gut></div><textarea class=src id=src wrap=off spellcheck=false autocapitalize=off autocomplete=off autocorrect=off></textarea></div></div>
-<div class=row><button class="btn alt" id=rst>${ic("reset")} Reset challenge</button><button class="btn alt editor-hint" id=hint title="Hint" aria-label="Hint">${ic("bulb")}</button><button class="btn alt" id=sol>${ic("book")} Run solution</button><button class=btn style="flex:1" id=run>${ic("play")} Run</button></div>
+<div class=row><button class="btn alt" id=rst>${ic("reset")} Reset challenge</button><button class="btn alt" id=sol>${ic("book")} Run solution</button><button class="btn alt editor-hint" id=hint title="Hint" aria-label="Hint">${ic("bulb")}</button><button class=btn style="flex:1" id=run>${ic("play")} Run</button></div>
 <div class=cons id=cons>Press Run to check your code.</div>
 <p class=mut>Code Lab checks your code and shows the expected output. It is not a real Java compiler. To run it for real, paste the same code into JVDroid.</p>`;
         const src = $("#src"),
@@ -2236,7 +2525,16 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
             }
           });
           hl.style.backgroundImage = guides.join(",");
-          if (!wrap) gut.textContent = lines.map((x, i) => i + 1).join("\n");
+          const lintErrs = lint(src.value, k.sol);
+          const badLines = new Set(lintErrs.map((e) => e.line));
+          if (!wrap)
+            gut.innerHTML = lines
+              .map((x, i) =>
+                badLines.has(i + 1)
+                  ? `<span style="color:#fb7185;text-decoration:underline">${i + 1}</span>`
+                  : String(i + 1),
+              )
+              .join("\n");
           else {
             const cs = document.createElement("canvas").getContext("2d");
             cs.font = getComputedStyle(src).font;
@@ -2272,6 +2570,7 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
         src.oninput = () => {
           rememberEdit();
           P.lab.code[LB] = src.value;
+          syncLabId(LB, { code: src.value });
           save();
           upd();
         };
@@ -2401,12 +2700,46 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
           src.dispatchEvent(new Event("input"));
           src.focus();
         };
+        const LIVE_TEMPLATES = {
+          sout: 'System.out.println();',
+          souf: 'System.out.printf("");',
+          psvm: 'public static void main(String[] args) {\n  \n}',
+          fori: 'for (int i = 0; i < ; i++) {\n  \n}',
+          iter: 'for (var item : ) {\n  \n}',
+          ifelse: 'if () {\n  \n} else {\n  \n}',
+        };
+        const expandTemplate = () => {
+          const p = src.selectionStart;
+          const before = src.value.slice(0, p);
+          const m = before.match(/([A-Za-z_]\w*)$/);
+          if (!m) return false;
+          const key = m[1];
+          const tpl = LIVE_TEMPLATES[key];
+          if (!tpl) return false;
+          const start = p - key.length;
+          const text = tpl.replace(/\\n/g, "\n");
+          src.setRangeText(text, start, p, "end");
+          // Place cursor at first editable spot (after first open paren or brace body)
+          let caret = start + text.length;
+          const openParen = text.indexOf("(");
+          const openBrace = text.indexOf("{");
+          if (openParen >= 0 && (openBrace < 0 || openParen < openBrace)) {
+            caret = start + openParen + 1;
+            if (text[openParen + 1] === '"') caret++;
+          } else if (openBrace >= 0) {
+            const nl = text.indexOf("\n", openBrace);
+            caret = nl >= 0 ? start + nl + 1 + 2 : start + openBrace + 1;
+          }
+          src.setSelectionRange(caret, caret);
+          src.dispatchEvent(new Event("input"));
+          return true;
+        };
         src.onkeydown = (e) => {
           const pairs = { "{": "}", "(": ")", "[": "]", '"': '"', "'": "'" };
           if (e.key == "Tab") {
             e.preventDefault();
             if (e.shiftKey) dedentLine();
-            else ins("  ");
+            else if (!expandTemplate()) ins("  ");
           } else if (pairs[e.key]) {
             e.preventDefault();
             pairInsert(e.key, pairs[e.key]);
@@ -2438,6 +2771,21 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
             } else ins("\n" + indent + extra);
           }
         };
+        // Volume buttons move the caret when the code editor is focused (accessibility).
+        const onVol = (e) => {
+          if (document.activeElement !== src) return;
+          if (e.key === "AudioVolumeUp" || e.key === "VolumeUp") {
+            e.preventDefault();
+            const p = Math.min(src.value.length, src.selectionStart + 1);
+            src.setSelectionRange(p, p);
+          } else if (e.key === "AudioVolumeDown" || e.key === "VolumeDown") {
+            e.preventDefault();
+            const p = Math.max(0, src.selectionStart - 1);
+            src.setSelectionRange(p, p);
+          }
+        };
+        document.addEventListener("keydown", onVol);
+        // Clean up when leaving this challenge view is handled by full re-render of rLab.
         $("#keys").innerHTML = [
           "Tab",
           "{",
@@ -2490,6 +2838,8 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
             delete P.lab.done[LB];
             src.value = k.start;
             P.lab.code[LB] = k.start;
+            syncLabId(LB, { code: k.start, done: 0 });
+            if (P.lab.byId && LAB[LB]) { const id = LAB[LB]._id || LAB[LB].f; if (P.lab.byId[id]) delete P.lab.byId[id].done; }
             undoStack = [k.start];
             redoStack = [];
             historyValue = k.start;
@@ -2515,7 +2865,11 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
             ? `<div class="g">Hint · Requirement ${next + 1}: ${esc(step[0])}</div><div>${esc(step[1] || requirement(step[0]))}</div>`
             : `<div class="g">All listed requirements appear to be present. Run your code to check it.</div>`;
         };
+        let runBusy = false;
         $("#run").onclick = () => {
+          if (runBusy) return;
+          runBusy = true;
+          setTimeout(() => { runBusy = false; }, 600);
           const c = src.value,
             er = lint(c, k.sol),
             left = k.steps.filter((s) => !pass(c, s, k.sol)),
@@ -2546,6 +2900,9 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
             const first = !P.lab.done[LB];
             if (first) {
               P.lab.done[LB] = 1;
+              const id = (LAB[LB] && (LAB[LB]._id || LAB[LB].f)) || String(LB);
+              P.lab.byId = P.lab.byId || {};
+              P.lab.byId[id] = Object.assign({}, P.lab.byId[id] || {}, { done: 1 });
               P.xp += 25;
               save();
               $("#xp").textContent = P.xp + " XP";
@@ -4056,11 +4413,7 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
       );
 
       /* ===== LAB MAP (candy style) ===== */
-      const LORD = [
-        0, 6, 7, 8, 1, 9, 11, 2, 10, 3, 12, 13, 4, 5, 14, 15, 16, 17, 18, 19,
-        20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37,
-        38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
-      ];
+      let LORD = []; // filled after curriculum remap
       const LD = () => (P.lab = P.lab || { done: {}, code: {} }).done;
       function labMap(el) {
         const dn = LD(),
@@ -4097,41 +4450,69 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
             theme: "fire",
             hint: "Forge your mastery in the final trials",
           },
+          {
+            name: "Stormforge Peaks",
+            icon: "⚡",
+            theme: "lightning",
+            hint: "Strike true through the storm of advanced challenges",
+          },
         ];
-        const worldWon = worlds.map(
-          (_, w) =>
-            LORD.slice(w * 10, w * 10 + 10).filter((i) => dn[i]).length === 10,
-        );
-        const worldOpen = worlds.map((_, w) => w === 0 || worldWon[w - 1]);
+        const worldCount = Math.max(1, Math.ceil(LORD.length / 10));
+        const worldWon = [];
+        const worldOpen = [];
+        for (let w = 0; w < worldCount; w++) {
+          const levels = LORD.slice(w * 10, w * 10 + 10);
+          worldWon[w] =
+            levels.length > 0 && levels.every((i) => dn[i]);
+          worldOpen[w] = w === 0 || worldWon[w - 1];
+        }
+        // Nested world detail: challenges stay inside the chosen hexagon world.
         if (typeof WORLD !== "undefined" && WORLD != null) {
           return labWorld(el, WORLD, worlds, worldWon, worldOpen, dn, cur);
         }
-        let h = `<div class="map-journey clean-map"><div class="map-hero"><div class="map-hero-top"><div class="map-compass">🧭</div><div><h1>Elemental Realms</h1><p>Clear every challenge in a world to open the portal to the next realm.</p></div></div><div class="map-progress"><div class="bar"><i style="width:${(cnt / LORD.length) * 100}%"></i></div><b>${cnt} / ${LORD.length} cleared</b></div></div>`;
-        h += `<div class="realm-layout"><aside class="portal-rail" aria-label="World portals">`;
-        for (let w = 0; w < worlds.length - 1; w++) {
-          const cleared = worldWon[w];
-          h += `<button type="button" class="map-portal rail-portal ${cleared ? "open" : "locked-portal"}" data-portal="${w + 1}" ${cleared ? "" : "disabled"} aria-label="${cleared ? "Enter World " + (w + 2) : "Portal sealed until World " + (w + 1) + " is cleared"}"><b>${cleared ? "Open" : "Sealed"}</b><small>${cleared ? "World " + (w + 2) : "Finish 10"}</small></button>`;
-        }
-        h += `</aside><div class="realm-stream">`;
-        worlds.forEach((world, w) => {
-          const levels = LORD.slice(w * 10, w * 10 + 10),
-            won = levels.filter((i) => dn[i]).length,
+        let h = `<div class="map-journey clean-map"><div class="map-hero"><div class="map-hero-top"><div class="map-compass">🧭</div><div><h1>Elemental Realms</h1><p>Enter a world to open its challenges. Clear a world to unlock the next.</p></div></div><div class="map-progress"><div class="bar"><i style="width:${(cnt / Math.max(1, LORD.length)) * 100}%"></i></div><b>${cnt} / ${LORD.length} cleared</b></div></div>`;
+        // Hexagon worlds only — no portal rail.
+        h += `<div class="realm-stream realm-stream-solo">`;
+        for (let w = 0; w < worldCount; w++) {
+          const world = worlds[w] || {
+            name: "Realm " + (w + 1),
+            icon: "✦",
+            theme: "spirit",
+            hint: "Continue your journey",
+          };
+          const levels = LORD.slice(w * 10, w * 10 + 10);
+          if (!levels.length) continue;
+          const won = levels.filter((i) => dn[i]).length,
             open = worldOpen[w],
             locked = !open;
           const side = w % 2 === 0 ? "left" : "right";
-          h += `<button type="button" class="realm-card ${side} ${world.theme}${locked ? " locked" : ""}${worldWon[w] ? " cleared" : ""}${open && !locked ? " active" : ""}" data-world="${w}" style="--world-bg:url('world${w + 1}.png')" ${locked ? "disabled" : ""} aria-label="World ${w + 1}: ${esc(world.name)}, ${won} of 10 cleared">`;
+          h += `<button type="button" class="realm-card ${side} ${world.theme}${locked ? " locked" : ""}${worldWon[w] ? " cleared" : ""}${open && !locked ? " active" : ""}" data-world="${w}" style="--world-bg:url('world${Math.min(w + 1, 6)}.png')" ${locked ? "disabled" : ""} aria-label="World ${w + 1}: ${esc(world.name)}, ${won} of ${levels.length} cleared">`;
           h += `<span class="realm-hex"><span class="realm-hex-face">`;
           h += `<span class="realm-icon">${world.icon}</span>`;
-          h += `<span class="realm-score">${won}/10</span>`;
+          h += `<span class="realm-score">${won}/${levels.length}</span>`;
           h += `<b class="realm-title">World ${w + 1}</b>`;
           h += `<small class="realm-name">${esc(world.name)}</small>`;
           if (locked) h += `<span class="realm-lock">LOCKED</span>`;
-          else if (worldWon[w])
-            h += `<span class="realm-status">Cleared</span>`;
+          else if (worldWon[w]) h += `<span class="realm-status">Cleared</span>`;
           else h += `<span class="realm-status">Tap to enter</span>`;
           h += `</span></span></button>`;
-        });
-        h += `</div></div></div>`;
+          // Add the missing first portal directly between World 1 and World 2.
+          // It follows World 2's unlock state, matching the other realm portals.
+          if (w === 0 && worldCount > 1) {
+            const pLocked = !worldOpen[1];
+            const pCls = pLocked ? "locked-portal" : "open-portal";
+            h += `<div class="realm-portal-slot" data-portal="0"><span class="realm-portal ${pCls}" style="background-image:url('portal.png')" title="${pLocked ? "Locked" : "Portal 1"}" aria-hidden="true"></span></div>`;
+          }
+          // Each portal is gated by the world it leads TO, not the world behind it.
+          // Portal after W2 -> W3 unlocks only when W3 is unlocked; same rule onward.
+          if (w >= 1 && w < worldCount - 1) {
+            const targetWorld = w + 1; // zero-based index of destination world
+            const pLocked = !worldOpen[targetWorld];
+            const pCls = pLocked ? "locked-portal" : "open-portal";
+            h += `<div class="realm-portal-slot" data-portal="${w}"><span class="realm-portal ${pCls}" style="background-image:url('portal.png')" title="${pLocked ? "Locked" : "Portal " + (w + 1)}" aria-hidden="true"></span></div>`;
+          }
+        }
+        h += `</div></div>`;
         el.innerHTML = h;
         $$(".realm-card:not([disabled])").forEach(
           (b) =>
@@ -4141,37 +4522,39 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
               $("main").scrollTop = 0;
             }),
         );
-        $$(".rail-portal.open").forEach(
-          (p) =>
-            (p.onclick = () => {
-              WORLD = +p.dataset.portal;
-              labMap(el);
-              $("main").scrollTop = 0;
-            }),
-        );
       }
       function labWorld(el, w, worlds, worldWon, worldOpen, dn, cur) {
-        const world = worlds[w],
-          levels = LORD.slice(w * 10, w * 10 + 10),
+        const world = worlds[w] || {
+          name: "Realm " + (w + 1),
+          icon: "✦",
+          theme: "spirit",
+          hint: "Continue your journey",
+        };
+        const levels = LORD.slice(w * 10, w * 10 + 10),
           won = levels.filter((i) => dn[i]).length,
           open = worldOpen[w],
           locked = !open;
-        let h = `<div class="world-screen" style="--world-bg:url('world${w + 1}.png')"><div class="row sp"><button type="button" class="back" id="worldBack">${typeof ic === "function" ? ic("back") : "←"} Realms</button><span class="mut">World ${w + 1} of ${worlds.length}</span></div>`;
-        h += `<div class="world-screen-hero ${world.theme}"><span class="world-screen-icon">${world.icon}</span><div><h1>World ${w + 1} · ${esc(world.name)}</h1><p class="mut">${esc(world.hint)}</p><div class="map-progress" style="margin-top:8px"><div class="bar"><i style="width:${(won / 10) * 100}%"></i></div><b>${won}/10</b></div></div></div>`;
-        h += `<div class="world-challenges">`;
+        let h = `<div class="world-screen" style="--world-bg:url('world${Math.min(w + 1, 6)}.png')"><div class="row sp"><button type="button" class="back" id="worldBack">${typeof ic === "function" ? ic("back") : "←"} Realms</button><span class="mut">World ${w + 1} of ${Math.max(1, Math.ceil(LORD.length / 10))}</span></div>`;
+        h += `<div class="world-screen-hero ${world.theme}"><span class="world-screen-icon">${world.icon}</span><div><h1>World ${w + 1} · ${esc(world.name)}</h1><p class="mut">${esc(world.hint)}</p><div class="map-progress" style="margin-top:8px"><div class="bar"><i style="width:${(won / Math.max(1, levels.length)) * 100}%"></i></div><b>${won}/${levels.length}</b></div></div></div>`;
+        h += `<div class="world-challenges lab-chal-grid">`;
         levels.forEach((i, j) => {
           const n = w * 10 + j + 1,
-            k = LAB[i],
-            isCurrent = open && i === cur,
+            k = LAB[i];
+          if (!k) return;
+          const isCurrent = open && i === cur,
             done = !!dn[i];
+          const unlocked =
+            done ||
+            isCurrent ||
+            (open && LORD.indexOf(i) <= LORD.indexOf(cur));
           const state = done
             ? "done"
             : isCurrent
               ? "open"
-              : open
+              : unlocked
                 ? "ready"
                 : "lock";
-          h += `<button type="button" class="world-chal ${state}" data-o="${i}" data-locked="${locked ? 1 : 0}"><span class="talisman ${state}"><span class="talisman-core">${done ? "✓" : n}</span></span><span class="chal-copy"><b>${esc(k.t)}</b><small>${esc(k.lv || "Challenge")}</small></span><span class="chal-go">›</span></button>`;
+          h += `<button type="button" class="world-chal ${state}" data-o="${i}" data-locked="${locked || !unlocked ? 1 : 0}"><span class="talisman ${state}"><span class="talisman-core">${done ? "✓" : n}</span></span><span class="chal-copy"><b>${esc(k.t)}</b><small>${esc(k.lv || "Challenge")}</small></span><span class="chal-go">${state === "lock" ? "⌂" : "›"}</span></button>`;
         });
         h += `</div></div>`;
         el.innerHTML = h;
@@ -4184,7 +4567,11 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
           (b) =>
             (b.onclick = () => {
               if (b.dataset.locked === "1") {
-                toast("Clear the previous world first");
+                toast(
+                  locked
+                    ? "Clear the previous world first"
+                    : "Clear earlier challenges first",
+                );
                 return;
               }
               LB = +b.dataset.o;
@@ -4390,6 +4777,115 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
         ),
       );
 
+      /* ===== CURRICULUM REMAP: strict Easy → Medium → Hard =====
+         Reorders LAB in place after all challenges are registered, then
+         rebuilds the journey index. Progress is keyed by challenge file id
+         so completions survive reordering across versions. */
+      (function remapLabCurriculum() {
+        const rank = (lv) => {
+          const s = String(lv || "").toLowerCase();
+          if (/easy|beginner|warm/.test(s)) return 0;
+          if (/medium|mid/.test(s)) return 1;
+          return 2; // Challenge / Hard / Boss
+        };
+        // Pedagogical tie-break within the same difficulty band.
+        const topicScore = (item) => {
+          const blob = (
+            (item.t || "") +
+            " " +
+            (item.f || "") +
+            " " +
+            (item.sit || "") +
+            " " +
+            (item.sol || "")
+          ).toLowerCase();
+          if (/hello|welcome|print|println|variable|warm/.test(blob)) return 10;
+          if (/operator|math|increment|arithmetic|\+\+|%/.test(blob)) return 20;
+          if (/if |else|pass or fail|grade|boolean|compar/.test(blob)) return 30;
+          if (/for |while |loop|count to|portion|batch/.test(blob)) return 40;
+          if (/array|menu array|stock|search|matrix/.test(blob)) return 50;
+          if (/string|word|username|palindrome|charat/.test(blob)) return 55;
+          if (/method|static |temperature|factorial|parcel|late fee/.test(blob))
+            return 60;
+          if (
+            /class |object|constructor|encapsul|private|getter|setter|discount|bank|library|attendance|inventory/.test(
+              blob,
+            )
+          )
+            return 70;
+          return 45;
+        };
+        // Snapshot legacy index → id before sorting.
+        const legacyIdByIndex = LAB.map((item, i) => ({
+          i,
+          id: item.f || item.t || String(i),
+        }));
+        // Preserve original registration order for course-day lab links (D[]).
+        window.ORIG_LAB_IDS = legacyIdByIndex.map((x) => x.id);
+        LAB.forEach((item, i) => {
+          if (!item._id) item._id = item.f || item.t || "lab-" + i;
+          // Normalize display labels toward Easy / Medium / Hard
+          const r = rank(item.lv);
+          item.lv = r === 0 ? "Easy" : r === 1 ? "Medium" : "Hard";
+        });
+        LAB.sort((a, b) => {
+          const d = rank(a.lv) - rank(b.lv);
+          if (d) return d;
+          const ta = topicScore(a) - topicScore(b);
+          if (ta) return ta;
+          return String(a.t || "").localeCompare(String(b.t || ""));
+        });
+        // Rebuild progress maps keyed by stable challenge id.
+        P.lab = P.lab || { done: {}, code: {}, byId: {} };
+        const byId = P.lab.byId || {};
+        // Recover from legacy numeric indexes when upgrading.
+        if (P.lab._needsRemap || !Object.keys(byId).length) {
+          legacyIdByIndex.forEach(({ i, id }) => {
+            if (P.lab.done && P.lab.done[i]) byId[id] = Object.assign({ done: 1 }, byId[id] || {});
+            if (P.lab.code && P.lab.code[i] != null) {
+              byId[id] = byId[id] || {};
+              if (byId[id].code == null) byId[id].code = P.lab.code[i];
+            }
+          });
+          delete P.lab._needsRemap;
+        }
+        // Project byId back onto the new index order.
+        const done = {},
+          code = {};
+        LAB.forEach((item, i) => {
+          const id = item._id;
+          const rec = byId[id];
+          if (rec && rec.done) done[i] = 1;
+          if (rec && rec.code != null) code[i] = rec.code;
+        });
+        P.lab.done = done;
+        P.lab.code = code;
+        P.lab.byId = byId;
+        try {
+          save();
+        } catch (e) {}
+      })();
+
+
+      LORD = LAB.map((_, i) => i);
+      // Keep byId projection in sync after any late LAB.push + remap.
+      const labIndexById = () => {
+        const map = {};
+        LAB.forEach((item, i) => {
+          const id = item._id || item.f || item.t;
+          if (id != null) map[id] = i;
+        });
+        return map;
+      };
+      const resolveCourseLab = (oldIdx) => {
+        if (oldIdx == null || oldIdx < 0) return -1;
+        const ids = window.ORIG_LAB_IDS || [];
+        const id = ids[oldIdx];
+        if (!id) return -1;
+        const map = labIndexById();
+        return map[id] != null ? map[id] : -1;
+      };
+
       /* ===== 30-DAY COURSE ===== */
       const PACE = 1,
         DMS = 86400000;
@@ -4460,8 +4956,10 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
         c.last = t;
         save();
       };
-      const dayDone = (i) =>
-        C().l[i] && C().s[i] && (D[i][5] < 0 || LD()[D[i][5]]);
+      const dayDone = (i) => {
+        const lab = resolveCourseLab(D[i][5]);
+        return C().l[i] && C().s[i] && (D[i][5] < 0 || lab < 0 || LD()[lab]);
+      };
       const dayState = (i) =>
         dayDone(i) ? "done" : i == 0 || dayDone(i - 1) ? "open" : "lock";
       const stars = (i) => C().s[i] || 0;
@@ -4483,6 +4981,43 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
         );
       }
       let tt;
+      // About / creator info modal (side watermark button)
+      (() => {
+        const overlay = document.getElementById("aboutOverlay");
+        const btn = document.getElementById("evc-mark");
+        const close = document.getElementById("aboutClose");
+        if (!overlay || !btn || !close) return;
+        let aboutDepth = 0;
+        const hide = () => {
+          overlay.classList.remove("open");
+          overlay.setAttribute("aria-hidden", "true");
+          if (aboutDepth > 0) {
+            aboutDepth = 0;
+            try { history.back(); } catch (e) {}
+          }
+        };
+        const show = () => {
+          overlay.classList.add("open");
+          overlay.setAttribute("aria-hidden", "false");
+          if (aboutDepth === 0) {
+            aboutDepth = 1;
+            try { history.pushState({ about: 1 }, ""); } catch (e) {}
+          }
+        };
+        btn.addEventListener("click", show);
+        close.addEventListener("click", hide);
+        overlay.addEventListener("click", (e) => { if (e.target === overlay) hide(); });
+        window.addEventListener("popstate", () => {
+          if (overlay.classList.contains("open")) {
+            overlay.classList.remove("open");
+            overlay.setAttribute("aria-hidden", "true");
+            aboutDepth = 0;
+          }
+        });
+        document.addEventListener("keydown", (e) => {
+          if (e.key === "Escape" && overlay.classList.contains("open")) hide();
+        });
+      })();
       function toast(m) {
         const e = $("#toast");
         e.textContent = m;
@@ -4577,13 +5112,13 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
         const i = DAY,
           d = D[i],
           ls = L[d[2]],
-          lab = d[5] >= 0 ? LAB[d[5]] : null,
+          labIdx = resolveCourseLab(d[5]), lab = labIdx >= 0 ? LAB[labIdx] : null,
           ds = C().l[i],
           qs = stars(i);
         el.innerHTML = `<div class="row sp"><button class=back id=bk>${ic("back")}Map</button><span class=mut>Day ${i + 1} of ${D.length}</span></div><h1>${esc(d[1])}</h1><p class=mut>${WN[d[0]]}</p>
 <div class=card><h2>${ic("book")} Lesson: ${ls[0]}</h2><p style="margin:8px 0;color:#e2e8ff">${ls[2]}</p><pre>${hl(ls[3])}</pre><button class="btn ${ds ? "alt" : ""}" style="width:100%;margin-top:10px" id=rd>${ds ? ic("check") + " Read. Tap to review again" : "I understand. Mark as read"}</button></div>
 <div class=card><h2>${ic("puzzle")} Quiz level ${"★".repeat(qs)}${"☆".repeat(3 - qs)}</h2><p class=mut style="margin:6px 0 10px">${d[4]} fill-the-code questions. You have 5 hearts and each wrong answer costs one.</p><button class=btn style="width:100%" id=qz>${qs ? "Play again" : "Start quiz"}</button></div>
-${lab ? `<div class=card><h2>${ic("code")} Code challenge: ${lab.t}</h2><p class=mut style="margin:6px 0 10px">${lab.sit}</p><button class=btn style="width:100%" id=lbn>${LD()[d[5]] ? ic("check") + " Done. Open again" : "Open in Code Lab"}</button></div>` : ""}`;
+${lab ? `<div class=card><h2>${ic("code")} Code challenge: ${lab.t}</h2><p class=mut style="margin:6px 0 10px">${lab.sit}</p><button class=btn style="width:100%" id=lbn>${labIdx >= 0 && LD()[labIdx] ? ic("check") + " Done. Open again" : "Open in Code Lab"}</button></div>` : ""}`;
         $("#bk").onclick = () => {
           DAY = null;
           rCourse();
@@ -4602,15 +5137,17 @@ ${lab ? `<div class=card><h2>${ic("code")} Code challenge: ${lab.t}</h2><p class
         const lb = $("#lbn");
         lb &&
           (lb.onclick = () => {
-            LB = d[5];
+            LB = labIdx;
             go("lab");
           });
       }
       function start(ids, lv) {
         if (!ids.length) return;
         const fr = tab == "quiz" && S ? S.from : tab;
+        // Always shuffle question order for variety on each attempt
+        const shuffled = shuf(ids.slice());
         S = {
-          ids,
+          ids: shuffled,
           i: 0,
           ok: 0,
           tries: 0,
@@ -4652,10 +5189,29 @@ ${lab ? `<div class=card><h2>${ic("code")} Code challenge: ${lab.t}</h2><p class
         DAY = null,
         depth = 0,
         skip = false,
-        armed = 0;
+        armed = 0,
+        LESSON = null;
+      // Snapshot of nested view state for accurate back navigation
+      function viewKey() {
+        return [
+          tab,
+          DAY == null ? "" : "d" + DAY,
+          LB == null ? "" : "l" + LB,
+          WORLD == null ? "" : "w" + WORLD,
+          LESSON == null ? "" : "n" + LESSON,
+          S && tab == "quiz" ? "q" : "",
+        ].join("|");
+      }
+      let lastViewKey = viewKey();
       function go(t) {
         tab = t;
-        if (t != "lab") LB = null;
+        if (t != "lab") {
+          LB = null;
+          WORLD = null;
+        }
+        if (t != "learn") LESSON = null;
+        if (t != "course") DAY = null;
+        if (t != "quiz") S = null;
         $$(".tab").forEach((x) => x.classList.toggle("on", x.id == t));
         $$("nav button").forEach((b) =>
           b.classList.toggle(
@@ -4684,42 +5240,65 @@ ${lab ? `<div class=card><h2>${ic("code")} Code challenge: ${lab.t}</h2><p class
             go(b.dataset.go);
           }),
       );
-      const layers = () =>
-        (tab != "course" ? 1 : 0) +
-        (tab == "quiz" ||
-        (tab == "lab" && (LB != null || WORLD != null)) ||
-        (tab == "course" && DAY != null)
-          ? 1
-          : 0);
+      const layers = () => {
+        let n = 0;
+        if (tab != "course") n++;
+        if (tab == "quiz") n++;
+        if (tab == "lab" && WORLD != null) n++;
+        if (tab == "lab" && LB != null) n++;
+        if (tab == "course" && DAY != null) n++;
+        if (tab == "learn" && LESSON != null) n++;
+        return n;
+      };
       function sync() {
         const n = layers();
-        if (n > depth) {
-          while (depth < n) history.pushState({ d: ++depth }, "");
-        } else if (n < depth) {
-          skip = true;
-          const k = depth - n;
-          depth = n;
-          history.go(-k);
+        const key = viewKey();
+        if (key !== lastViewKey) {
+          if (n > depth) {
+            while (depth < n) history.pushState({ d: ++depth, k: key }, "");
+          } else if (n < depth) {
+            skip = true;
+            const k = depth - n;
+            depth = n;
+            history.go(-k);
+          } else if (n === depth && depth > 0) {
+            // same depth but different nested view: replace state
+            try {
+              history.replaceState({ d: depth, k: key }, "");
+            } catch (e) {}
+          }
+          lastViewKey = key;
         }
       }
       function back() {
         if (tab == "quiz") {
-          go((S && S.from) || "home");
+          const fr = (S && S.from) || "home";
+          S = null;
+          go(fr);
           return;
         }
         if (tab == "lab" && LB != null) {
           LB = null;
           rLab();
+          sync();
           return;
         }
         if (tab == "lab" && WORLD != null) {
           WORLD = null;
           rLab();
+          sync();
           return;
         }
         if (tab == "course" && DAY != null) {
           DAY = null;
           rCourse();
+          sync();
+          return;
+        }
+        if (tab == "learn" && LESSON != null) {
+          LESSON = null;
+          rLearn();
+          sync();
           return;
         }
         if (tab != "course") go("course");
