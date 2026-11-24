@@ -2821,6 +2821,16 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
             } else ins("\n" + indent + extra);
           }
         };
+        // Mobile virtual keyboards may emit beforeinput without a reliable keydown.
+        // Expand Java shortcuts when a typed space arrives (phone/tablet keyboards).
+        src.addEventListener("beforeinput", (e) => {
+          if (e.inputType !== "insertText" || e.data !== " ") return;
+          const p = src.selectionStart;
+          const token = src.value.slice(0, p).match(/([A-Za-z_]\w*)$/);
+          if (!token || !LIVE_TEMPLATES[token[1]]) return;
+          e.preventDefault();
+          expandTemplate();
+        });
         // Volume buttons move the caret when the code editor is focused (accessibility).
         const onVol = (e) => {
           if (document.activeElement !== src) return;
