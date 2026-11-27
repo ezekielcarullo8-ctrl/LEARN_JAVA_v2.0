@@ -1122,16 +1122,16 @@
       <button type="button" id="evc-mark" aria-label="About JavaLab and creator">@EVC</button>
     </header>
     <main>
-      <section class="tab on" id="course"></section>
+      <section class="tab" id="course"></section>
       <section class="tab" id="home"></section>
       <section class="tab" id="quiz"></section>
-      <section class="tab" id="lab"></section>
+      <section class="tab on" id="lab"></section>
       <section class="tab" id="learn"></section>
       <section class="tab" id="prog"></section>
       <section class="tab" id="worm"></section>
     </main>
     <nav>
-      <button data-go="course" class="on">
+      <button data-go="course">
         <span
           ><svg class="i" viewBox="0 0 24 24">
             <path d="M9 4 3 6v14l6-2 6 2 6-2V4l-6 2z" />
@@ -1142,7 +1142,7 @@
           ><svg class="i" viewBox="0 0 24 24">
             <path d="M7 4l13 8-13 8z" /></svg></span
         >Practice</button
-      ><button data-go="lab">
+      ><button data-go="lab" class="on">
         <span
           ><svg class="i" viewBox="0 0 24 24">
             <path d="M8 8l-5 4 5 4M16 8l5 4-5 4M14 5l-4 14" /></svg></span
@@ -3669,36 +3669,43 @@ ${k.out != "@" ? `<div class="lab-modal-backdrop" id="modalOut" role="dialog" ar
             name: "Tidebound North",
             icon: "🌊",
             theme: "water",
+            bg: 1,
             hint: "Begin your journey in the glacial waters",
           },
           {
             name: "Cloud Temple Isles",
             icon: "☁️",
             theme: "sky",
+            bg: 2,
             hint: "Rise above the clouds and find your focus",
           },
           {
-            name: "Verdant Valley",
-            icon: "🌿",
-            theme: "forest",
-            hint: "Grow your skill through logic and repetition",
+            // Keep "World 3" label; use World 5 fire identity + artwork
+            name: "Ember Coast",
+            icon: "🔥",
+            theme: "fire",
+            bg: 5,
+            hint: "Forge your mastery in the final trials",
           },
           {
             name: "Stoneheart Citadel",
             icon: "🪨",
             theme: "earth",
+            bg: 4,
             hint: "Build strong foundations with data and methods",
           },
           {
-            name: "Ember Coast",
-            icon: "🔥",
-            theme: "fire",
-            hint: "Forge your mastery in the final trials",
+            name: "Verdant Valley",
+            icon: "🌿",
+            theme: "forest",
+            bg: 3,
+            hint: "Grow your skill through logic and repetition",
           },
           {
             name: "Stormforge Peaks",
             icon: "⚡",
             theme: "lightning",
+            bg: 6,
             hint: "Strike true through the storm of advanced challenges",
           },
         ];
@@ -3731,7 +3738,7 @@ ${k.out != "@" ? `<div class="lab-modal-backdrop" id="modalOut" role="dialog" ar
             open = worldOpen[w],
             locked = !open;
           const side = w % 2 === 0 ? "left" : "right";
-          h += `<button type="button" class="realm-card ${side} ${world.theme}${locked ? " locked" : ""}${worldWon[w] ? " cleared" : ""}${open && !locked ? " active" : ""}" data-world="${w}" style="--world-bg:url('world${Math.min(w + 1, 6)}.png')" ${locked ? "disabled" : ""} aria-label="World ${w + 1}: ${esc(world.name)}, ${won} of ${levels.length} cleared">`;
+          h += `<button type="button" class="realm-card ${side} ${world.theme}${locked ? " locked" : ""}${worldWon[w] ? " cleared" : ""}${open && !locked ? " active" : ""}" data-world="${w}" style="--world-bg:url('world${Math.min((world.bg != null ? world.bg : w + 1), 6)}.png')" ${locked ? "disabled" : ""} aria-label="World ${w + 1}: ${esc(world.name)}, ${won} of ${levels.length} cleared">`;
           h += `<span class="realm-hex"><span class="realm-hex-face">`;
           h += `<span class="realm-icon">${world.icon}</span>`;
           h += `<span class="realm-score">${won}/${levels.length}</span>`;
@@ -3776,7 +3783,7 @@ ${k.out != "@" ? `<div class="lab-modal-backdrop" id="modalOut" role="dialog" ar
           won = levels.filter((i) => dn[i]).length,
           open = worldOpen[w],
           locked = !open;
-        let h = `<div class="world-screen" style="--world-bg:url('world${Math.min(w + 1, 6)}.png')"><div class="row sp"><button type="button" class="back" id="worldBack">${typeof ic === "function" ? ic("back") : "←"} Realms</button><span class="mut">World ${w + 1} of ${Math.max(1, Math.ceil(LORD.length / 10))}</span></div>`;
+        let h = `<div class="world-screen" style="--world-bg:url('world${Math.min((world.bg != null ? world.bg : w + 1), 6)}.png')"><div class="row sp"><button type="button" class="back" id="worldBack">${typeof ic === "function" ? ic("back") : "←"} Realms</button><span class="mut">World ${w + 1} of ${Math.max(1, Math.ceil(LORD.length / 10))}</span></div>`;
         h += `<div class="world-screen-hero ${world.theme}"><span class="world-screen-icon">${world.icon}</span><div><h1>World ${w + 1} · ${esc(world.name)}</h1><p class="mut">${esc(world.hint)}</p><div class="map-progress" style="margin-top:8px"><div class="bar"><i style="width:${(won / Math.max(1, levels.length)) * 100}%"></i></div><b>${won}/${levels.length}</b></div></div></div>`;
         h += `<div class="world-challenges lab-chal-grid">`;
         levels.forEach((i, j) => {
@@ -4007,7 +4014,7 @@ ${k.out != "@" ? `<div class="lab-modal-backdrop" id="modalOut" role="dialog" ar
               "",
               [
                 /for\s*\(/,
-                /if\s*\(\s*studied\s*\[/,
+                /if\s*\(\s*(?:studied\s*\[|[A-Za-z_$][\w$]*\s*\))/,
                 /current\+\+/,
                 /current\s*>\s*longest/,
               ],
@@ -4437,7 +4444,7 @@ ${lab ? `<div class=card><h2>${ic("code")} Code challenge: ${lab.t}</h2><p class
 
       /* ===== NAVIGATION + MOBILE BACK BUTTON ===== */
       let WORLD = null;
-      let tab = "course",
+      let tab = "lab",
         DAY = null,
         depth = 0,
         skip = false,
@@ -4615,7 +4622,7 @@ ${lab ? `<div class=card><h2>${ic("code")} Code challenge: ${lab.t}</h2><p class
       history.replaceState({ b: 1 }, "");
       history.pushState({ d: 0 }, "");
       rHome();
-      rCourse();
+      rLab();
       $("#xp").textContent = P.xp + " XP";
 
       /* ===== SPELLWORM — Java quiz duel (Bookworm-inspired) ===== */
