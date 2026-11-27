@@ -65,6 +65,102 @@
       .ide{border:1px solid #ffffff1f;border-radius:16px;overflow:hidden;background:#070a1a;box-shadow:0 0 40px #22d3ee14}
       .ftab{padding:8px 14px;font:600 12px monospace;color:#a5f3fc;background:#0d1230;border-bottom:1px solid var(--line)}
       .ed{display:flex;height:var(--eh,min(58vh,480px))}.ide.big{--eh:76vh}
+      /* Full-screen code editor */
+      .ide.fullscreen{
+        position:fixed!important;inset:0!important;z-index:80!important;
+        width:100vw!important;height:100dvh!important;max-width:100vw!important;max-height:100dvh!important;
+        border-radius:0!important;border:0!important;margin:0!important;
+        display:flex!important;flex-direction:column!important;
+        background:#070a1a!important;
+        box-shadow:none!important;
+      }
+      .ide.fullscreen .ed{flex:1 1 auto!important;height:auto!important;min-height:0!important;--eh:100%}
+      .ide.fullscreen .ftab{padding:10px 12px;flex-wrap:wrap;flex-shrink:0}
+      .ide.fullscreen .keys{flex-shrink:0}
+      .ide.fullscreen .lab-fs-bar{display:flex!important;flex-shrink:0}
+      body.ide-fs-open{overflow:hidden!important}
+      body.ide-fs-open nav,body.ide-fs-open header,.library-launch,.calc-widget{visibility:hidden!important;pointer-events:none!important}
+      @media (min-width: 901px) {
+        .ide.fullscreen{
+          inset:0!important;
+          width:100%!important;height:100%!important;
+          max-width:none!important;max-height:none!important;
+        }
+        .ide.fullscreen .ed{min-height:0!important}
+        .ide.fullscreen .ftab{padding:12px 18px}
+        .ide.fullscreen .lab-fs-bar{padding:10px 18px}
+        .ide.fullscreen textarea.src,.ide.fullscreen .syntax-highlight{font-size:15px;line-height:1.65}
+      }
+      /* Problem / Expected floating modals */
+      .lab-panels{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 10px;align-items:center}
+      .lab-panels .tb{
+        flex:0 1 auto;
+        min-width:0;
+        min-height:36px;
+        padding:8px 12px;
+        border-radius:11px;
+        font-weight:800;
+        font-size:12px;
+        display:inline-flex;
+        align-items:center;
+        justify-content:center;
+        gap:6px;
+        color:#f1f7ff!important;
+        border:1px solid #83b5dc88!important;
+        background:linear-gradient(145deg,#243c59,#1b2a43)!important;
+        box-shadow:0 3px 0 #0a1220,0 0 10px #3d83c133,inset 0 1px 0 #ffffff22!important;
+        text-shadow:0 1px 2px #0008;
+        transition:transform .13s,filter .13s,box-shadow .13s;
+      }
+      .lab-panels .tb:hover{filter:brightness(1.1)}
+      .lab-panels .tb:active{transform:translateY(1px) scale(.98);box-shadow:0 1px 0 #0a1220,0 0 10px #3d83c144!important}
+      .lab-panels #btnFs.on{
+        border-color:#a5edff!important;
+        box-shadow:0 0 12px #4ccaff44,0 3px 0 #0a1220,inset 0 1px 0 #ffffff33!important;
+      }
+      .ide.fullscreen .lab-fs-bar{
+        gap:8px;padding:8px 10px;
+        background:linear-gradient(180deg,#101b35f5,#070c1bf5)!important;
+      }
+      .ide.fullscreen .lab-fs-bar .tb{
+        flex:0 1 auto;min-height:34px;padding:7px 11px;border-radius:10px;font-weight:800;font-size:12px;
+        display:inline-flex;align-items:center;justify-content:center;gap:5px;
+        color:#f1f7ff!important;border:1px solid #83b5dc88!important;
+        background:linear-gradient(145deg,#243c59,#1b2a43)!important;
+        box-shadow:0 3px 0 #0a1220,0 0 10px #3d83c133,inset 0 1px 0 #ffffff22!important;
+      }
+      .ide.fullscreen .lab-fs-bar #fsClose{margin-left:auto}
+      @media(max-width:600px){
+        .lab-panels{gap:6px;margin:6px 0 8px}
+        .lab-panels .tb{min-height:34px;padding:7px 10px;font-size:11px;border-radius:10px}
+        .ide.fullscreen .lab-fs-bar .tb{min-height:32px;font-size:11px;padding:6px 9px}
+      }
+      .lab-modal-backdrop{
+        display:none;position:fixed;inset:0;z-index:120;
+        background:#02050bcc;backdrop-filter:blur(8px);
+        align-items:center;justify-content:center;padding:16px;
+        pointer-events:auto;
+      }
+      .lab-modal-backdrop.open{display:flex!important}
+      .lab-modal{
+        width:min(520px,100%);max-height:min(70vh,640px);overflow:auto;
+        border-radius:18px;border:1px solid #a5f3fc55;
+        background:linear-gradient(160deg,#12182df7,#070b16f8);
+        box-shadow:0 20px 60px #000d,0 0 32px #22d3ee2a;padding:16px;
+        pointer-events:auto;
+      }
+      .lab-modal h2{font-size:16px;margin:0}
+      .lab-modal pre,.lab-modal p{margin-top:10px;white-space:pre-wrap;color:#e2e8ff;line-height:1.55}
+      .ide.fullscreen .lab-fs-bar{
+        display:flex;flex-wrap:wrap;gap:8px;padding:8px 12px;
+        background:#0d1230;border-top:1px solid rgba(255,255,255,.09);
+        flex-shrink:0;
+      }
+      .ide:not(.fullscreen) .lab-fs-bar{display:none}
+      /* Hide quick-key row in full screen for cleaner typing */
+      .ide.fullscreen .keys{display:none!important}
+
+
       .gut{padding:12px 8px;text-align:right;font:var(--fs,14px)/1.6 ui-monospace,Menlo,Consolas,monospace;color:#4b5580;background:#0a0e24;overflow:hidden;user-select:none;min-width:38px;white-space:pre}
       textarea.src{flex:1;border:0;outline:0;resize:none;background:transparent;color:#e6eaff;font:var(--fs,14px)/1.6 ui-monospace,Menlo,Consolas,monospace;padding:12px;white-space:pre;overflow:auto;tab-size:2;caret-color:#22d3ee}
       .keys{display:flex;gap:6px;overflow-x:auto;padding:8px;background:#0d1230;border-top:1px solid var(--line);scrollbar-width:none}
@@ -1086,144 +1182,88 @@
         </header>
         <div class="library-content">
           <article class="library-topic">
-            <h3>1. Variables & Data Types</h3>
-            <p>A variable is a named box that stores a value your program can read or change. You must declare the type first so Java knows how much memory to reserve and which operations are allowed.</p>
-            <div class="lib-syntax">int age = 18;
-double price = 99.50;
-String name = "Ana";
-boolean enrolled = true;
-char grade = 'A';
-final int MAX_SEATS = 40;</div>
-            <small>Syntax: type name = value; Common types: int (whole numbers), double (decimals), String (text in double quotes), boolean (true/false), char (single character in single quotes). Watch out: forgetting the semicolon; writing string instead of String; putting words in single quotes.</small>
+            <h3>1. Public Class & main</h3>
+            <p>Every Java program lives inside a public class. The class name must match the filename. Execution always starts at public static void main(String[] args).</p>
+            <div class="lib-syntax">public class CampusEats {
+  public static void main(String[] args) {
+    System.out.println("Welcome!");
+  }
+}</div>
+            <small>Syntax: public class ClassName { public static void main(String[] args) { ... } }. Watch out: missing public; class name that does not match the file; code written outside main.</small>
           </article>
           <article class="library-topic">
-            <h3>2. Output & Input</h3>
-            <p>System.out.println shows a message and moves to the next line. System.out.print stays on the same line. Scanner reads what the user types on the keyboard.</p>
-            <div class="lib-syntax">System.out.println("Hello!");
-System.out.print("Name: ");
-Scanner sc = new Scanner(System.in);
-String input = sc.nextLine();
-System.out.println("Hi, " + input);</div>
-            <small>Add import java.util.Scanner; above the class. Prompt before you read. Watch out: missing the import; mixing nextInt() and nextLine() without consuming the leftover newline.</small>
+            <h3>2. Variables & Data Types</h3>
+            <p>A variable is a named box that stores a value. Declare the type so Java knows the kind of data.</p>
+            <div class="lib-syntax">String customerName = "Carlos Mendoza";
+double mealPrice = 120.00;
+int quantity = 3;
+boolean hasActiveID = true;</div>
+            <small>Common types: int, double, String, boolean. End every statement with a semicolon. Watch out: writing string instead of String.</small>
           </article>
           <article class="library-topic">
             <h3>3. Operators</h3>
-            <p>Operators calculate, compare, and combine values. Arithmetic changes numbers; comparison produces true/false; logical operators combine conditions.</p>
-            <div class="lib-syntax">// Arithmetic
-int sum = 7 + 3;
-int rem = 7 % 3;   // 1
-// Comparison
-boolean ok = sum &gt;= 10;
-// Logical
-boolean both = ok && rem == 1;
-// Compound assignment
-sum += 2;
-sum++;</div>
-            <small>Use == for equality, not =. Integer division discards the fraction (7/2 is 3). Prefer && and || over & and | for conditions.</small>
+            <p>Operators perform work on values: arithmetic (+ - * / %), comparison (== != &gt; &lt;), logical (&amp;&amp; || !).</p>
+            <div class="lib-syntax">double baseTotal = mealPrice + drinkPrice;
+double vat = baseTotal * 0.12;
+boolean silver = points &gt;= 50 &amp;&amp; points &lt; 100;</div>
+            <small>Use == for comparison, not =. Integer division drops the fraction; prefer double for money.</small>
           </article>
           <article class="library-topic">
-            <h3>4. if / else & switch</h3>
-            <p>Branching lets the program choose different paths. if runs a block when a condition is true. else covers the other path. switch is useful for several fixed cases of one value.</p>
-            <div class="lib-syntax">if (score &gt;= 75) {
-    System.out.println("Passed");
+            <h3>4. Conditionals (if / else if / else)</h3>
+            <p>Conditionals choose which block of code runs. Always use braces.</p>
+            <div class="lib-syntax">if (hasActiveID == false) {
+  System.out.println("Invalid ID.");
+} else if (studentPoints &gt;= 100) {
+  System.out.println("Gold Tier");
+} else if (studentPoints &gt;= 50) {
+  System.out.println("Silver Tier");
 } else {
-    System.out.println("Needs support");
-}
-
-switch (choice) {
-    case 1:
-        System.out.println("Option A");
-        break;
-    default:
-        System.out.println("Other");
-        break;
+  System.out.println("Bronze Tier");
 }</div>
-            <small>Always use braces. A switch case usually needs break to avoid falling through. Compare Strings with equals, not ==.</small>
+            <small>Test the most restrictive or special cases first. Watch out: using = instead of ==.</small>
           </article>
           <article class="library-topic">
-            <h3>5. Loops</h3>
-            <p>Loops repeat instructions. for is ideal when you know the count. while repeats while a condition stays true. do-while runs the body at least once.</p>
-            <div class="lib-syntax">for (int i = 0; i &lt; 5; i++) {
-    System.out.println(i);
-}
-
-int n = 3;
-while (n &gt; 0) {
-    n--;
+            <h3>5. Loops (for / while)</h3>
+            <p>Loops repeat a block. for is ideal when you know how many times; while when a condition controls the duration.</p>
+            <div class="lib-syntax">for (int count = 6; count &gt;= 1; count--) {
+  if (count &lt;= 2) {
+    System.out.println("LOW STOCK ALERT!");
+  }
 }</div>
-            <small>Make sure the condition eventually becomes false. Watch off-by-one errors: i < 5 runs 0..4; i <= 5 runs 0..5. break exits early; continue skips to the next pass.</small>
+            <small>Always make the condition eventually false. break exits early; continue skips to the next pass.</small>
           </article>
           <article class="library-topic">
-            <h3>6. Arrays</h3>
-            <p>An array holds many values of the same type under one name. Indexes start at zero. length tells you how many slots exist.</p>
-            <div class="lib-syntax">int[] scores = {80, 92, 75};
-System.out.println(scores[0]); // 80
-
-for (int score : scores) {
-    System.out.println(score);
+            <h3>6. Arrays & Parallel Arrays</h3>
+            <p>An array holds a fixed number of values of the same type. Parallel arrays keep related data at the same index.</p>
+            <div class="lib-syntax">String[] mealNames = {"Lugaw", "Egg Sandwich"};
+double[] mealPrices = {35.00, 40.00};
+for (int i = 0; i &lt; mealNames.length; i++) {
+  System.out.println(mealNames[i] + " PHP " + mealPrices[i]);
 }</div>
-            <small>Last valid index is length - 1. Arrays cannot grow after creation. Watch out: using scores[scores.length] (out of bounds).</small>
+            <small>Indexes start at 0. The last valid index is length - 1. Never use length itself as an index.</small>
           </article>
           <article class="library-topic">
-            <h3>7. Methods</h3>
-            <p>Methods package reusable steps. Parameters pass data in; return sends a result back. void means the method does not return a value.</p>
-            <div class="lib-syntax">static int add(int a, int b) {
-    return a + b;
+            <h3>7. Public Static Methods</h3>
+            <p>A public static method belongs to the class. Call it without creating an object. Perfect for calculations such as totals and discounts.</p>
+            <div class="lib-syntax">public static double calculateTotal(double price, int qty) {
+  return price * qty;
 }
-
-int result = add(2, 3);
-System.out.println(result); // 5</div>
-            <small>The return type must match the returned value. Argument count and order must match the parameter list. static methods are called without creating an object.</small>
+// in main:
+double total = calculateTotal(50.00, 3);</div>
+            <small>Return type must match the value you return. Argument count and order must match the parameter list.</small>
           </article>
           <article class="library-topic">
-            <h3>8. Classes & Objects</h3>
-            <p>A class is a blueprint. An object is one living instance built from that blueprint with new. Fields hold state; methods define behavior.</p>
-            <div class="lib-syntax">class Pet {
-    String name;
-    void greet() {
-        System.out.println("Hi, I am " + name);
-    }
-}
-
-Pet p = new Pet();
-p.name = "Mochi";
-p.greet();</div>
-            <small>Forgetting new is a common mistake. Each object has its own copy of the fields. You can keep a non-public helper class in the same file.</small>
-          </article>
-          <article class="library-topic">
-            <h3>9. Encapsulation</h3>
-            <p>Encapsulation protects data by keeping fields private and exposing carefully designed getters and setters. Validation inside setters stops invalid values.</p>
-            <div class="lib-syntax">private double price;
-
-public double getPrice() {
-    return price;
-}
-
-public void setPrice(double p) {
-    if (p &lt; 0) return;
-    this.price = p;
+            <h3>8. Modular Design with Public Methods</h3>
+            <p>Keep main focused on setup and printing. Move repeated logic into public static helper methods (applyBulkDiscount, computeGrandTotal, etc.).</p>
+            <div class="lib-syntax">public static double applyBulkDiscount(double amount) {
+  if (amount &gt;= 200.00) return amount * 0.85;
+  return amount;
 }</div>
-            <small>Use this.field when a parameter has the same name as a field. Prefer private fields so outside code cannot corrupt object state.</small>
+            <small>Pass data in, get a result out. This makes programs easier to test and reuse.</small>
           </article>
-          <article class="library-topic">
-            <h3>10. Constructors</h3>
-            <p>A constructor runs automatically when you create an object with new. Its job is to set up the starting state of the object. The constructor name matches the class name and has no return type.</p>
-            <div class="lib-syntax">class MenuItem {
-    private String name;
-    private double price;
-
-    MenuItem(String name, double price) {
-        this.name = name;
-        this.price = price;
-    }
-}
-
-MenuItem item = new MenuItem("Tapsilog", 75.0);</div>
-            <small>If you write any constructor, Java no longer provides the empty default constructor. Argument types must match the call to new.</small>
-          </article>
-                </div>
-      </div>
-    </section>
+        </div>
+        </div>
+      </section>
     <script>
       const f = (x) => x.replace(/∥/g, "||");
       const T = [
@@ -1242,464 +1282,142 @@ MenuItem item = new MenuItem("Tapsilog", 75.0);</div>
       ];
       /* [topic, task, code (__ = blank), answers|sep, extra choices|sep] */
       const Q = [
-        [
-          0,
-          "Declare a text variable.",
-          `__ customerName = "Maria Santos";`,
-          "String",
-          "int|double",
-        ],
-        [
-          0,
-          "Declare a decimal price.",
-          `__ price = 75.00;`,
-          "double",
-          "String|int",
-        ],
-        [
-          0,
-          "Assign the value 2 to quantity.",
-          `int quantity __ 2;`,
-          "=",
-          "==|:",
-        ],
-        [
-          0,
-          "Compute the total amount.",
-          `double total = price __ quantity;`,
-          "*",
-          "+|/",
-        ],
-        [
-          0,
-          "Compute the change.",
-          `double change = cashPaid __ total;`,
-          "-",
-          "+|%",
-        ],
-        [
-          0,
-          "Print a line to the console.",
-          `System.out.__("Campus Eats");`,
-          "println",
-          "print|printf",
-        ],
-        [
-          0,
-          "Join text and a number in output.",
-          `System.out.println("Total: PHP " __ total);`,
-          "+",
-          "-|&",
-        ],
-        [
-          0,
-          "Make a constant that cannot change.",
-          `__ int MAX = 5;`,
-          "final",
-          "static|const",
-        ],
-        [
-          0,
-          "Integer division of 7 by 2 gives 3.",
-          `int half = 7 __ 2;`,
-          "/",
-          "%|*",
-        ],
-        [
-          0,
-          "Get the remainder of 7 divided by 3.",
-          `int r = 7 __ 3;`,
-          "%",
-          "/|*",
-        ],
-        [
-          1,
-          "Free delivery when subtotal is 300 or more.",
-          `if (subtotal __ 300.0) {\n  fee = 0.0;\n}`,
-          ">=",
-          "<=|>",
-        ],
-        [
-          1,
-          "Run this block when the if fails.",
-          `if (km <= 2) {\n  fee = 25.0;\n} __ {\n  fee = 50.0;\n}`,
-          "else",
-          "elif|then",
-        ],
-        [
-          1,
-          "Add a second condition.",
-          `if (km <= 2) {\n  fee = 25.0;\n} else __ (km > 2) {\n  fee = 50.0;\n}`,
-          "if",
-          "elif|when",
-        ],
-        [
-          1,
-          "Compute the final total.",
-          `double finalTotal = subtotal __ fee;`,
-          "+",
-          "-|*",
-        ],
-        [
-          1,
-          "Both conditions must be true.",
-          `if (age >= 18 __ hasId) {`,
-          "&&",
-          "∥|&|!",
-        ],
-        [
-          1,
-          "At least one condition must be true.",
-          `if (isMember __ isStudent) {`,
-          "∥",
-          "&&|!",
-        ],
-        [
-          1,
-          "Negate a boolean.",
-          `if (__isOpen) {\n  System.out.println("Closed");\n}`,
-          "!",
-          "~|-",
-        ],
-        [
-          1,
-          "Compare two Strings correctly.",
-          `if (name.__("Maria")) {`,
-          "equals",
-          "==|compare",
-        ],
-        [
-          1,
-          "Complete the switch.",
-          `switch (day) {\n  __ 1:\n    System.out.println("Mon");\n    __;\n}`,
-          "case|break",
-          "default|stop",
-        ],
-        [
-          1,
-          "Ternary operator: pick a label.",
-          `String s = (qty > 1) __ "items" : "item";`,
-          "?",
-          ":|??",
-        ],
-        [
-          2,
-          "Loop while i is up to 5.",
-          `for (int i = 1; i __ 5; i++) {`,
-          "<=",
-          "<|>=",
-        ],
-        [
-          2,
-          "Increase i by one each round.",
-          `for (int i = 1; i <= 5; i__) {`,
-          "++",
-          "--|+",
-        ],
-        [
-          2,
-          "Repeat while a condition holds.",
-          `int i = 1;\n__ (i <= 3) {\n  i++;\n}`,
-          "while",
-          "for|if",
-        ],
-        [
-          2,
-          "Run the body at least once.",
-          `__ {\n  i++;\n} while (i < 3);`,
-          "do",
-          "loop|try",
-        ],
-        [
-          2,
-          "Skip to the next iteration.",
-          `for (int i = 1; i <= 5; i++) {\n  if (i == 3) __;\n  System.out.println(i);\n}`,
-          "continue",
-          "break|skip",
-        ],
-        [
-          2,
-          "Exit the loop immediately.",
-          `while (true) {\n  if (done) __;\n}`,
-          "break",
-          "continue|exit",
-        ],
-        [
-          2,
-          "Add i to the running sum.",
-          `int sum = 0;\nfor (int i = 1; i <= 5; i++) {\n  sum __ i;\n}`,
-          "+=",
-          "=+|++",
-        ],
-        [
-          2,
-          "Loop over every array position.",
-          `for (int i = 0; i < arr.__; i++) {`,
-          "length",
-          "size|length()",
-        ],
-        [
-          2,
-          "For-each over an array.",
-          `for (String s __ menu) {\n  System.out.println(s);\n}`,
-          ":",
-          "in|of",
-        ],
-        [
-          2,
-          "Count down from 5.",
-          `for (int i = 5; i >= 1; i__) {`,
-          "--",
-          "++|-",
-        ],
-        [
-          3,
-          "Declare a class.",
-          `public __ MenuItem {\n}`,
-          "class",
-          "object|new",
-        ],
-        [
-          3,
-          "Hide a field from outside code.",
-          `__ String name;`,
-          "private",
-          "public|static",
-        ],
-        [
-          3,
-          "Refer to this object inside the constructor.",
-          `public MenuItem(String name) {\n  __.name = name;\n}`,
-          "this",
-          "self|me",
-        ],
-        [
-          3,
-          "Create an object.",
-          `MenuItem m = __ MenuItem("Tapsilog", 75.0);`,
-          "new",
-          "create|make",
-        ],
-        [
-          3,
-          "Constructor name must match the class.",
-          `public __(String name, double price) {`,
-          "MenuItem",
-          "void|Item",
-        ],
-        [
-          3,
-          "Make an array that holds 5 items.",
-          `MenuItem[] catalog = new MenuItem[__];`,
-          "5",
-          "4|6",
-        ],
-        [
-          3,
-          "Set the first array slot.",
-          `catalog[__] = new MenuItem("Siomai", 30.0);`,
-          "0",
-          "1|-1",
-        ],
-        [
-          3,
-          "main must belong to the class, not an object.",
-          `public __ void main(String[] args) {`,
-          "static",
-          "final|private",
-        ],
-        [
-          3,
-          "A field with no object yet is...",
-          `String name = __;`,
-          "null",
-          "void|0",
-        ],
-        [3, "Call a method on an object.", `m__printLine();`, ".", "->|:"],
-        [
-          4,
-          "Send a value back from a method.",
-          `public double getSubtotal() {\n  __ price * quantity;\n}`,
-          "return",
-          "give|send",
-        ],
-        [
-          4,
-          "A method that returns nothing.",
-          `public __ printLine() {`,
-          "void",
-          "null|int",
-        ],
-        [
-          4,
-          "Validating setter: reject negatives.",
-          `public void setPrice(double p) {\n  if (p __ 0) return;\n  this.price = p;\n}`,
-          "<",
-          ">|==",
-        ],
-        [
-          4,
-          "Discount formula: percent of price.",
-          `this.price = this.price - (this.price * percent __ 100);`,
-          "/",
-          "*|%",
-        ],
-        [
-          4,
-          "Type of the discount parameter.",
-          `public void applyDiscount(__ percent) {`,
-          "double",
-          "String|void",
-        ],
-        [
-          4,
-          "Getter for the name field.",
-          `public String __() {\n  return name;\n}`,
-          "getName",
-          "name|setName",
-        ],
-        [
-          4,
-          "Call a method with arguments.",
-          `int r = __(2, 3);`,
-          "add",
-          "sum|plus",
-        ],
-        [
-          4,
-          "Apply a 10 percent discount.",
-          `catalog[0].applyDiscount(__);`,
-          "10",
-          "0.1|100",
-        ],
-        [
-          4,
-          "Print price with 2 decimals.",
-          `System.out.printf("PHP %.__f", price);`,
-          "2",
-          "0|f",
-        ],
-        [
-          4,
-          "Reject invalid input with an exception.",
-          `throw new __("Invalid price");`,
-          "IllegalArgumentException",
-          "Exception|RuntimeError",
-        ],
+        [0, "Start every program with a public class.", `__ class CampusEats { }`, "public", "private|static|class"],
+        [0, "The entry point of a Java program.", `public static void __(String[] args) { }`, "main", "start|run|init"],
+        [0, "Declare a text variable for a customer.", `__ customerName = "Carlos Mendoza";`, "String", "int|double|boolean"],
+        [0, "Declare a decimal meal price.", `__ mealPrice = 120.00;`, "double", "String|int|float"],
+        [0, "Compute base total from two prices.", `double baseTotal = mealPrice __ drinkPrice;`, "+", "-|*|/"],
+        [0, "Compute 12% VAT.", `double vatAmount = baseTotal __ 0.12;`, "*", "+|/|%"],
+        [0, "Print a line to the console.", `System.out.__("Campus Eats");`, "println", "print|printf|out"],
+        [0, "Join text and a number when printing.", `System.out.println("Final Bill: PHP " __ finalBill);`, "+", "-|&|,"],
+        [1, "Correct keyword for a true/false variable.", `__ hasActiveID = true;`, "boolean", "bool|Boolean|int"],
+        [1, "Start an if statement.", `__ (hasActiveID == false) { }`, "if", "when|for|while"],
+        [1, "Chain another condition after if.", `if (x) { } __ if (y) { }`, "else", "then|or|elseif"],
+        [1, "Compare points for Silver tier.", `studentPoints >= 50 __ studentPoints < 100`, "&&", "|||&|+"],
+        [2, "Start a countdown for loop from 6.", `for (int i = 6; i __ 1; i--) { }`, ">=", ">|<=|=="],
+        [2, "Keyword to exit a loop early.", `__;`, "break", "continue|return|exit"],
+        [2, "Keyword to skip to the next loop pass.", `__;`, "continue", "break|skip|next"],
+        [3, "Create a String array of meal names.", `String[] mealNames = __ "Lugaw", "Chicken Adobo" __;`, "{ }", "( )|[ ]|< >"],
+        [3, "Get the number of elements in an array.", `int n = mealNames.__;`, "length", "size|count|len"],
+        [3, "Access the first price in a parallel array.", `double p = mealPrices__[0];`, "[", ".|(|{"],
+        [4, "Declare a public static method that returns a double.", `public static __ calculateTotal(double price, int qty) { }`, "double", "void|int|String"],
+        [4, "Call a static method from main.", `double total = __calculateTotal(50.00, 3);`, "", "this.|new |super."],
+        [4, "Return a computed value from a method.", `return price __ quantity;`, "*", "+|-|/"],
+        [4, "Method that returns nothing.", `public static __ printReceipt() { }`, "void", "null|empty|double"],
       ];
       const L = [
         [
+          "Public class & main",
+          0,
+          "Every Java program lives inside a public class. The class name must match the file name. The program starts at the public static void main method. Write the class header, then put main inside it. Use System.out.println to show text.\n\nSyntax: public class ClassName { public static void main(String[] args) { ... } }\n\nWatch out: missing public; wrong class name; forgetting the curly braces; putting code outside main.",
+          `public class CampusEats {
+  public static void main(String[] args) {
+    System.out.println("Welcome to Campus Eats!");
+  }
+}
+// Expected: Welcome to Campus Eats!`,
+        ],
+        [
           "Variables and types",
           0,
-          "A variable is a named container that holds one value your program can read or update. Choose a type that matches the data: int for whole numbers, double for decimals, String for text, boolean for true/false, and char for a single character. Declare a variable before you use it and end the statement with a semicolon. Use final when the value must never change.\n\nSyntax: type name = value; — type is the data kind, name is the identifier, = assigns, value is the data, ; ends the statement.\n\nWatch out: forgetting the semicolon; using = when you meant ==; writing string instead of String; putting multi-character text in single quotes.",
-          `// Basic declarations
-String name = "Maria";
-int quantity = 2;
-double price = 75.00;
-boolean paid = true;
-final int MAX = 5; // constant
-
-// Applied
-double total = price * quantity;
-System.out.println(name + " owes PHP " + total);
-// Expected: Maria owes PHP 150.0`,
+          "A variable is a named container. Choose a type that matches the data: int for whole numbers, double for decimals, String for text, boolean for true/false. Declare before you use it and end with a semicolon.\n\nSyntax: type name = value;\n\nWatch out: forgetting the semicolon; writing string instead of String; using = when you meant ==.",
+          `public class CampusEatsTaxCalculator {
+  public static void main(String[] args) {
+    String customerName = "Carlos Mendoza";
+    double mealPrice = 120.00;
+    double drinkPrice = 30.00;
+    double serviceFee = 15.00;
+    System.out.println("Customer: " + customerName);
+  }
+}`,
         ],
         [
           "Operators",
           0,
-          "Operators perform work on values. Arithmetic: + - * / %. Assignment: = += -= *= /=. Comparison: == != > < >= <=. Logical: && || !. Integer division discards the fraction (7/2 is 3); use % for the remainder.\n\nCompound forms like x += 2 mean x = x + 2. Prefix ++n updates then uses the value; postfix n++ uses then updates.\n\nWatch out: writing = instead of == inside conditions; integer division when you needed a decimal; confusing & with &&.",
-          `int n = 10;
-n += 2;                 // n becomes 12
-int rem = n % 3;        // remainder 0
-boolean ok = n > 5 && n != 0;
-System.out.println("n = " + n + ", ok = " + ok);
-// Expected: n = 12, ok = true`,
+          "Operators work on values. Arithmetic: + - * / %. Assignment: = += -=. Comparison: == != > < >= <=. Logical: && || !. Integer division discards the fraction; use double when you need decimals.\n\nWatch out: writing = instead of == inside conditions; integer division when you needed a decimal.",
+          `double baseTotal = 120.00 + 30.00;   // 150.0
+double vatAmount = baseTotal * 0.12; // 18.0
+double finalBill = baseTotal + vatAmount + 15.00;
+System.out.println("Final Bill: PHP " + finalBill);
+// Expected: Final Bill: PHP 183.0`,
         ],
         [
-          "Conditionals",
+          "Conditionals (if / else if / else)",
           1,
-          "Conditionals choose a path. if runs only when its condition is true. else if adds another test; else covers the rest. switch compares one value against fixed cases. Always use braces { } so the body is clear.\n\nSyntax: if (condition) { statements } else { statements }. Conditions must be boolean. Compare String text with .equals(...), never with ==.\n\nWatch out: missing braces; forgetting break in switch; using = instead of ==.",
-          `double fee;
-if (subtotal >= 300) {
-  fee = 0.0;
-} else if (km <= 2) {
-  fee = 25.0;
+          "Conditionals choose a path. if runs only when its condition is true. else if adds another test; else covers the rest. Always use braces { }.\n\nSyntax: if (condition) { statements } else if (condition) { } else { }\n\nWatch out: missing braces; using = instead of ==; forgetting to handle every case.",
+          `int studentPoints = 75;
+boolean hasActiveID = true;
+if (hasActiveID == false) {
+  System.out.println("Invalid ID. Cannot claim rewards.");
+} else if (studentPoints >= 100) {
+  System.out.println("Gold Tier: Free Full Meal!");
+} else if (studentPoints >= 50 && studentPoints < 100) {
+  System.out.println("Silver Tier: Free Bottled Drink!");
 } else {
-  fee = 50.0;
-}
-System.out.println("Delivery fee: " + fee);`,
-        ],
-        [
-          "Loops",
-          2,
-          "Loops repeat a block. Use for when you know the number of passes, while when a condition controls duration, and do-while when the body must run at least once. break exits immediately; continue skips to the next pass.\n\nSyntax: for (init; condition; update) { body }. Always make the condition eventually false.\n\nWatch out: off-by-one errors (i <= n vs i < n); infinite loops; unexpected changes to the loop variable.",
-          `for (int i = 1; i <= 3; i++) {
-  System.out.println("Portion " + i);
-}
-// Expected:
-// Portion 1
-// Portion 2
-// Portion 3`,
-        ],
-        [
-          "Arrays",
-          2,
-          "An array stores a fixed number of values of the same type. Indexes start at 0. array.length is the number of slots; the last valid index is length - 1. Create with new Type[size] or an initializer { ... }. A for-each loop visits every element without manual indexes.\n\nWatch out: using length as an index (out of bounds); arrays are fixed size; confusing array length with String length().",
-          `String[] menu = { "Tapsilog", "Siomai Rice", "Halo-Halo" };
-System.out.println(menu[0]); // Tapsilog
-for (String item : menu) {
-  System.out.println(item);
+  System.out.println("Bronze Tier: Keep ordering to earn rewards!");
 }`,
         ],
         [
-          "Methods",
-          4,
-          "A method packages reusable instructions. Parameters receive input; a return type (or void) describes what comes back. static methods belong to the class and can be called without an object. Call a method by writing its name followed by arguments in parentheses.\n\nSyntax: static returnType name(paramType param) { body; return value; }\n\nWatch out: mismatched return type; forgetting return; calling an instance method without an object; wrong argument count.",
-          `static int add(int a, int b) {
-  return a + b;
+          "Loops (for / while)",
+          2,
+          "Loops repeat a block. Use for when you know the number of passes, while when a condition controls duration. break exits early; continue skips to the next pass.\n\nSyntax: for (init; condition; update) { body }\n\nWatch out: off-by-one errors; infinite loops.",
+          `int startingVouchers = 6;
+for (int count = startingVouchers; count >= 1; count--) {
+  if (count <= 2) {
+    System.out.println("Remaining Vouchers: " + count + " - LOW STOCK ALERT!");
+  } else {
+    System.out.println("Remaining Vouchers: " + count);
+  }
 }
-public static void main(String[] args) {
-  int result = add(2, 3);
-  System.out.println(result); // 5
+System.out.println("All lunch vouchers have been distributed.");`,
+        ],
+        [
+          "Arrays & parallel arrays",
+          2,
+          "An array stores a fixed number of values of the same type. Indexes start at 0. array.length is the number of slots. Parallel arrays keep related data in the same index (names[i] pairs with prices[i]).\n\nWatch out: using length as an index (out of bounds); arrays are fixed size.",
+          `String[] mealNames = {"Lugaw", "Chicken Adobo", "Sinigang", "Egg Sandwich", "Sisig Rice"};
+double[] mealPrices = {35.00, 85.00, 95.00, 40.00, 75.00};
+double studentBudget = 60.00;
+for (int i = 0; i < mealNames.length; i++) {
+  if (mealPrices[i] <= studentBudget) {
+    System.out.println("- " + mealNames[i] + " (PHP " + mealPrices[i] + ")");
+  }
 }`,
         ],
         [
-          "Strings and casting",
-          6,
-          "String holds text. Helpers: length(), charAt(i), equals(other), toUpperCase(), toLowerCase(), trim(). Join text with +. Casting converts numeric types: (double) total / count keeps the decimal part integer division would drop.\n\nWatch out: comparing strings with == (use equals); charAt out of range; indexes start at 0.",
-          `String raw = "  Java Lab  ";
-String clean = raw.trim().toUpperCase();
-System.out.println(clean); // JAVA LAB
-double avg = (double) 10 / 4; // 2.5 not 2`,
-        ],
-        [
-          "Scanner input",
-          7,
-          "Scanner reads keyboard input. Import java.util.Scanner first. Create Scanner sc = new Scanner(System.in); then use nextLine() for text, nextInt() for integers, nextDouble() for decimals. Prompt the user before reading.\n\nWatch out: missing the import; mixing nextInt and nextLine without consuming the leftover newline.",
-          `import java.util.Scanner;
-// inside main:
-Scanner sc = new Scanner(System.in);
-System.out.print("Name: ");
-String name = sc.nextLine();
-System.out.println("Hello, " + name);`,
-        ],
-        [
-          "Constructors",
+          "Public static methods",
           3,
-          `A constructor is a setup routine that runs automatically when you create an object. It gives the new object its initial value. Its name matches the type name and it does not have a return type. For now, focus only on passing one value in and storing it with this.\n\nExample idea: Greeting(String name) { this.name = name; } then Greeting g = new Greeting("Mia");`,
-          `class Greeting {\n  String name;\n  Greeting(String name) {\n    this.name = name;\n  }\n}\nGreeting g = new Greeting("Mia");`
+          "A public static method belongs to the class and can be called without creating an object. It is ideal for pure calculations such as totals or discounts. Parameters receive input; the return type describes what comes back (or void if nothing is returned).\n\nSyntax: public static returnType name(paramType param) { body; return value; }\n\nWatch out: mismatched return type; forgetting return; wrong argument count.",
+          `public class CampusEatsOrder {
+  public static double calculateTotal(double price, int quantity) {
+    return price * quantity;
+  }
+  public static void main(String[] args) {
+    String itemName = "Siomai Rice";
+    double price = 50.00;
+    int quantity = 3;
+    double total = calculateTotal(price, quantity);
+    System.out.println("Total Amount: PHP " + total);
+  }
+}`,
         ],
         [
-          "Encapsulation",
-          4,
-          "Encapsulation hides internal data behind controlled methods. Mark fields private so outside code cannot change them freely. Provide public getters to read values and setters that validate before updating.\n\nWatch out: public fields that anyone can corrupt; setters that accept negative prices without checks; forgetting this. when parameter names match field names.",
-          `public double getPrice() { return price; }
-public void setPrice(double p) {
-  if (p < 0) return; // reject invalid
-  this.price = p;
+          "Public methods & modular design",
+          3,
+          "Public methods can be static (class-level) or instance methods. For beginner modular problems we mainly use public static helpers that receive data, perform a calculation, and return a result. Call them from main and keep main focused on setup and printing.\n\nExample tasks: apply a bulk discount, compute a grand total from parallel arrays, decide loyalty tiers.",
+          `public static double applyBulkDiscount(double amount) {
+  if (amount >= 200.00) {
+    return amount * 0.85; // 15% off
+  } else {
+    return amount;
+  }
 }
-public void applyDiscount(double percent) {
-  this.price -= this.price * percent / 100;
+// In main:
+double[] tableSubtotals = {150.00, 250.00, 400.00, 180.00};
+for (int i = 0; i < tableSubtotals.length; i++) {
+  double original = tableSubtotals[i];
+  double finalAmt = applyBulkDiscount(original);
+  System.out.println("Table " + (i+1) + ": Original = PHP " + original + " | Final = PHP " + finalAmt);
 }`,
         ],
       ];
@@ -2044,246 +1762,89 @@ ${mode == "pick" ? `<div class=chips id=bank></div>` : ""}<div id=fb></div>
       let LB = null;
       const LAB = [
         {
-          t: "Hello, Campus Eats",
-          f: "CampusEats",
+          t: "VAT & Service Charge Calculator",
+          f: "CampusEatsTaxCalculator",
           lv: "Easy",
-          out: "@",
-          sit: "The canteen wants a screen that greets students. Write your very first Java program that prints a welcome message.",
+          sit: "Create a Java program named CampusEatsTaxCalculator that computes the final bill of a customer including a 12% Value Added Tax (VAT) and a fixed service fee.\n\nSPECIFICATIONS:\n1. Declare the following variables:\n   - customerName (String) = \"Carlos Mendoza\"\n   - mealPrice (double) = 120.00\n   - drinkPrice (double) = 30.00\n   - serviceFee (double) = 15.00\n2. Compute the baseTotal by adding mealPrice and drinkPrice.\n3. Compute the vatAmount as 12% of the baseTotal (baseTotal * 0.12).\n4. Compute the finalBill by adding baseTotal, vatAmount, and serviceFee.\n5. Display the complete billing breakdown using System.out.println.",
+          out: "--- CAMPUS EATS BILLING ---\nCustomer: Carlos Mendoza\nBase Total: PHP 150.0\nVAT (12%): PHP 18.0\nService Fee: PHP 15.0\nFinal Bill: PHP 183.0",
           steps: [
-            [
-              "Create the class",
-              "Every Java program lives inside a class. The class name must match the file name: public class CampusEats { }",
-              /class\s+CampusEats\s*\{/,
-            ],
-            [
-              "Add the main method",
-              "main is where Java starts running. Type it exactly: public static void main(String[] args) { } and put it inside the class.",
-              /public\s+static\s+void\s+main\s*\(\s*String\s*\[\s*\]\s*\w+\s*\)\s*\{/,
-            ],
-            [
-              "Print a message",
-              'Inside main, type System.out.println("your text"); The text goes between double quotes and the line ends with a semicolon.',
-              /System\.out\.println\s*\(\s*\"[^\"]+\"\s*\)\s*;/,
-            ],
+            ["Declare the required variables", "String customerName = \"Carlos Mendoza\"; double mealPrice = 120.00; double drinkPrice = 30.00; double serviceFee = 15.00;", [/String\s+customerName\s*=\s*"Carlos Mendoza"\s*;/, /double\s+mealPrice\s*=\s*120/, /double\s+drinkPrice\s*=\s*30/, /double\s+serviceFee\s*=\s*15/]],
+            ["Compute baseTotal, vatAmount and finalBill", "baseTotal = mealPrice + drinkPrice; vatAmount = baseTotal * 0.12; finalBill = baseTotal + vatAmount + serviceFee;", [/baseTotal\s*=\s*mealPrice\s*\+\s*drinkPrice/, /vatAmount\s*=\s*baseTotal\s*\*\s*0\.12/, /finalBill\s*=/]],
+            ["Print the billing breakdown", "Print the exact header and each line shown in the expected output.", [/CAMPUS EATS BILLING/, /Customer:/, /Final Bill:/]],
           ],
-          start:
-            "public class CampusEats {\n  // STEP 2: add the main method here\n\n}",
-          sol: 'public class CampusEats {\n  public static void main(String[] args) {\n    System.out.println("Welcome to Campus Eats!");\n  }\n}',
+          start: "public class CampusEatsTaxCalculator {\n  public static void main(String[] args) {\n    // STEP 1: declare variables\n    // STEP 2: compute baseTotal, vatAmount, finalBill\n    // STEP 3: print the billing breakdown\n\n  }\n}",
+          sol: 'public class CampusEatsTaxCalculator {\n  public static void main(String[] args) {\n    String customerName = "Carlos Mendoza";\n    double mealPrice = 120.00;\n    double drinkPrice = 30.00;\n    double serviceFee = 15.00;\n    double baseTotal = mealPrice + drinkPrice;\n    double vatAmount = baseTotal * 0.12;\n    double finalBill = baseTotal + vatAmount + serviceFee;\n    System.out.println("--- CAMPUS EATS BILLING ---");\n    System.out.println("Customer: " + customerName);\n    System.out.println("Base Total: PHP " + baseTotal);\n    System.out.println("VAT (12%): PHP " + vatAmount);\n    System.out.println("Service Fee: PHP " + serviceFee);\n    System.out.println("Final Bill: PHP " + finalBill);\n  }\n}',
         },
         {
-          t: "Basic Receipt",
-          f: "CampusEatsReceipt",
+          t: "Student Loyalty Tier Evaluator",
+          f: "CampusEatsLoyalty",
           lv: "Easy",
-          sit: "Machine Problem: Basic Receipt Generator. Create a complete program that prepares a clear customer receipt. The order is for Maria Santos: 2 Pork Tapsilog at PHP 75.00 each, paid with PHP 200.00. The receipt must show the customer, order details, computed total, cash paid, and change, surrounded by the receipt header and footer shown in the expected output.",
-          out: "===== CAMPUS EATS RECEIPT =====\nCustomer: Maria Santos\nOrder: 2x Pork Tapsilog @ PHP 75.0\nTotal Amount: PHP 150.0\nCash Paid: PHP 200.0\nChange: PHP 50.0\n===============================",
+          sit: "Create a Java program named CampusEatsLoyalty that determines a student's reward tier and freebie based on their accumulated points.\n\nSPECIFICATIONS:\n1. Declare variables: studentPoints (int) = 75 and hasActiveID (boolean) = true.\n2. Use conditional statements (if, else if, else) to evaluate the reward:\n   - If hasActiveID is false, print \"Invalid ID. Cannot claim rewards.\"\n   - Else if studentPoints >= 100, print \"Gold Tier: Free Full Meal!\"\n   - Else if studentPoints >= 50 && studentPoints < 100, print \"Silver Tier: Free Bottled Drink!\"\n   - Else, print \"Bronze Tier: Keep ordering to earn rewards!\"\n3. Print the current studentPoints before displaying the tier result.",
+          out: "Current Points: 75\nSilver Tier: Free Bottled Drink!",
           steps: [
-            [
-              "Declare the text variables",
-              'Use String for words: String customerName = "Maria Santos"; and String itemName = "Pork Tapsilog";',
-              [
-                /String\s+customerName\s*=\s*\"[^\"]*\"\s*;/,
-                /String\s+itemName\s*=\s*\"[^\"]*\"\s*;/,
-              ],
-            ],
-            [
-              "Declare the number variables",
-              "double price = 75.00; then int quantity = 2; then double cashPaid = 200.00; (double for decimals, int for whole numbers)",
-              [
-                /double\s+price\s*=\s*75(\.0+)?\s*;/,
-                /int\s+quantity\s*=\s*2\s*;/,
-                /double\s+cashPaid\s*=\s*200(\.0+)?\s*;/,
-              ],
-            ],
-            [
-              "Compute totalAmount",
-              "Multiply: double totalAmount = price * quantity;",
-              /double\s+totalAmount\s*=\s*price\s*\*\s*quantity\s*;/,
-            ],
-            [
-              "Compute change",
-              "Subtract: double change = cashPaid - totalAmount;",
-              /double\s+change\s*=\s*cashPaid\s*-\s*totalAmount\s*;/,
-            ],
-            [
-              "Print the receipt",
-              'Use at least 6 System.out.println lines. Join text and variables with +, for example: System.out.println("Change: PHP " + change);',
-              [
-                /(System\.out\.println[\s\S]*){6}/,
-                /println\s*\([^;]*\+\s*change\s*\)/,
-              ],
-            ],
+            ["Declare studentPoints and hasActiveID", "int studentPoints = 75; boolean hasActiveID = true;", [/int\s+studentPoints\s*=\s*75\s*;/, /boolean\s+hasActiveID\s*=\s*true\s*;/]],
+            ["Write the if / else if / else chain", "Test hasActiveID first, then the point ranges for Gold, Silver and Bronze.", [/if\s*\(\s*!?\s*hasActiveID/, /else\s+if\s*\(\s*studentPoints\s*>=\s*100/, /else\s+if\s*\(\s*studentPoints\s*>=\s*50/]],
+            ["Print points then the tier message", "System.out.println(\"Current Points: \" + studentPoints); followed by the tier line.", [/Current Points:/, /Silver Tier/]],
           ],
-          start:
-            "public class CampusEatsReceipt {\n  public static void main(String[] args) {\n    // STEP 1: text variables\n    // STEP 2: number variables\n    // STEP 3: totalAmount\n    // STEP 4: change\n    // STEP 5: print the receipt\n\n  }\n}",
-          sol: 'public class CampusEatsReceipt {\n  public static void main(String[] args) {\n    String customerName = "Maria Santos";\n    String itemName = "Pork Tapsilog";\n    double price = 75.00;\n    int quantity = 2;\n    double cashPaid = 200.00;\n    double totalAmount = price * quantity;\n    double change = cashPaid - totalAmount;\n    System.out.println("===== CAMPUS EATS RECEIPT =====");\n    System.out.println("Customer: " + customerName);\n    System.out.println("Order: " + quantity + "x " + itemName + " @ PHP " + price);\n    System.out.println("Total Amount: PHP " + totalAmount);\n    System.out.println("Cash Paid: PHP " + cashPaid);\n    System.out.println("Change: PHP " + change);\n    System.out.println("===============================");\n  }\n}',
+          start: "public class CampusEatsLoyalty {\n  public static void main(String[] args) {\n    // STEP 1: declare variables\n    // STEP 2: if / else if / else\n    // STEP 3: print points and tier\n\n  }\n}",
+          sol: 'public class CampusEatsLoyalty {\n  public static void main(String[] args) {\n    int studentPoints = 75;\n    boolean hasActiveID = true;\n    System.out.println("Current Points: " + studentPoints);\n    if (hasActiveID == false) {\n      System.out.println("Invalid ID. Cannot claim rewards.");\n    } else if (studentPoints >= 100) {\n      System.out.println("Gold Tier: Free Full Meal!");\n    } else if (studentPoints >= 50 && studentPoints < 100) {\n      System.out.println("Silver Tier: Free Bottled Drink!");\n    } else {\n      System.out.println("Bronze Tier: Keep ordering to earn rewards!");\n    }\n  }\n}',
         },
         {
-          t: "Delivery Fee",
-          f: "CampusEatsDelivery",
+          t: "Countdown & Queue Ticket Printer",
+          f: "CampusEatsQueue",
+          lv: "Easy",
+          sit: "Create a Java program named CampusEatsQueue that prints a descending countdown of remaining food vouchers and alerts when stock is critically low.\n\nSPECIFICATIONS:\n1. Declare an integer variable startingVouchers = 6.\n2. Use a for loop (or while loop) that counts downward from startingVouchers down to 1.\n3. Inside the loop:\n   - If the remaining count is 2 or less, print: \"Remaining Vouchers: [count] - LOW STOCK ALERT!\"\n   - Otherwise, print: \"Remaining Vouchers: [count]\"\n4. After the loop finishes, print \"All lunch vouchers have been distributed.\"",
+          out: "Remaining Vouchers: 6\nRemaining Vouchers: 5\nRemaining Vouchers: 4\nRemaining Vouchers: 3\nRemaining Vouchers: 2 - LOW STOCK ALERT!\nRemaining Vouchers: 1 - LOW STOCK ALERT!\nAll lunch vouchers have been distributed.",
+          steps: [
+            ["Declare startingVouchers", "int startingVouchers = 6;", /int\s+startingVouchers\s*=\s*6\s*;/],
+            ["Write the downward for loop", "for (int count = startingVouchers; count >= 1; count--) { }", /for\s*\(\s*int\s+\w+\s*=\s*startingVouchers\s*;\s*\w+\s*>=\s*1\s*;\s*\w+--\s*\)/],
+            ["Add the low-stock if inside the loop", "if (count <= 2) print the LOW STOCK ALERT line, else the normal line.", [/LOW STOCK ALERT/, /Remaining Vouchers:/]],
+            ["Print the final message after the loop", "System.out.println(\"All lunch vouchers have been distributed.\");", /All lunch vouchers have been distributed/],
+          ],
+          start: "public class CampusEatsQueue {\n  public static void main(String[] args) {\n    // STEP 1: declare startingVouchers\n    // STEP 2-3: for loop with if / else\n    // STEP 4: final message\n\n  }\n}",
+          sol: 'public class CampusEatsQueue {\n  public static void main(String[] args) {\n    int startingVouchers = 6;\n    for (int count = startingVouchers; count >= 1; count--) {\n      if (count <= 2) {\n        System.out.println("Remaining Vouchers: " + count + " - LOW STOCK ALERT!");\n      } else {\n        System.out.println("Remaining Vouchers: " + count);\n      }\n    }\n    System.out.println("All lunch vouchers have been distributed.");\n  }\n}',
+        },
+        {
+          t: "Budget Meal Filter",
+          f: "CampusEatsBudget",
           lv: "Medium",
-          sit: "Machine Problem: Order Eligibility and Delivery Fee. Determine the delivery charge for an order using its subtotal and delivery distance. Orders of PHP 300.00 or more qualify for free delivery. For smaller orders, charge PHP 25.00 when the distance is at most 2 km; otherwise charge PHP 50.00. Use a PHP 220.00 order delivered 3.5 km away, calculate the final total, and print a four-line breakdown.",
-          out: "Order Subtotal: PHP 220.0\nDelivery Distance: 3.5 km\nDelivery Fee: PHP 50.0\nFinal Total: PHP 270.0",
+          sit: "Create a Java program named CampusEatsBudget that searches through the menu and prints only the items that fit within a student's budget.\n\nSPECIFICATIONS:\n1. Declare two parallel arrays with 5 elements each:\n   - String[] mealNames = {\"Lugaw\", \"Chicken Adobo\", \"Sinigang\", \"Egg Sandwich\", \"Sisig Rice\"};\n   - double[] mealPrices = {35.00, 85.00, 95.00, 40.00, 75.00};\n2. Declare a variable studentBudget (double) = 60.00.\n3. Use a for loop to check all items in the arrays:\n   - Print only the meals whose price is less than or equal to studentBudget.",
+          out: "Meals within PHP 60.0 budget:\n- Lugaw (PHP 35.0)\n- Egg Sandwich (PHP 40.0)",
           steps: [
-            [
-              "Declare the variables",
-              "double orderSubtotal = 220.0; double deliveryDistanceKM = 3.5; and double deliveryFee; (no value yet, the if will decide it)",
-              [
-                /double\s+orderSubtotal\s*=/,
-                /double\s+deliveryDistanceKM\s*=/,
-                /double\s+deliveryFee\b/,
-              ],
-            ],
-            [
-              "Free delivery rule",
-              "if (orderSubtotal >= 300) { deliveryFee = 0.0; } checks the first rule.",
-              [
-                /if\s*\(\s*orderSubtotal\s*>=\s*300(\.0+)?\s*\)/,
-                /deliveryFee\s*=\s*0(\.0+)?\s*;/,
-              ],
-            ],
-            [
-              "Short distance fee",
-              "In the else part, test the distance: if (deliveryDistanceKM <= 2) { deliveryFee = 25.0; }",
-              [
-                /if\s*\(\s*deliveryDistanceKM\s*<=\s*2(\.0+)?\s*\)/,
-                /deliveryFee\s*=\s*25(\.0+)?\s*;/,
-              ],
-            ],
-            [
-              "Long distance fee",
-              "Add an else for the other case: else { deliveryFee = 50.0; }",
-              /else[\s\S]*deliveryFee\s*=\s*50(\.0+)?\s*;/,
-            ],
-            [
-              "Compute and print",
-              "double finalTotal = orderSubtotal + deliveryFee; then print 4 lines with System.out.println.",
-              [
-                /double\s+finalTotal\s*=\s*orderSubtotal\s*\+\s*deliveryFee\s*;/,
-                /(System\.out\.println[\s\S]*){4}/,
-              ],
-            ],
+            ["Declare the parallel arrays and budget", "String[] mealNames = {...}; double[] mealPrices = {...}; double studentBudget = 60.00;", [/String\s*\[\s*\]\s*mealNames\s*=/, /double\s*\[\s*\]\s*mealPrices\s*=/, /studentBudget\s*=\s*60/]],
+            ["Write the for loop over the arrays", "for (int i = 0; i < mealNames.length; i++) { }", /for\s*\(\s*int\s+\w+\s*=\s*0\s*;\s*\w+\s*<\s*mealNames\.length/],
+            ["Filter and print meals within budget", "if (mealPrices[i] <= studentBudget) print the meal name and price.", [/mealPrices\s*\[\s*\w+\s*\]\s*<=\s*studentBudget/, /Lugaw|Egg Sandwich/]],
           ],
-          start:
-            "public class CampusEatsDelivery {\n  public static void main(String[] args) {\n    // STEP 1: variables\n    // STEP 2-4: if / else rules\n    // STEP 5: finalTotal and printing\n\n  }\n}",
-          sol: 'public class CampusEatsDelivery {\n  public static void main(String[] args) {\n    double orderSubtotal = 220.0;\n    double deliveryDistanceKM = 3.5;\n    double deliveryFee;\n    if (orderSubtotal >= 300.0) {\n      deliveryFee = 0.0;\n    } else {\n      if (deliveryDistanceKM <= 2) {\n        deliveryFee = 25.0;\n      } else {\n        deliveryFee = 50.0;\n      }\n    }\n    double finalTotal = orderSubtotal + deliveryFee;\n    System.out.println("Order Subtotal: PHP " + orderSubtotal);\n    System.out.println("Delivery Distance: " + deliveryDistanceKM + " km");\n    System.out.println("Delivery Fee: PHP " + deliveryFee);\n    System.out.println("Final Total: PHP " + finalTotal);\n  }\n}',
+          start: "public class CampusEatsBudget {\n  public static void main(String[] args) {\n    // STEP 1: parallel arrays + studentBudget\n    // STEP 2-3: for loop that prints only affordable meals\n\n  }\n}",
+          sol: 'public class CampusEatsBudget {\n  public static void main(String[] args) {\n    String[] mealNames = {"Lugaw", "Chicken Adobo", "Sinigang", "Egg Sandwich", "Sisig Rice"};\n    double[] mealPrices = {35.00, 85.00, 95.00, 40.00, 75.00};\n    double studentBudget = 60.00;\n    System.out.println("Meals within PHP " + studentBudget + " budget:");\n    for (int i = 0; i < mealNames.length; i++) {\n      if (mealPrices[i] <= studentBudget) {\n        System.out.println("- " + mealNames[i] + " (PHP " + mealPrices[i] + ")");\n      }\n    }\n  }\n}',
         },
         {
-          t: "Kitchen Batch Loop",
-          f: "CampusEatsKitchen",
+          t: "Basic Order with Method",
+          f: "CampusEatsOrder",
           lv: "Medium",
-          sit: "Machine Problem: Order Quantity Counter and Batch Processor. Simulate preparing 5 portions of Chili Garlic Rice. Display a preparation message, report each portion in order, mark only the final portion as FINAL PORTION, and display a completion message after the batch is finished.",
-          out: "Preparing Kitchen Order...\nCooking portion #1 of 5...\nCooking portion #2 of 5...\nCooking portion #3 of 5...\nCooking portion #4 of 5...\nCooking portion #5 of 5... (FINAL PORTION)\nOrder batch complete! Ready for serve.",
+          sit: "CampusEats needs a basic ordering module to record item purchases and calculate the subtotal automatically.\n\nSPECIFICATIONS:\n1. Create a class named CampusEatsOrder.\n2. Inside the main method, declare:\n   - itemName (String) set to \"Siomai Rice\"\n   - price (double) set to 50.00\n   - quantity (int) set to 3\n3. Create a static method named calculateTotal outside the main method:\n   - Parameters: double price, int quantity\n   - Return Type: double\n   - Logic: Multiplies price by quantity and returns the product.\n4. In the main method, call calculateTotal, store the result, and print Item Name, Quantity and Calculated Total with \"PHP\".",
+          out: "--- CampusEats Receipt ---\nItem: Siomai Rice\nQuantity: 3\nTotal Amount: PHP 150.0",
           steps: [
-            [
-              "Declare the variables",
-              'String foodItem = "Chili Garlic Rice"; and int portionsToCook = 5;',
-              [
-                /String\s+foodItem\s*=\s*\"Chili Garlic Rice\"\s*;/,
-                /int\s+portionsToCook\s*=\s*5\s*;/,
-              ],
-            ],
-            [
-              "Print the starting message",
-              'Before the loop: System.out.println("Preparing Kitchen Order...");',
-              /\"Preparing Kitchen Order\.\.\.\"/,
-            ],
-            [
-              "Write the for loop",
-              "A for loop has 3 parts: start, condition, step. Type: for (int i = 1; i <= portionsToCook; i++) { }",
-              /for\s*\(\s*int\s+\w+\s*=\s*1\s*;\s*\w+\s*<=\s*portionsToCook\s*;\s*\w+\+\+\s*\)/,
-            ],
-            [
-              "Detect the last portion",
-              "Inside the loop: if (i == portionsToCook) { print the FINAL PORTION line } else { print the normal line }",
-              [
-                /if\s*\(\s*\w+\s*==\s*portionsToCook\s*\)/,
-                /FINAL PORTION/,
-                /else\s*\{/,
-              ],
-            ],
-            [
-              "Print the finishing message",
-              'After the loop ends: System.out.println("Order batch complete! Ready for serve.");',
-              /Order batch complete! Ready for serve\./,
-            ],
+            ["Declare itemName, price and quantity", "String itemName = \"Siomai Rice\"; double price = 50.00; int quantity = 3;", [/String\s+itemName\s*=\s*"Siomai Rice"\s*;/, /double\s+price\s*=\s*50/, /int\s+quantity\s*=\s*3\s*;/]],
+            ["Write the public static calculateTotal method", "public static double calculateTotal(double price, int quantity) { return price * quantity; }", /public\s+static\s+double\s+calculateTotal\s*\(\s*double\s+\w+\s*,\s*int\s+\w+\s*\)/],
+            ["Call the method and print the receipt", "double total = calculateTotal(price, quantity); then print Item, Quantity and Total Amount.", [/calculateTotal\s*\(/, /Total Amount:/]],
           ],
-          start:
-            "public class CampusEatsKitchen {\n  public static void main(String[] args) {\n    // STEP 1: variables\n    // STEP 2: starting message\n    // STEP 3-4: loop with if / else\n    // STEP 5: finishing message\n\n  }\n}",
-          sol: 'public class CampusEatsKitchen {\n  public static void main(String[] args) {\n    String foodItem = "Chili Garlic Rice";\n    int portionsToCook = 5;\n    System.out.println("Preparing Kitchen Order...");\n    for (int i = 1; i <= portionsToCook; i++) {\n      if (i == portionsToCook) {\n        System.out.println("Cooking portion #" + i + " of " + portionsToCook + "... (FINAL PORTION)");\n      } else {\n        System.out.println("Cooking portion #" + i + " of " + portionsToCook + "...");\n      }\n    }\n    System.out.println("Order batch complete! Ready for serve.");\n  }\n}',
+          start: "public class CampusEatsOrder {\n  // STEP 2: write public static double calculateTotal(...)\n\n  public static void main(String[] args) {\n    // STEP 1: declare variables\n    // STEP 3: call calculateTotal and print\n\n  }\n}",
+          sol: 'public class CampusEatsOrder {\n  public static double calculateTotal(double price, int quantity) {\n    return price * quantity;\n  }\n  public static void main(String[] args) {\n    String itemName = "Siomai Rice";\n    double price = 50.00;\n    int quantity = 3;\n    double total = calculateTotal(price, quantity);\n    System.out.println("--- CampusEats Receipt ---");\n    System.out.println("Item: " + itemName);\n    System.out.println("Quantity: " + quantity);\n    System.out.println("Total Amount: PHP " + total);\n  }\n}',
         },
         {
-          t: "Your First Class: MenuItem",
-          f: "CampusEatsCatalog",
+          t: "Conditionals & Discount Calculator",
+          f: "CampusEatsDiscount",
           lv: "Medium",
-          sit: "Build a MenuItem class for the catalog. Each item has a name, price and stock. Create two items and print them. (Java lets you keep a second class in the same file if it is not public.)",
-          out: "Tapsilog - PHP 75.0 (stock: 20)\nSiomai Rice - PHP 30.0 (stock: 15)",
+          sit: "To reward frequent diners, CampusEats applies a promotional discount for orders exceeding a specific spend threshold.\n\nSPECIFICATIONS:\n1. Create a class named CampusEatsDiscount.\n2. Inside the main method, declare a subtotal (double) variable (e.g., 250.00).\n3. Implement conditional logic (if-else statement):\n   - IF subtotal is 200.00 or higher:\n     * Apply a 10% discount (discounted total = subtotal * 0.90).\n     * Print \"Qualifies for Discount!\".\n     * Print the original subtotal and the final discounted amount.\n   - ELSE:\n     * Print \"No discount applied.\"\n     * Print the final total equal to the original subtotal.",
+          out: "--- CampusEats Checkout ---\nSubtotal: PHP 250.0\nQualifies for Discount! (10% OFF)\nFinal Amount Due: PHP 225.0",
           steps: [
-            [
-              "Create the class",
-              "A class is a blueprint: class MenuItem { }",
-              /class\s+MenuItem\s*\{/,
-            ],
-            [
-              "Add 3 private fields",
-              "Fields store the data and are private: private String name; private double price; private int stock;",
-              /(private\s+\w+\s+\w+\s*;[\s\S]*){3}/,
-            ],
-            [
-              "Write the constructor",
-              "Same name as the class, no return type. Use this to copy parameters into fields: public MenuItem(String name, double price, int stock) { this.name = name; ... }",
-              [/public\s+MenuItem\s*\([^)]*\)\s*\{/, /this\.\w+\s*=\s*\w+\s*;/],
-            ],
-            [
-              "Add a getter",
-              "A getter returns a field: public String getName() { return name; }",
-              [/public\s+\w+\s+get\w+\s*\(\s*\)/, /return\s+\w+\s*;/],
-            ],
-            [
-              "Add printLine",
-              'public void printLine() prints the item using its own fields: System.out.println(name + " - PHP " + price + " (stock: " + stock + ")");',
-              /void\s+printLine\s*\(\s*\)/,
-            ],
-            [
-              "Create objects in main",
-              'Use new to build two objects: MenuItem a = new MenuItem("Tapsilog", 75.0, 20); then call a.printLine(); for both.',
-              [/(new\s+MenuItem\s*\([\s\S]*){2}/, /\.printLine\s*\(\s*\)\s*;/],
-            ],
+            ["Declare the subtotal", "double subtotal = 250.00;", /double\s+subtotal\s*=\s*250/],
+            ["Write the if / else that applies 10% discount", "if (subtotal >= 200.00) { discounted = subtotal * 0.90; ... } else { ... }", [/if\s*\(\s*subtotal\s*>=\s*200/, /0\.90|0\.9\b|\*\s*0\.9/]],
+            ["Print the checkout lines", "Header, Subtotal, Qualifies / No discount, Final Amount Due.", [/CampusEats Checkout/, /Final Amount Due:/]],
           ],
-          start:
-            "class MenuItem {\n  // STEP 2: private fields\n\n  // STEP 3: constructor\n\n  // STEP 4: getter\n\n  // STEP 5: printLine\n}\n\npublic class CampusEatsCatalog {\n  public static void main(String[] args) {\n    // STEP 6: create two MenuItem objects and print them\n  }\n}",
-          sol: 'class MenuItem {\n  private String name;\n  private double price;\n  private int stock;\n\n  public MenuItem(String name, double price, int stock) {\n    this.name = name;\n    this.price = price;\n    this.stock = stock;\n  }\n\n  public String getName() {\n    return name;\n  }\n\n  public void printLine() {\n    System.out.println(name + " - PHP " + price + " (stock: " + stock + ")");\n  }\n}\n\npublic class CampusEatsCatalog {\n  public static void main(String[] args) {\n    MenuItem a = new MenuItem("Tapsilog", 75.0, 20);\n    MenuItem b = new MenuItem("Siomai Rice", 30.0, 15);\n    a.printLine();\n    b.printLine();\n  }\n}',
-        },
-        {
-          t: "Add applyDiscount",
-          f: "CampusEatsCatalog",
-          lv: "Challenge",
-          sit: "Lab report: add an applyDiscount(double percent) method to MenuItem. A 10 percent discount on a PHP 75.00 item must make its price PHP 67.5. The method must change the object own price.",
-          out: "Tapsilog - PHP 67.5\nSiomai Rice - PHP 30.0",
-          steps: [
-            [
-              "Write the method header",
-              "Inside MenuItem: public void applyDiscount(double percent) { }  (void because it changes the object and returns nothing)",
-              /void\s+applyDiscount\s*\(\s*double\s+percent\s*\)\s*\{/,
-            ],
-            [
-              "Change the price field",
-              "Assign to the field itself: this.price = ... (not a new variable)",
-              /(this\.)?price\s*(-=|=)[^;]*percent/,
-            ],
-            [
-              "Use the percent formula",
-              "Discount amount = price * percent / 100. New price = price minus the discount amount.",
-              /percent\s*\/\s*100/,
-            ],
-            [
-              "Call it before printing",
-              "In main: a.applyDiscount(10); must come BEFORE a.printLine();",
-              /applyDiscount\s*\([^)]*\)\s*;[\s\S]*printLine/,
-            ],
-          ],
-          start:
-            'class MenuItem {\n  private String name;\n  private double price;\n\n  public MenuItem(String name, double price) {\n    this.name = name;\n    this.price = price;\n  }\n\n  public void printLine() {\n    System.out.println(name + " - PHP " + price);\n  }\n\n  // STEP 1-3: add applyDiscount(double percent) here\n}\n\npublic class CampusEatsCatalog {\n  public static void main(String[] args) {\n    MenuItem a = new MenuItem("Tapsilog", 75.0);\n    MenuItem b = new MenuItem("Siomai Rice", 30.0);\n    // STEP 4: call applyDiscount on a\n    a.printLine();\n    b.printLine();\n  }\n}',
-          sol: 'class MenuItem {\n  private String name;\n  private double price;\n\n  public MenuItem(String name, double price) {\n    this.name = name;\n    this.price = price;\n  }\n\n  public void applyDiscount(double percent) {\n    this.price = this.price - (this.price * percent / 100);\n  }\n\n  public void printLine() {\n    System.out.println(name + " - PHP " + price);\n  }\n}\n\npublic class CampusEatsCatalog {\n  public static void main(String[] args) {\n    MenuItem a = new MenuItem("Tapsilog", 75.0);\n    MenuItem b = new MenuItem("Siomai Rice", 30.0);\n    a.applyDiscount(10);\n    a.printLine();\n    b.printLine();\n  }\n}',
+          start: "public class CampusEatsDiscount {\n  public static void main(String[] args) {\n    // STEP 1: declare subtotal\n    // STEP 2: if / else discount logic\n    // STEP 3: print results\n\n  }\n}",
+          sol: 'public class CampusEatsDiscount {\n  public static void main(String[] args) {\n    double subtotal = 250.00;\n    System.out.println("--- CampusEats Checkout ---");\n    System.out.println("Subtotal: PHP " + subtotal);\n    if (subtotal >= 200.00) {\n      double finalAmount = subtotal * 0.90;\n      System.out.println("Qualifies for Discount! (10% OFF)");\n      System.out.println("Final Amount Due: PHP " + finalAmount);\n    } else {\n      System.out.println("No discount applied.");\n      System.out.println("Final Amount Due: PHP " + subtotal);\n    }\n  }\n}',
         },
       ];
       const strip = (c) =>
@@ -2480,12 +2041,44 @@ ${mode == "pick" ? `<div class=chips id=bank></div>` : ""}<div id=fb></div>
         }
         const k = LAB[LB];
         el.innerHTML = `<div class="row sp"><button class=back id=lb>${ic("back")}All tasks</button><span class=mut>Task ${LB + 1} of ${LAB.length}</span></div><h1>${k.t}</h1>
-<div class=card><h2>Problem statement</h2><p style="margin-top:6px;color:#e2e8ff;white-space:pre-line">${k.sit}</p></div>
-${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top:8px;white-space:pre-wrap">${esc(k.out)}</pre></div>` : ""}
-<div class=ide id=ide><div class=ftab><b>${k.f}.java</b><button class=tb zoom id=zo>${ic("minus")}</button><span id=zv class=mut style="font-size:11px;min-width:22px;text-align:center"></span><button class="tb zoom" id=zi>${ic("plus")}</button><button class=tb id=wr>${ic("wrap")}Wrap</button><button class="tb hist" id=undo title="Undo" aria-label="Undo">↶</button><button class="tb hist" id=redo title="Redo" aria-label="Redo">↷</button><button class=tb id=ex>${ic("expand")}</button></div><div class=keys id=keys></div><div class=ed><div class=gut id=gut></div><textarea class=src id=src wrap=off spellcheck=false autocapitalize=off autocomplete=off autocorrect=off></textarea></div></div>
+<div class="lab-panels">
+  <button type="button" class="tb" id="btnProb">${ic("book")} Problem</button>
+  ${k.out != "@" ? `<button type="button" class="tb" id="btnOut">${ic("list")} Expected output</button>` : ""}
+  <button type="button" class="tb" id="btnFs">${ic("expand")} Full screen</button>
+</div>
+<div class=ide id=ide>
+  <div class=ftab>
+    <b>${k.f}.java</b>
+    <button class=tb zoom id=zo>${ic("minus")}</button>
+    <span id=zv class=mut style="font-size:11px;min-width:22px;text-align:center"></span>
+    <button class="tb zoom" id=zi>${ic("plus")}</button>
+    <button class=tb id=wr>${ic("wrap")} Wrap</button>
+    <button class="tb hist" id=undo title="Undo" aria-label="Undo">↶</button>
+    <button class="tb hist" id=redo title="Redo" aria-label="Redo">↷</button>
+    <button class=tb id=ex title="Full screen">${ic("expand")}</button>
+  </div>
+  <div class=ed><div class=gut id=gut></div><textarea class=src id=src wrap=off spellcheck=false autocapitalize=off autocomplete=off autocorrect=off></textarea></div>
+  <div class="lab-fs-bar">
+    <button type="button" class="tb" id="fsProb">${ic("book")} Problem</button>
+    ${k.out != "@" ? `<button type="button" class="tb" id="fsOut">${ic("list")} Expected</button>` : ""}
+    <button type="button" class="tb" id="fsClose" style="margin-left:auto">${ic("x")} Exit full screen</button>
+  </div>
+</div>
 <div class=row><button class="btn alt" id=rst>${ic("reset")} Reset challenge</button><button class="btn alt" id=sol>${ic("book")} Run solution</button><button class="btn alt editor-hint" id=hint title="Hint" aria-label="Hint">${ic("bulb")}</button><button class=btn style="flex:1" id=run>${ic("play")} Run</button></div>
 <div class=cons id=cons>Press Run to check your code.</div>
-<p class=mut>Code Lab checks your code and shows the expected output. It is not a real Java compiler. To run it for real, paste the same code into JVDroid.</p>`;
+<p class=mut>Code Lab checks your code and shows the expected output. It is not a real Java compiler. To run it for real, paste the same code into JVDroid.</p>
+<div class="lab-modal-backdrop" id="modalProb" role="dialog" aria-modal="true" aria-label="Problem statement">
+  <div class="lab-modal">
+    <div class="row sp"><h2>Problem statement</h2><button type="button" class="tb" id="modalProbClose" aria-label="Close">${ic("x")}</button></div>
+    <p style="white-space:pre-wrap;color:#e2e8ff;line-height:1.55;margin-top:10px">${esc(k.sit || "No problem statement for this challenge.")}</p>
+  </div>
+</div>
+${k.out != "@" ? `<div class="lab-modal-backdrop" id="modalOut" role="dialog" aria-modal="true" aria-label="Expected output">
+  <div class="lab-modal">
+    <div class="row sp"><h2>Expected output</h2><button type="button" class="tb" id="modalOutClose" aria-label="Close">${ic("x")}</button></div>
+    <pre>${esc(k.out)}</pre>
+  </div>
+</div>` : ""}`;
         const src = $("#src"),
           gut = $("#gut");
         src.value = P.lab.code[LB] ?? k.start;
@@ -2674,10 +2267,133 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
         };
         setWr(!!P.lab.wr);
         $("#wr").onclick = () => setWr(!P.lab.wr);
-        $("#ex").onclick = () => {
-          ide.classList.toggle("big");
-          $("#ex").classList.toggle("on");
+        const setFullscreen = (on) => {
+          ide.classList.toggle("fullscreen", on);
+          ide.classList.toggle("big", on);
+          document.body.classList.toggle("ide-fs-open", on);
+          $("#ex").classList.toggle("on", on);
+          if ($("#btnFs")) $("#btnFs").classList.toggle("on", on);
+          if (on) {
+            try {
+              if (!history.state || !history.state.labFs) {
+                history.pushState({ labFs: 1, d: typeof depth !== "undefined" ? depth : 0 }, "");
+              }
+            } catch (e) {}
+            src.focus();
+          }
         };
+
+        // DOM-level helpers so mobile back always works (even after re-render)
+        const closeAllModalsDom = () => {
+          document.querySelectorAll(".lab-modal-backdrop").forEach((m) => {
+            m.classList.remove("open");
+            m.style.display = "none";
+            m.setAttribute("aria-hidden", "true");
+          });
+        };
+        const anyModalOpenDom = () =>
+          !!document.querySelector(".lab-modal-backdrop.open");
+        const exitFullscreenDom = () => {
+          const ideEl = document.getElementById("ide");
+          if (!ideEl || !ideEl.classList.contains("fullscreen")) return false;
+          ideEl.classList.remove("fullscreen", "big");
+          document.body.classList.remove("ide-fs-open");
+          const ex = document.getElementById("ex");
+          if (ex) ex.classList.remove("on");
+          const btnFs = document.getElementById("btnFs");
+          if (btnFs) btnFs.classList.remove("on");
+          return true;
+        };
+        const isFullscreenDom = () => {
+          const ideEl = document.getElementById("ide");
+          return !!(ideEl && ideEl.classList.contains("fullscreen"));
+        };
+        window.__labCloseAllModals = closeAllModalsDom;
+        window.__labAnyModalOpen = anyModalOpenDom;
+        window.__labExitFullscreen = exitFullscreenDom;
+        window.__labIsFullscreen = isFullscreenDom;
+        window.__labSetFullscreen = setFullscreen;
+        window.__labDismissOverlay = () => {
+          // Order: hide Problem/Expected first, then exit fullscreen
+          if (anyModalOpenDom()) {
+            closeAllModalsDom();
+            return true;
+          }
+          if (isFullscreenDom()) {
+            exitFullscreenDom();
+            return true;
+          }
+          return false;
+        };
+
+        $("#ex").onclick = () =>
+          setFullscreen(!ide.classList.contains("fullscreen"));
+        if ($("#btnFs")) $("#btnFs").onclick = () => setFullscreen(true);
+        if ($("#fsClose")) $("#fsClose").onclick = () => setFullscreen(false);
+
+        const modalSel = (id) => {
+          if (!id) return id;
+          return id.charAt(0) === "#" ? id : "#" + id;
+        };
+        const openModal = (id) => {
+          const want = modalSel(id).slice(1);
+          // Drop closed duplicate backdrops left on body from earlier rLab renders
+          document.querySelectorAll(".lab-modal-backdrop#" + want).forEach((el, idx, all) => {
+            if (idx < all.length - 1 && !el.classList.contains("open")) el.remove();
+          });
+          let m = document.getElementById(want);
+          if (!m) {
+            console.warn("Modal not found:", id);
+            return;
+          }
+          if (m.parentElement !== document.body) {
+            document.body.appendChild(m);
+          }
+          m.classList.add("open");
+          m.style.display = "flex";
+          m.setAttribute("aria-hidden", "false");
+          try {
+            if (!history.state || !history.state.labModal) {
+              history.pushState(
+                { labModal: want, d: typeof depth !== "undefined" ? depth : 0 },
+                "",
+              );
+            }
+          } catch (e) {}
+        };
+        const closeModal = (id) => {
+          const m = document.getElementById(
+            id && id.charAt(0) === "#" ? id.slice(1) : id,
+          );
+          if (!m) return;
+          m.classList.remove("open");
+          m.style.display = "none";
+          m.setAttribute("aria-hidden", "true");
+        };
+        const closeAllModals = closeAllModalsDom;
+        const anyModalOpen = anyModalOpenDom;
+
+        if ($("#btnProb")) $("#btnProb").onclick = () => openModal("modalProb");
+        if ($("#btnOut")) $("#btnOut").onclick = () => openModal("modalOut");
+        if ($("#fsProb")) $("#fsProb").onclick = () => openModal("modalProb");
+        if ($("#fsOut")) $("#fsOut").onclick = () => openModal("modalOut");
+        if ($("#modalProbClose"))
+          $("#modalProbClose").onclick = () => closeModal("modalProb");
+        if ($("#modalOutClose"))
+          $("#modalOutClose").onclick = () => closeModal("modalOut");
+        if ($("#modalProb"))
+          $("#modalProb").onclick = (e) => {
+            if (e.target.id === "modalProb") closeModal("modalProb");
+          };
+        if ($("#modalOut"))
+          $("#modalOut").onclick = (e) => {
+            if (e.target.id === "modalOut") closeModal("modalOut");
+          };
+
+        document.addEventListener("keydown", function fsEsc(e) {
+          if (e.key !== "Escape") return;
+          if (window.__labDismissOverlay && window.__labDismissOverlay()) return;
+        });
         const pdist = (e) =>
           Math.hypot(
             e.touches[0].clientX - e.touches[1].clientX,
@@ -2851,45 +2567,28 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
         };
         document.addEventListener("keydown", onVol);
         // Clean up when leaving this challenge view is handled by full re-render of rLab.
-        $("#keys").innerHTML = [
-          "Tab",
-          "{",
-          "}",
-          "(",
-          ")",
-          "[",
-          "]",
-          ";",
-          '"',
-          "=",
-          "+",
-          "-",
-          "*",
-          "/",
-          "<",
-          ">",
-          "!",
-          "&",
-          "|",
-          ",",
-          ".",
-        ]
-          .map((x) => `<button>${esc(x)}</button>`)
-          .join("");
-        $$("#keys button").forEach((b) => {
-          b.onpointerdown = (e) => e.preventDefault();
-          b.onclick = () => {
-            const t = b.textContent;
-            if (t === "Tab") ins("  ");
-            else if (t === "UnTab") dedentLine();
-            else if ({ "{": "}", "(": ")", "[": "]", '"': '"', "'": "'" }[t])
-              pairInsert(
-                t,
-                { "{": "}", "(": ")", "[": "]", '"': '"', "'": "'" }[t],
-              );
-            else ins(t);
-          };
-        });
+        if ($("#keys")) {
+          $("#keys").innerHTML = [
+            "Tab","{","}","(",")","[","]",";",'"',"=",
+            "+","-","*","/","<",">","!","&","|",",",".",
+          ]
+            .map((x) => `<button>${esc(x)}</button>`)
+            .join("");
+          $$("#keys button").forEach((b) => {
+            b.onpointerdown = (e) => e.preventDefault();
+            b.onclick = () => {
+              const t = b.textContent;
+              if (t === "Tab") ins("  ");
+              else if (t === "UnTab") dedentLine();
+              else if ({ "{": "}", "(": ")", "[": "]", '"': '"', "'": "'" }[t])
+                pairInsert(
+                  t,
+                  { "{": "}", "(": ")", "[": "]", '"': '"', "'": "'" }[t],
+                );
+              else ins(t);
+            };
+          });
+        }
         $("#lb").onclick = () => {
           LB = null;
           rLab();
@@ -3004,9 +2703,11 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
         minus: '<path d="M5 12h14"/>',
         wrap: '<path d="M3 6h18M3 12h13a3 3 0 0 1 0 6h-4"/><path d="M14 16l-2 2 2 2M3 18h5"/>',
         expand: '<path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5"/>',
+        list: '<path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/>',
+        x: '<path d="M18 6L6 18M6 6l12 12"/>',
       });
       const ic = (n, c) =>
-        `<svg class="i ${c || ""}" viewBox="0 0 24 24">${ICONS[n]}</svg>`;
+        `<svg class="i ${c || ""}" viewBox="0 0 24 24">${ICONS[n] || ICONS.book || ""}</svg>`;
       const hearts = (n) =>
         Array.from({ length: n }, () => ic("heart", "hrt")).join("");
       /* ===== MORE CONTENT ===== */
@@ -3647,577 +3348,56 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
 
       const MACHINE_PROBLEMS = [
         {
-          t: "Weekly Sales Summary",
-          f: "WeeklySales",
+          t: "Loops & Order Preparation",
+          f: "CampusEatsPreparation",
           lv: "Medium",
-          sit: "Machine Problem: Weekly Sales Summary. A kiosk recorded sales of PHP 250.00, PHP 400.00, PHP 325.00, PHP 500.00, and PHP 375.00 across five days. Store the figures, calculate the total and daily average, then print both results.",
-          out: "Week total: PHP 1850.0\nDaily average: PHP 370.0",
+          sit: "Kitchen staff at CampusEats require a status printer to trace order preparation step-by-step for multi-quantity item orders.\n\nSPECIFICATIONS:\n1. Create a class named CampusEatsPreparation.\n2. Inside the main method, declare:\n   - itemName (String) set to \"Burger Steak\"\n   - orderQuantity (int) set to 4\n3. Use a for loop to simulate step-by-step preparation:\n   - Loop counter i starts at 1 and runs up to orderQuantity.\n   - Print a preparation message for each item iteration.\n4. After the loop finishes, print a final status completion message.",
+          out: "--- Kitchen Prep Queue ---\nPreparing item 1 of 4: Burger Steak\nPreparing item 2 of 4: Burger Steak\nPreparing item 3 of 4: Burger Steak\nPreparing item 4 of 4: Burger Steak\n>>> All items prepared successfully!",
           steps: [
-            [
-              "Store the five daily figures",
-              "",
-              [
-                "double\\s*\\[\\s*\\]\\s*sales\\s*=\\s*\\{\\s*250(\\.0+)?\\s*,\\s*400(\\.0+)?\\s*,\\s*325(\\.0+)?\\s*,\\s*500(\\.0+)?\\s*,\\s*375(\\.0+)?\\s*\\}\\s*;",
-              ],
-            ],
-            [
-              "Calculate total and average",
-              "",
-              [
-                "total\\s*\\+=\\s*\\w+",
-                "average\\s*=\\s*total\\s*/\\s*sales\\.length",
-              ],
-            ],
-            ["Print the summary", "", ["Week total:", "Daily average:"]],
+            ["Declare itemName and orderQuantity", "String itemName = \"Burger Steak\"; int orderQuantity = 4;", ["String\\s+itemName\\s*=\\s*\\\"Burger Steak\\\"\\s*;", "int\\s+orderQuantity\\s*=\\s*4\\s*;"]],
+            ["Write the for loop from 1 to orderQuantity", "for (int i = 1; i <= orderQuantity; i++) { }", ["for\\s*\\(\\s*int\\s+\\w+\\s*=\\s*1\\s*;\\s*\\w+\\s*<=\\s*orderQuantity"]],
+            ["Print preparation lines and final message", "Inside loop: Preparing item i of orderQuantity: itemName. After loop: >>> All items prepared successfully!", ["Preparing item", "All items prepared successfully"]],
           ],
-          sol: 'public class WeeklySales {\n  public static void main(String[] args) {\n    double[] sales = {250.0, 400.0, 325.0, 500.0, 375.0};\n    double total = 0;\n    for (double amount : sales) { total += amount; }\n    double average = total / sales.length;\n    System.out.println("Week total: PHP " + total);\n    System.out.println("Daily average: PHP " + average);\n  }\n}',
+          sol: 'public class CampusEatsPreparation {\n  public static void main(String[] args) {\n    String itemName = "Burger Steak";\n    int orderQuantity = 4;\n    System.out.println("--- Kitchen Prep Queue ---");\n    for (int i = 1; i <= orderQuantity; i++) {\n      System.out.println("Preparing item " + i + " of " + orderQuantity + ": " + itemName);\n    }\n    System.out.println(">>> All items prepared successfully!");\n  }\n}',
         },
         {
-          t: "Grade Band Analyzer",
-          f: "GradeBand",
-          lv: "Medium",
-          sit: "Machine Problem: Grade Band Analyzer. Classify a score of 86 using these bands: 90 or higher is Excellent, 80–89 is Very Good, 70–79 is Satisfactory, and below 70 is Needs Support. Print the matching band.",
-          out: "Grade band: Very Good",
+          t: "Modular Bulk Discount",
+          f: "CampusEatsBulkOrder",
+          lv: "Hard",
+          sit: "Create a Java program named CampusEatsBulkOrder that uses a dedicated method to apply a bulk discount to an array of order subtotals.\n\nSPECIFICATIONS:\n1. Create a static method applyBulkDiscount(double amount) that checks:\n   - If amount >= 200.00, return amount * 0.85 (15% discount).\n   - Otherwise, return the original amount.\n2. In the main method:\n   - Declare an array double[] tableSubtotals = {150.00, 250.00, 400.00, 180.00};\n   - Use a for loop to pass each element of tableSubtotals into applyBulkDiscount() and print the original vs. final amount for each table.",
+          out: "Table 1: Original = PHP 150.0 | Final = PHP 150.0\nTable 2: Original = PHP 250.0 | Final = PHP 212.5\nTable 3: Original = PHP 400.0 | Final = PHP 340.0\nTable 4: Original = PHP 180.0 | Final = PHP 180.0",
           steps: [
-            [
-              "Set up and classify the score",
-              "",
-              [
-                "int\\s+score\\s*=\\s*86\\s*;",
-                "if\\s*\\(\\s*score\\s*>=\\s*90\\s*\\)",
-                "else\\s+if\\s*\\(\\s*score\\s*>=\\s*80\\s*\\)",
-              ],
-            ],
-            [
-              "Handle all remaining bands",
-              "",
-              ["Satisfactory", "Needs Support"],
-            ],
-            ["Print the selected band", "", ["Grade band:"]],
+            ["Write public static applyBulkDiscount", "public static double applyBulkDiscount(double amount) { if (amount >= 200.00) return amount * 0.85; else return amount; }", ["public\\s+static\\s+double\\s+applyBulkDiscount\\s*\\(\\s*double\\s+\\w+\\s*\\)", "0\\.85|\\*\\s*0\\.85"]],
+            ["Declare tableSubtotals array", "double[] tableSubtotals = {150.00, 250.00, 400.00, 180.00};", ["double\\s*\\[\\s*\\]\\s*tableSubtotals\\s*=\\s*\\{"]],
+            ["Loop, call method and print Original vs Final", "for each index call applyBulkDiscount and print Table N: Original = PHP x | Final = PHP y", ["applyBulkDiscount\\s*\\(", "Original\\s*=", "Final\\s*="]],
           ],
-          sol: 'public class GradeBand {\n  public static void main(String[] args) {\n    int score = 86;\n    String band;\n    if (score >= 90) band = "Excellent";\n    else if (score >= 80) band = "Very Good";\n    else if (score >= 70) band = "Satisfactory";\n    else band = "Needs Support";\n    System.out.println("Grade band: " + band);\n  }\n}',
+          sol: 'public class CampusEatsBulkOrder {\n  public static double applyBulkDiscount(double amount) {\n    if (amount >= 200.00) {\n      return amount * 0.85;\n    } else {\n      return amount;\n    }\n  }\n  public static void main(String[] args) {\n    double[] tableSubtotals = {150.00, 250.00, 400.00, 180.00};\n    for (int i = 0; i < tableSubtotals.length; i++) {\n      double original = tableSubtotals[i];\n      double finalAmt = applyBulkDiscount(original);\n      System.out.println("Table " + (i + 1) + ": Original = PHP " + original + " | Final = PHP " + finalAmt);\n    }\n  }\n}',
         },
         {
-          t: "Parking Fee Calculator",
-          f: "ParkingFee",
-          lv: "Medium",
-          sit: "Machine Problem: Parking Fee Calculator. A vehicle stays for 3 hours. The first hour costs PHP 50.00 and every additional hour costs PHP 30.00. Calculate and display the parking fee.",
-          out: "Parking fee: PHP 110.0",
+          t: "Inventory Availability Checker",
+          f: "CampusEatsInventory",
+          lv: "Hard",
+          sit: "CampusEats tracks item availability dynamically to prevent students from ordering out-of-stock food items.\n\nSPECIFICATIONS:\n1. Create a class named CampusEatsInventory.\n2. Declare two parallel arrays in the main method:\n   - menuItems (String array): {\"Chicken Bowl\", \"Halo-Halo\", \"Pancit\", \"Turon\"}\n   - isAvailable (boolean array): {true, false, true, true}\n3. Use a for loop to iterate through all elements of the arrays (using .length).\n4. Inside the loop, check the boolean value:\n   - IF true, display: \"[Item Name] - AVAILABLE\"\n   - ELSE, display: \"[Item Name] - OUT OF STOCK\"",
+          out: "--- CampusEats Menu Availability ---\nChicken Bowl - AVAILABLE\nHalo-Halo - OUT OF STOCK\nPancit - AVAILABLE\nTuron - AVAILABLE",
           steps: [
-            [
-              "Represent the parking duration and rates",
-              "",
-              [
-                "int\\s+hours\\s*=\\s*3\\s*;",
-                "double\\s+fee\\s*=\\s*50(\\.0+)?\\s*;",
-              ],
-            ],
-            [
-              "Apply the additional-hour rule",
-              "",
-              ["for\\s*\\(\\s*int\\s+\\w+\\s*=\\s*2"],
-            ],
-            ["Display the fee", "", ["Parking fee:"]],
+            ["Declare the parallel arrays", "String[] menuItems = {...}; boolean[] isAvailable = {true, false, true, true};", ["String\\s*\\[\\s*\\]\\s*menuItems\\s*=", "boolean\\s*\\[\\s*\\]\\s*isAvailable\\s*="]],
+            ["Write the for loop over .length", "for (int i = 0; i < menuItems.length; i++) { }", ["for\\s*\\(\\s*int\\s+\\w+\\s*=\\s*0\\s*;\\s*\\w+\\s*<\\s*menuItems\\.length"]],
+            ["Print AVAILABLE or OUT OF STOCK", "if (isAvailable[i]) print AVAILABLE else OUT OF STOCK", ["AVAILABLE", "OUT OF STOCK"]],
           ],
-          sol: 'public class ParkingFee {\n  public static void main(String[] args) {\n    int hours = 3;\n    double fee = 50.0;\n    for (int h = 2; h <= hours; h++) fee += 30.0;\n    System.out.println("Parking fee: PHP " + fee);\n  }\n}',
+          sol: 'public class CampusEatsInventory {\n  public static void main(String[] args) {\n    String[] menuItems = {"Chicken Bowl", "Halo-Halo", "Pancit", "Turon"};\n    boolean[] isAvailable = {true, false, true, true};\n    System.out.println("--- CampusEats Menu Availability ---");\n    for (int i = 0; i < menuItems.length; i++) {\n      if (isAvailable[i]) {\n        System.out.println(menuItems[i] + " - AVAILABLE");\n      } else {\n        System.out.println(menuItems[i] + " - OUT OF STOCK");\n      }\n    }\n  }\n}',
         },
         {
-          t: "Savings Goal Tracker",
-          f: "SavingsGoal",
-          lv: "Medium",
-          sit: "Machine Problem: Savings Goal Tracker. A student begins with PHP 100.00 and saves PHP 25.00 each week. Use repetition to find how many weeks are needed to reach at least PHP 200.00, then print the number of weeks and final savings.",
-          out: "Weeks to goal: 4\nSavings: PHP 200.0",
+          t: "Modular Catalog Grand Total",
+          f: "CampusEatsCatalog",
+          lv: "Hard",
+          sit: "CampusEats aggregates cart calculations across multiple items using modular functions and array processing.\n\nSPECIFICATIONS:\n1. Create a class named CampusEatsCatalog.\n2. In the main method, declare two parallel arrays:\n   - itemPrices (double array): {89.50, 45.00, 25.00}\n   - itemQuantities (int array): {2, 3, 1}\n3. Create a static method computeGrandTotal:\n   - Parameters: double[] prices, int[] quantities\n   - Return Type: double\n   - Logic: Iterates through the arrays, multiplies price[i] * quantity[i] for each index, accumulates the values, and returns the grand total.\n4. In main, call computeGrandTotal and print each item subtotal plus the returned grand total.",
+          out: "--- CampusEats Cart Summary ---\nItem 1 Subtotal: PHP 179.0\nItem 2 Subtotal: PHP 135.0\nItem 3 Subtotal: PHP 25.0\n-----------------------------\nGrand Total: PHP 339.0",
           steps: [
-            [
-              "Set the starting balance and weekly deposit",
-              "",
-              [
-                "double\\s+savings\\s*=\\s*100(\\.0+)?\\s*;",
-                "double\\s+weeklyDeposit\\s*=\\s*25(\\.0+)?\\s*;",
-              ],
-            ],
-            [
-              "Repeat until the goal is reached",
-              "",
-              ["while\\s*\\(\\s*savings\\s*<\\s*200"],
-            ],
-            ["Report the result", "", ["Weeks to goal:", "Savings:"]],
+            ["Declare the parallel arrays", "double[] itemPrices = {89.50, 45.00, 25.00}; int[] itemQuantities = {2, 3, 1};", ["double\\s*\\[\\s*\\]\\s*itemPrices\\s*=", "int\\s*\\[\\s*\\]\\s*itemQuantities\\s*="]],
+            ["Write public static computeGrandTotal", "public static double computeGrandTotal(double[] prices, int[] quantities) { ... accumulate price[i]*quantity[i] ... }", ["public\\s+static\\s+double\\s+computeGrandTotal\\s*\\(", "prices\\s*\\[\\s*\\w+\\s*\\]\\s*\\*\\s*quantities\\s*\\[\\s*\\w+\\s*\\]"]],
+            ["Call the method and print subtotals + grand total", "Print each Item N Subtotal then Grand Total: PHP ...", ["computeGrandTotal\\s*\\(", "Grand Total:"]],
           ],
-          sol: 'public class SavingsGoal {\n  public static void main(String[] args) {\n    double savings = 100.0;\n    double weeklyDeposit = 25.0;\n    int weeks = 0;\n    while (savings < 200.0) { savings += weeklyDeposit; weeks++; }\n    System.out.println("Weeks to goal: " + weeks);\n    System.out.println("Savings: PHP " + savings);\n  }\n}',
-        },
-        {
-          t: "Word Inspector",
-          f: "WordInspector",
-          lv: "Medium",
-          sit: "Machine Problem: Word Inspector. Examine the phrase “Campus Eats”. Count its characters (including the space) and count its vowels without regard to case. Print both counts.",
-          out: "Characters: 11\nVowels: 4",
-          steps: [
-            [
-              "Store the phrase and initialize counts",
-              "",
-              [
-                'String\\s+text\\s*=\\s*\\"Campus Eats\\"\\s*;',
-                "int\\s+vowels\\s*=\\s*0\\s*;",
-              ],
-            ],
-            [
-              "Inspect each character",
-              "",
-              ["for\\s*\\(\\s*int\\s+\\w+\\s*=\\s*0"],
-            ],
-            [
-              "Count vowels and print both results",
-              "",
-              ["aeiouAEIOU", "Characters:", "Vowels:"],
-            ],
-          ],
-          sol: 'public class WordInspector {\n  public static void main(String[] args) {\n    String text = "Campus Eats";\n    int vowels = 0;\n    for (int i = 0; i < text.length(); i++) {\n      if ("aeiouAEIOU".indexOf(text.charAt(i)) >= 0) vowels++;\n    }\n    System.out.println("Characters: " + text.length());\n    System.out.println("Vowels: " + vowels);\n  }\n}',
-        },
-        {
-          t: "Temperature Converter",
-          f: "TemperatureConverter",
-          lv: "Medium",
-          sit: "Machine Problem: Temperature Converter. Convert 25 degrees Celsius to Fahrenheit using the standard conversion formula. Place the conversion in a reusable method and print the result.",
-          out: "Fahrenheit: 77.0",
-          steps: [
-            [
-              "Create a reusable conversion method",
-              "",
-              [
-                "static\\s+double\\s+toFahrenheit\\s*\\(\\s*double\\s+\\w+\\s*\\)",
-              ],
-            ],
-            [
-              "Apply the conversion and call the method",
-              "",
-              ["\\*\\s*9\\s*/\\s*5", "toFahrenheit\\s*\\(\\s*25"],
-            ],
-            ["Print the converted temperature", "", ["Fahrenheit:"]],
-          ],
-          sol: 'public class TemperatureConverter {\n  static double toFahrenheit(double celsius) { return celsius * 9 / 5 + 32; }\n  public static void main(String[] args) {\n    System.out.println("Fahrenheit: " + toFahrenheit(25));\n  }\n}',
-        },
-        {
-          t: "Menu Item Search",
-          f: "MenuSearch",
-          lv: "Medium",
-          sit: "Machine Problem: Menu Item Search. Search a menu containing Rice, Adobo, and Sinigang for Adobo. Print the position using human-friendly numbering, or report that the item was not found.",
-          out: "Adobo found at position 2",
-          steps: [
-            [
-              "Create the menu and search target",
-              "",
-              [
-                "String\\s*\\[\\s*\\]\\s*menu\\s*=\\s*\\{",
-                'String\\s+target\\s*=\\s*\\"Adobo\\"\\s*;',
-              ],
-            ],
-            [
-              "Search every menu entry",
-              "",
-              ["for\\s*\\(\\s*int\\s+\\w+\\s*=\\s*0"],
-            ],
-            ["Report found or not found", "", ["position", "not found"]],
-          ],
-          sol: 'public class MenuSearch {\n  public static void main(String[] args) {\n    String[] menu = {"Rice", "Adobo", "Sinigang"};\n    String target = "Adobo";\n    int found = -1;\n    for (int i = 0; i < menu.length; i++) if (menu[i].equals(target)) found = i;\n    if (found >= 0) System.out.println(target + " found at position " + (found + 1));\n    else System.out.println(target + " not found");\n  }\n}',
-        },
-        {
-          t: "Even and Odd Counter",
-          f: "EvenOddCounter",
-          lv: "Medium",
-          sit: "Machine Problem: Even and Odd Counter. Given the values 1, 2, 3, 4, 5, and 6, count how many are even and how many are odd. Print both counts.",
-          out: "Even values: 3\nOdd values: 3",
-          steps: [
-            [
-              "Store the values and initialize both counts",
-              "",
-              [
-                "int\\s*\\[\\s*\\]\\s*numbers\\s*=\\s*\\{\\s*1\\s*,\\s*2\\s*,\\s*3\\s*,\\s*4\\s*,\\s*5\\s*,\\s*6\\s*\\}",
-                "int\\s+even\\s*=\\s*0",
-                "odd\\s*=\\s*0",
-              ],
-            ],
-            [
-              "Classify every value",
-              "",
-              ["for\\s*\\(\\s*int\\s+\\w+\\s*:", "%\\s*2\\s*==\\s*0"],
-            ],
-            ["Print both counts", "", ["Even values:", "Odd values:"]],
-          ],
-          sol: 'public class EvenOddCounter {\n  public static void main(String[] args) {\n    int[] numbers = {1, 2, 3, 4, 5, 6};\n    int even = 0, odd = 0;\n    for (int n : numbers) { if (n % 2 == 0) even++; else odd++; }\n    System.out.println("Even values: " + even);\n    System.out.println("Odd values: " + odd);\n  }\n}',
-        },
-        {
-          t: "Bank Account Simulator",
-          f: "BankAccountDemo",
-          lv: "Challenge",
-          sit: "Machine Problem: Bank Account Simulator. Build an account with a starting balance of PHP 1,000.00. Deposit PHP 250.00, then withdraw PHP 300.00. Encapsulate the balance and use object behaviors to update it. Print the final balance.",
-          out: "Final balance: PHP 950.0",
-          steps: [
-            [
-              "Define an account that protects its balance",
-              "",
-              ["class\\s+BankAccount\\s*\\{", "private\\s+double\\s+balance"],
-            ],
-            [
-              "Support deposits and withdrawals",
-              "",
-              ["void\\s+deposit\\s*\\(", "void\\s+withdraw\\s*\\("],
-            ],
-            [
-              "Perform both transactions and report the balance",
-              "",
-              [
-                "deposit\\s*\\(\\s*250",
-                "withdraw\\s*\\(\\s*300",
-                "Final balance:",
-              ],
-            ],
-          ],
-          sol: 'public class BankAccountDemo {\n  public static void main(String[] args) {\n    BankAccount account = new BankAccount(1000.0);\n    account.deposit(250.0);\n    account.withdraw(300.0);\n    System.out.println("Final balance: PHP " + account.getBalance());\n  }\n}\nclass BankAccount {\n  private double balance;\n  BankAccount(double balance) { this.balance = balance; }\n  void deposit(double amount) { if (amount > 0) balance += amount; }\n  void withdraw(double amount) { if (amount > 0 && amount <= balance) balance -= amount; }\n  double getBalance() { return balance; }\n}',
-        },
-        {
-          t: "Library Book Checkout",
-          f: "LibraryCheckout",
-          lv: "Challenge",
-          sit: "Machine Problem: Library Book Checkout. Represent a book with a title and availability state. A borrower checks out the available book “Java Basics”, then returns it. Print the checkout result and whether the book is available at the end.",
-          out: "Java Basics borrowed.\nAvailable after return: true",
-          steps: [
-            [
-              "Represent book state with an object",
-              "",
-              [
-                "class\\s+LibraryBook\\s*\\{",
-                "private\\s+boolean\\s+available",
-              ],
-            ],
-            [
-              "Implement checkout and return behavior",
-              "",
-              ["boolean\\s+borrow\\s*\\(", "void\\s+returnBook\\s*\\("],
-            ],
-            [
-              "Run the borrowing cycle and report the state",
-              "",
-              [
-                "borrow\\s*\\(\\s*\\)",
-                "returnBook\\s*\\(\\s*\\)",
-                "Available after return:",
-              ],
-            ],
-          ],
-          sol: 'public class LibraryCheckout {\n  public static void main(String[] args) {\n    LibraryBook book = new LibraryBook("Java Basics");\n    if (book.borrow()) System.out.println("Java Basics borrowed.");\n    book.returnBook();\n    System.out.println("Available after return: " + book.isAvailable());\n  }\n}\nclass LibraryBook {\n  private String title;\n  private boolean available = true;\n  LibraryBook(String title) { this.title = title; }\n  boolean borrow() { if (!available) return false; available = false; return true; }\n  void returnBook() { available = true; }\n  boolean isAvailable() { return available; }\n}',
-        },
-        {
-          t: "Student Result Report",
-          f: "StudentReport",
-          lv: "Challenge",
-          sit: "Machine Problem: Student Result Report. Create a student record for Lia with scores of 80, 84, and 82. Calculate the average and determine whether the student passed (average of 75 or higher). Print the average and status.",
-          out: "Lia average: 82.0\nStatus: Passed",
-          steps: [
-            [
-              "Model the student and scores",
-              "",
-              ["class\\s+StudentRecord\\s*\\{", "private\\s+String\\s+name"],
-            ],
-            [
-              "Calculate an average and pass status",
-              "",
-              [
-                "double\\s+average\\s*\\(",
-                "boolean\\s+passed\\s*\\(",
-                ">=\\s*75",
-              ],
-            ],
-            [
-              "Create the record and print both results",
-              "",
-              ["new\\s+StudentRecord", "average:", "Status:"],
-            ],
-          ],
-          sol: 'public class StudentReport {\n  public static void main(String[] args) {\n    StudentRecord student = new StudentRecord("Lia", 80, 84, 82);\n    System.out.println(student.getName() + " average: " + student.average());\n    System.out.println("Status: " + (student.passed() ? "Passed" : "Needs Support"));\n  }\n}\nclass StudentRecord {\n  private String name; private int a, b, c;\n  StudentRecord(String name, int a, int b, int c) { this.name=name; this.a=a; this.b=b; this.c=c; }\n  String getName() { return name; }\n  double average() { return (a+b+c)/3.0; }\n  boolean passed() { return average() >= 75; }\n}',
-        },
-        {
-          t: "Cart Discount Calculator",
-          f: "CartDiscount",
-          lv: "Challenge",
-          sit: "Machine Problem: Cart Discount Calculator. A customer buys 3 notebooks at PHP 80.00 each. Apply a 10 percent discount to the subtotal and print the final amount. Encapsulate the calculation in a reusable cart item class.",
-          out: "Final amount: PHP 216.0",
-          steps: [
-            [
-              "Represent the cart item",
-              "",
-              ["class\\s+CartItem\\s*\\{", "private\\s+double\\s+price"],
-            ],
-            [
-              "Calculate subtotal and discounted total",
-              "",
-              [
-                "double\\s+subtotal\\s*\\(",
-                "double\\s+finalAmount\\s*\\(",
-                "percent\\s*/\\s*100",
-              ],
-            ],
-            [
-              "Create the item and print the total",
-              "",
-              ["new\\s+CartItem", "finalAmount\\s*\\(", "Final amount:"],
-            ],
-          ],
-          sol: 'public class CartDiscount {\n  public static void main(String[] args) {\n    CartItem item = new CartItem("Notebook", 80.0, 3);\n    System.out.println("Final amount: PHP " + item.finalAmount(10));\n  }\n}\nclass CartItem {\n  private String name; private double price; private int quantity;\n  CartItem(String name, double price, int quantity) { this.name=name; this.price=price; this.quantity=quantity; }\n  double subtotal() { return price * quantity; }\n  double finalAmount(double percent) { return subtotal() - subtotal() * percent / 100; }\n}',
-        },
-        {
-          t: "PIN Access Guard",
-          f: "PinGuard",
-          lv: "Challenge",
-          sit: "Machine Problem: PIN Access Guard. A user enters 1111 followed by the correct PIN 2580. Check each attempt until access is granted or three attempts are used. Print the number of attempts when access succeeds.",
-          out: "Access granted after 2 attempts.",
-          steps: [
-            [
-              "Prepare the accepted PIN and attempts",
-              "",
-              [
-                "int\\s+correctPin\\s*=\\s*2580",
-                "int\\s*\\[\\s*\\]\\s*attempts\\s*=\\s*\\{\\s*1111\\s*,\\s*2580",
-              ],
-            ],
-            [
-              "Check attempts with a stopping condition",
-              "",
-              ["while\\s*\\(", "attempts\\s*\\[", "&&\\s*\\w+\\s*<\\s*3"],
-            ],
-            [
-              "Report successful access and attempt count",
-              "",
-              ["Access granted", "attempts\\."],
-            ],
-          ],
-          sol: 'public class PinGuard {\n  public static void main(String[] args) {\n    int correctPin = 2580;\n    int[] attempts = {1111, 2580};\n    int i = 0;\n    while (i < attempts.length && i < 3 && attempts[i] != correctPin) i++;\n    if (i < attempts.length && attempts[i] == correctPin)\n      System.out.println("Access granted after " + (i + 1) + " attempts.");\n    else System.out.println("Access denied.");\n  }\n}',
-        },
-        {
-          t: "Pantry Reorder Report",
-          f: "PantryReorder",
-          lv: "Challenge",
-          sit: "Machine Problem: Pantry Reorder Report. A kitchen tracks 4 ingredients with stock counts of 4, 1, 8, and 0. Any ingredient with fewer than 3 units needs reordering. Count and report how many ingredients need reorder.",
-          out: "Ingredients to reorder: 2",
-          steps: [
-            [
-              "Store stock quantities and set the reorder threshold",
-              "",
-              [
-                "int\\s*\\[\\s*\\]\\s*stock\\s*=\\s*\\{\\s*4\\s*,\\s*1\\s*,\\s*8\\s*,\\s*0",
-                "int\\s+threshold\\s*=\\s*3",
-              ],
-            ],
-            [
-              "Evaluate every ingredient",
-              "",
-              ["for\\s*\\(\\s*int\\s+\\w+\\s*:", "<\\s*threshold"],
-            ],
-            ["Print the reorder count", "", ["Ingredients to reorder:"]],
-          ],
-          sol: 'public class PantryReorder {\n  public static void main(String[] args) {\n    int[] stock = {4, 1, 8, 0};\n    int threshold = 3, reorder = 0;\n    for (int quantity : stock) if (quantity < threshold) reorder++;\n    System.out.println("Ingredients to reorder: " + reorder);\n  }\n}',
-        },
-        {
-          t: "Best Sales Day",
-          f: "BestSalesDay",
-          lv: "Challenge",
-          sit: "Machine Problem: Best Sales Day. Daily sales are PHP 120.00, 250.00, 180.00, and 300.00. Find the highest sales value and the day number on which it occurred. Print both.",
-          out: "Highest sales: PHP 300.0\nDay number: 4",
-          steps: [
-            [
-              "Store sales and initialize the best result",
-              "",
-              [
-                "double\\s*\\[\\s*\\]\\s*sales\\s*=\\s*\\{\\s*120",
-                "double\\s+highest\\s*=\\s*sales\\s*\\[\\s*0\\s*\\]",
-              ],
-            ],
-            [
-              "Search for a higher value",
-              "",
-              ["for\\s*\\(\\s*int\\s+\\w+", ">\\s*highest"],
-            ],
-            ["Print the value and day", "", ["Highest sales:", "Day number:"]],
-          ],
-          sol: 'public class BestSalesDay {\n  public static void main(String[] args) {\n    double[] sales = {120.0, 250.0, 180.0, 300.0};\n    double highest = sales[0]; int day = 1;\n    for (int i = 1; i < sales.length; i++) {\n      if (sales[i] > highest) { highest = sales[i]; day = i + 1; }\n    }\n    System.out.println("Highest sales: PHP " + highest);\n    System.out.println("Day number: " + day);\n  }\n}',
-        },
-        {
-          t: "Palindrome Checker",
-          f: "PalindromeCheck",
-          lv: "Challenge",
-          sit: "Machine Problem: Palindrome Checker. Determine whether the word “level” reads the same forward and backward. Compare characters and print the word with the result.",
-          out: "level is palindrome: true",
-          steps: [
-            [
-              "Store the word and establish the comparison",
-              "",
-              [
-                'String\\s+word\\s*=\\s*\\"level\\"',
-                "boolean\\s+palindrome\\s*=\\s*true",
-              ],
-            ],
-            [
-              "Compare characters from both ends",
-              "",
-              ["while\\s*\\(", "charAt\\s*\\(", "!=\\s*word\\.charAt"],
-            ],
-            ["Print the determination", "", ["is palindrome:"]],
-          ],
-          sol: 'public class PalindromeCheck {\n  public static void main(String[] args) {\n    String word = "level";\n    boolean palindrome = true;\n    int left = 0, right = word.length() - 1;\n    while (left < right) {\n      if (word.charAt(left) != word.charAt(right)) palindrome = false;\n      left++; right--;\n    }\n    System.out.println(word + " is palindrome: " + palindrome);\n  }\n}',
-        },
-        {
-          t: "Factorial Calculator",
-          f: "FactorialCalc",
-          lv: "Challenge",
-          sit: "Machine Problem: Factorial Calculator. Calculate 5 factorial (5 × 4 × 3 × 2 × 1) in a reusable method using repetition. Print the result.",
-          out: "5 factorial: 120",
-          steps: [
-            [
-              "Create a method that returns an integer",
-              "",
-              ["static\\s+int\\s+factorial\\s*\\(\\s*int\\s+\\w+\\s*\\)"],
-            ],
-            [
-              "Accumulate the product in a loop",
-              "",
-              ["for\\s*\\(", "result\\s*\\*=\\s*\\w+"],
-            ],
-            [
-              "Call the method and display the result",
-              "",
-              ["factorial\\s*\\(\\s*5", "factorial:"],
-            ],
-          ],
-          sol: 'public class FactorialCalc {\n  static int factorial(int n) {\n    int result = 1;\n    for (int i = 1; i <= n; i++) result *= i;\n    return result;\n  }\n  public static void main(String[] args) {\n    System.out.println("5 factorial: " + factorial(5));\n  }\n}',
-        },
-        {
-          t: "Team Score Matrix",
-          f: "TeamScoreMatrix",
-          lv: "Challenge",
-          sit: "Machine Problem: Team Score Matrix. Two teams have scores {{10, 12, 8}, {7, 9, 10}}. Use a two-dimensional array and nested loops to compute each team's total. Print one total per team.",
-          out: "Team 1 total: 30\nTeam 2 total: 26",
-          steps: [
-            [
-              "Represent both teams in a two-dimensional array",
-              "",
-              [
-                "int\\s*\\[\\s*\\]\\s*\\[\\s*\\]\\s*scores\\s*=\\s*\\{\\s*\\{\\s*10\\s*,\\s*12\\s*,\\s*8\\s*\\}\\s*,\\s*\\{\\s*7\\s*,\\s*9\\s*,\\s*10\\s*\\}\\s*\\}",
-              ],
-            ],
-            [
-              "Use nested loops to total each row",
-              "",
-              [
-                "for\\s*\\(\\s*int",
-                "for\\s*\\(\\s*int",
-                "total\\s*\\+=\\s*\\w+",
-              ],
-            ],
-            ["Print each team total", "", ["Team ", "total:"]],
-          ],
-          sol: 'public class TeamScoreMatrix {\n  public static void main(String[] args) {\n    int[][] scores = {{10, 12, 8}, {7, 9, 10}};\n    for (int team = 0; team < scores.length; team++) {\n      int total = 0;\n      for (int score : scores[team]) total += score;\n      System.out.println("Team " + (team + 1) + " total: " + total);\n    }\n  }\n}',
-        },
-        {
-          t: "Shape Area Methods",
-          f: "ShapeAreas",
-          lv: "Challenge",
-          sit: "Machine Problem: Shape Area Methods. Create reusable area calculations for a square with side 4 and a rectangle with width 5 and height 3. Use overloaded methods and print both areas.",
-          out: "Square area: 16.0\nRectangle area: 15.0",
-          steps: [
-            [
-              "Provide overloaded area calculations",
-              "",
-              [
-                "static\\s+double\\s+area\\s*\\(\\s*double\\s+\\w+\\s*\\)",
-                "static\\s+double\\s+area\\s*\\(\\s*double\\s+\\w+\\s*,\\s*double\\s+\\w+\\s*\\)",
-              ],
-            ],
-            [
-              "Calculate area for each shape",
-              "",
-              ["area\\s*\\(\\s*4\\s*\\)", "area\\s*\\(\\s*5\\s*,\\s*3\\s*\\)"],
-            ],
-            ["Print both areas", "", ["Square area:", "Rectangle area:"]],
-          ],
-          sol: 'public class ShapeAreas {\n  static double area(double side) { return side * side; }\n  static double area(double width, double height) { return width * height; }\n  public static void main(String[] args) {\n    System.out.println("Square area: " + area(4));\n    System.out.println("Rectangle area: " + area(5, 3));\n  }\n}',
-        },
-        {
-          t: "Overtime Payroll",
-          f: "OvertimePayroll",
-          lv: "Challenge",
-          sit: "Machine Problem: Overtime Payroll. An employee works 45 hours at PHP 100.00 per regular hour. Hours beyond 40 are paid at 1.5 times the regular rate. Calculate and print regular pay, overtime pay, and gross pay.",
-          out: "Regular pay: PHP 4000.0\nOvertime pay: PHP 750.0\nGross pay: PHP 4750.0",
-          steps: [
-            [
-              "Represent hours and hourly rate",
-              "",
-              ["int\\s+hours\\s*=\\s*45", "double\\s+rate\\s*=\\s*100"],
-            ],
-            [
-              "Separate regular and overtime pay",
-              "",
-              ["Math\\.min\\s*\\(", "Math\\.max\\s*\\(", "\\*\\s*1\\.5"],
-            ],
-            [
-              "Print the complete pay summary",
-              "",
-              ["Regular pay:", "Overtime pay:", "Gross pay:"],
-            ],
-          ],
-          sol: 'public class OvertimePayroll {\n  public static void main(String[] args) {\n    int hours = 45; double rate = 100.0;\n    double regularPay = Math.min(hours, 40) * rate;\n    double overtimePay = Math.max(hours - 40, 0) * rate * 1.5;\n    System.out.println("Regular pay: PHP " + regularPay);\n    System.out.println("Overtime pay: PHP " + overtimePay);\n    System.out.println("Gross pay: PHP " + (regularPay + overtimePay));\n  }\n}',
-        },
-        {
-          t: "Campus Event Planner",
-          f: "CampusEventPlanner",
-          lv: "Challenge",
-          sit: "Machine Problem: Campus Event Planner. Plan a 3-day event with attendance of 45, 60, and 55. Store the attendance values, compute the total and average attendance, and report the busiest day. Print a compact event summary.",
-          out: "Total attendance: 160\nAverage attendance: 53.333333333333336\nBusiest day: 2",
-          steps: [
-            [
-              "Store the daily attendance",
-              "",
-              [
-                "int\\s*\\[\\s*\\]\\s*attendees\\s*=\\s*\\{\\s*45\\s*,\\s*60\\s*,\\s*55\\s*\\}",
-              ],
-            ],
-            [
-              "Compute sum, average, and busiest day",
-              "",
-              ["total\\s*\\+=", "average\\s*=", ">\\s*max"],
-            ],
-            [
-              "Print the complete summary",
-              "",
-              ["Total attendance:", "Average attendance:", "Busiest day:"],
-            ],
-          ],
-          sol: 'public class CampusEventPlanner {\n  public static void main(String[] args) {\n    int[] attendees = {45, 60, 55}; int total = 0, max = attendees[0], day = 1;\n    for (int i = 0; i < attendees.length; i++) {\n      total += attendees[i];\n      if (attendees[i] > max) { max = attendees[i]; day = i + 1; }\n    }\n    double average = (double) total / attendees.length;\n    System.out.println("Total attendance: " + total);\n    System.out.println("Average attendance: " + average);\n    System.out.println("Busiest day: " + day);\n  }\n}',
-        },
-        {
-          t: "Final Campus Order Report",
-          f: "FinalOrderReport",
-          lv: "Challenge",
-          sit: "Machine Problem: Final Campus Order Report. Process three orders with subtotals of PHP 180.00, 320.00, and 250.00. Orders of PHP 300.00 or more receive free delivery; smaller orders pay PHP 25.00. Compute each final total and the grand total.",
-          out: "Order 1 total: PHP 205.0\nOrder 2 total: PHP 320.0\nOrder 3 total: PHP 275.0\nGrand total: PHP 800.0",
-          steps: [
-            [
-              "Store the order subtotals",
-              "",
-              [
-                "double\\s*\\[\\s*\\]\\s*subtotals\\s*=\\s*\\{\\s*180\\s*,\\s*320\\s*,\\s*250",
-              ],
-            ],
-            [
-              "Apply the delivery rule to each order",
-              "",
-              ["for\\s*\\(", ">=\\s*300", "25"],
-            ],
-            [
-              "Print each total and the grand total",
-              "",
-              ["Order ", "Grand total:"],
-            ],
-          ],
-          sol: 'public class FinalOrderReport {\n  public static void main(String[] args) {\n    double[] subtotals = {180, 320, 250}; double grand = 0;\n    for (int i = 0; i < subtotals.length; i++) {\n      double total = subtotals[i] >= 300 ? subtotals[i] : subtotals[i] + 25;\n      grand += total;\n      System.out.println("Order " + (i + 1) + " total: PHP " + total);\n    }\n    System.out.println("Grand total: PHP " + grand);\n  }\n}',
+          sol: 'public class CampusEatsCatalog {\n  public static double computeGrandTotal(double[] prices, int[] quantities) {\n    double grand = 0;\n    for (int i = 0; i < prices.length; i++) {\n      grand += prices[i] * quantities[i];\n    }\n    return grand;\n  }\n  public static void main(String[] args) {\n    double[] itemPrices = {89.50, 45.00, 25.00};\n    int[] itemQuantities = {2, 3, 1};\n    System.out.println("--- CampusEats Cart Summary ---");\n    for (int i = 0; i < itemPrices.length; i++) {\n      double sub = itemPrices[i] * itemQuantities[i];\n      System.out.println("Item " + (i + 1) + " Subtotal: PHP " + sub);\n    }\n    System.out.println("-----------------------------");\n    double grandTotal = computeGrandTotal(itemPrices, itemQuantities);\n    System.out.println("Grand Total: PHP " + grandTotal);\n  }\n}',
         },
       ];
       LAB.push(
@@ -4842,7 +4022,7 @@ ${k.out != "@" ? `<div class=card><h2>Expected output</h2><pre style="margin-top
       // Trim advanced/OOP and formatted-print tasks from this beginner-focused build. IDs remain stable for saved progress.
       LAB.splice(0, LAB.length, ...LAB.filter(item => {
         const text = ((item.t || "") + " " + (item.f || "") + " " + (item.sit || "") + " " + (item.sol || "")).toLowerCase();
-        return !/printf|formatted output|encapsulation|getter|setter|design your own class|class and object|object-oriented|private fields/.test(text);
+        return !/printf|formatted output|encapsulation|getter|setter|design your own class|object-oriented|private fields|private String|private double|MenuItem/.test(text);
       }));
 
       /* ===== CURRICULUM REMAP: strict Easy → Medium → Hard =====
@@ -5343,6 +4523,10 @@ ${lab ? `<div class=card><h2>${ic("code")} Code challenge: ${lab.t}</h2><p class
         }
       }
       function back() {
+        // Mobile back: hide Problem/Expected modals, then exit fullscreen
+        if (typeof window.__labDismissOverlay === "function" && window.__labDismissOverlay()) {
+          return;
+        }
         if (tab == "quiz") {
           const fr = (S && S.from) || "home";
           S = null;
@@ -5380,6 +4564,13 @@ ${lab ? `<div class=card><h2>${ic("code")} Code challenge: ${lab.t}</h2><p class
           skip = false;
           return;
         }
+        // Mobile system back: close modal, then exit fullscreen, before navigating
+        if (typeof window.__labDismissOverlay === "function" && window.__labDismissOverlay()) {
+          try {
+            history.pushState({ d: Math.max(0, depth) }, "");
+          } catch (e) {}
+          return;
+        }
         depth--;
         if (depth < 0) {
           depth = 0;
@@ -5397,6 +4588,30 @@ ${lab ? `<div class=card><h2>${ic("code")} Code challenge: ${lab.t}</h2><p class
         back();
         sync();
       });
+      try {
+        const CapApp = window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.App;
+        if (CapApp && CapApp.addListener) {
+          CapApp.addListener("backButton", () => {
+            // 1) Hide Problem / Expected output modals
+            // 2) Exit code-lab fullscreen
+            // 3) Otherwise navigate up the stack / exit
+            if (typeof window.__labDismissOverlay === "function" && window.__labDismissOverlay()) {
+              return;
+            }
+            if (layers() > 0) {
+              back();
+              sync();
+              return;
+            }
+            if (Date.now() - armed < 2200) {
+              CapApp.exitApp && CapApp.exitApp();
+              return;
+            }
+            armed = Date.now();
+            toast("Press back again to exit");
+          });
+        }
+      } catch (e) {}
       history.replaceState({ b: 1 }, "");
       history.pushState({ d: 0 }, "");
       rHome();
