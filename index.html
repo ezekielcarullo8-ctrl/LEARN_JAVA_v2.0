@@ -2034,6 +2034,16 @@ ${mode == "pick" ? `<div class=chips id=bank></div>` : ""}<div id=fb></div>
         return errors;
       }
       function rLab() {
+        // Challenge modals are moved to document.body while open to escape the
+        // Code Lab stacking context. Remove any moved modal from the previous
+        // challenge before rendering the next view; otherwise duplicate IDs can
+        // make getElementById() return stale problem/expected-output content.
+        document.querySelectorAll("body > .lab-modal-backdrop").forEach((modal) => {
+          modal.classList.remove("open");
+          modal.style.display = "none";
+          modal.setAttribute("aria-hidden", "true");
+          modal.remove();
+        });
         const el = $("#lab");
         P.lab = P.lab || { done: {}, code: {} };
         if (LB == null) {
